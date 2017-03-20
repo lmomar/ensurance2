@@ -1,0 +1,12 @@
+consta:
+    resource: "@ConstaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+api_user:
+    resource: "@ApiUserBundle/Controller/"
+    type:     rest
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
