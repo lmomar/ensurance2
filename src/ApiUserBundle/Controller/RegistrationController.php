@@ -27,7 +27,7 @@ class RegistrationController extends Controller {
             $name = $request->request->get('name');
             $email = $request->request->get('email');
             $username = $request->request->get('username');
-            $password = $request->request->get('plainPassword')['first'];
+            $password = $request->request->get('password');
             
             $user = $userManager->createUser();
             $user->setName($name);
