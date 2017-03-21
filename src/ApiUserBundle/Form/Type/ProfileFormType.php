@@ -6,15 +6,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationFormType extends AbstractType {
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+class ProfileFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('nom');
         $builder->add('prenom');
+        $builder->add('phone');
+        $builder->add('date_naissance', DateType::class,array('widget' => 'single_text'));
+        $builder->add('date_driver_license', DateType::class,array('widget' => 'single_text'));
     }
 
     public function getParent() {
-        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+        return 'FOS\UserBundle\Form\Type\ProfileFormType';
     }
 
     public function configureOptions(OptionsResolver $resolver) {
@@ -26,7 +30,7 @@ class RegistrationFormType extends AbstractType {
     }
 
     public function getBlockPrefix() {
-        return 'user_registration';
+        return 'user_profile';
     }
 
 }

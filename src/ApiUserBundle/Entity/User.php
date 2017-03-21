@@ -22,30 +22,144 @@ class User extends BaseUser {
      * @ORM\Column(type="string", length=255)
      *
      */
-    protected $name;
-
+    protected $nom;
 
     /**
-     * Set name
+     * @ORM\Column(type="string", length=255)
      *
-     * @param string $name
+     */
+    protected $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    protected $phone;
+
+    /**
+     * @ORM\Column(type="date")
+     *
+     */
+    protected $date_naissance;
+
+    /**
+     * @ORM\Column(type="date")
+     *
+     */
+    protected $date_driver_license;
+
+    
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
      *
      * @return User
      */
-    public function setName($name)
-    {
-        $this->name = $name;
+    public function setNom($nom) {
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get nom
      *
      * @return string
      */
-    public function getName()
+    public function getNom() {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return User
+     */
+    public function setPrenom($prenom) {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    /**
+     * Set dateNaissance
+     *
+     * @param \DateTime $dateNaissance
+     *
+     * @return User
+     */
+    public function setDateNaissance($dateNaissance) {
+        $this->date_naissance = $dateNaissance;
+
+        return $this;
+    }
+
+    /**
+     * Get dateNaissance
+     *
+     * @return \DateTime
+     */
+    public function getDateNaissance() {
+        return $this->date_naissance;
+    }
+
+    /**
+     * Set dateDriverLicense
+     *
+     * @param \DateTime $dateDriverLicense
+     *
+     * @return User
+     */
+    public function setDateDriverLicense($dateDriverLicense) {
+        $this->date_driver_license = $dateDriverLicense;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDriverLicense
+     *
+     * @return \DateTime
+     */
+    public function getDateDriverLicense() {
+        return $this->date_driver_license;
+    }
+
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return User
+     */
+    public function setPhone($phone)
     {
-        return $this->name;
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }
