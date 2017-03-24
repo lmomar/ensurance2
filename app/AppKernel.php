@@ -24,6 +24,7 @@ class AppKernel extends Kernel {
             new \FOS\RestBundle\FOSRestBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
             new ConstaBundle\ConstaBundle(),
+            new AssureurBundle\AssureurBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
