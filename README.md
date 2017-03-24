@@ -5,8 +5,14 @@ Framework PHP : Symfony 3.2
 
 ==============
 Web services
+**
 
-**login:**
+Part User :
+-----------
+
+**
+
+ 1. **login:**
 
 url : `/api/login`
 
@@ -19,7 +25,8 @@ data to send :
     }
 result : user data or false
 
-Registration :
+ 2. **Registration :**
+
 url: `/api/adduser`
 type : `post`
 data to send :
@@ -30,8 +37,8 @@ data to send :
 }
 result : user data or form empty
 
+ 3. **Profile update:**
 
-Profile update:
 url : `/api/profile/{id}`
 param : `user id`
 data to send :
@@ -47,7 +54,8 @@ data to send :
 }
 result : user data + message 
 
-Password change:
+ 4. **Password change:**
+
 url: `/api/change_password/{id}`
 param : `user_id`
 data to send :
