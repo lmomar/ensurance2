@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use \Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use ApiUserBundle\Form\Type\RegistrationFormType;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 class RegistrationController extends Controller {
 
     /**
@@ -24,15 +24,16 @@ class RegistrationController extends Controller {
         //$form->handleRequest($request);
         if ($form->isValid()) {
             $userManager = $this->get('fos_user.user_manager');
-            $name = $request->request->get('name');
             $email = $request->request->get('email');
-            $username = $request->request->get('username');
             $password = $request->request->get('password');
-            
+            if($userManager->findUserByEmail($email))
+            {
+                return new JsonResponse(array('email' => 'exist'));
+            }
             $user = $userManager->createUser();
-            $user->setName($name);
-            $user->setUsername($username);
+            $user->setUsername($email);
             $user->setEmail($email);
+            $user->setEnabled(true);
             $user->setPlainPassword($password);
             $userManager->updateUser($user, true);
             return $user;

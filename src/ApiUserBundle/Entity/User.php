@@ -4,12 +4,12 @@ namespace ApiUserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser {
+class User extends BaseUser  {
 
     /**
      * @ORM\Id
@@ -19,36 +19,34 @@ class User extends BaseUser {
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      *
      */
     protected $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      */
     protected $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      */
     protected $phone;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      *
      */
     protected $date_naissance;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      *
      */
     protected $date_driver_license;
-
-    
 
     /**
      * Set nom
@@ -138,7 +136,6 @@ class User extends BaseUser {
         return $this->date_driver_license;
     }
 
-
     /**
      * Set phone
      *
@@ -146,8 +143,7 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
         return $this;
@@ -158,8 +154,8 @@ class User extends BaseUser {
      *
      * @return string
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
+
 }
