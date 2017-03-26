@@ -105,7 +105,7 @@ data :
 
 **Part Upload pictures :**
 url:`/api/upload`
-data : `array url[]`
+data : `array url[] + constat_id`
 
 
 
