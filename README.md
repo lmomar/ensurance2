@@ -68,5 +68,44 @@ data to send :
 result : message
 
 
+----------
+
+**Part Accident:**
+
+url:`/api/accident/add`
+data:
+
+    {
+	"coord1" : "6556.98987",
+	"coord2" : "6768.78675",
+	"description" : "ma description"
+}
+
+
+----------
+
+
+**Part Constat:**
+url:`api/constat/add`
+data : `{
+	"type" : "type constat"
+}`
+
+**Part Vehicule:**
+url:`/api/vehicule/add`
+data : 
+
+    {
+	"matricule" : "AB-6577",
+	"marque" : "BMV",
+	"type" : "120 D",
+	"num_carte_grise" : "56764543",
+	"user_id" : "2"
+}
+
+**Part Upload pictures :**
+url:`/api/upload`
+data : `array url[]`
+
 
 
