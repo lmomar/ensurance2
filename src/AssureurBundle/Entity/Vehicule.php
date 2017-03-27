@@ -43,17 +43,26 @@ class Vehicule
     private $marque;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="type_id", type="integer")
+     */
+    private $type_id;
+    
+    /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="modele", type="string", length=255)
      */
-    private $type;
+    private $modele;
 
     /**
      * @var string
      *
      * @ORM\Column(name="num_carte_grise", type="string", length=30)
      */
+    
+    
     private $numCarteGrise;
 
     /**
@@ -64,6 +73,9 @@ class Vehicule
     private $created;
 
 
+    public function __construct() {
+        $this->created = new \DateTime();
+    }
     /**
      * Get id
      *
@@ -147,30 +159,6 @@ class Vehicule
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Vehicule
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set numCarteGrise
      *
      * @param string $numCarteGrise
@@ -217,5 +205,52 @@ class Vehicule
     {
         return $this->created;
     }
-}
 
+    /**
+     * Set typeId
+     *
+     * @param integer $typeId
+     *
+     * @return Vehicule
+     */
+    public function setTypeId($typeId)
+    {
+        $this->type_id = $typeId;
+
+        return $this;
+    }
+
+    /**
+     * Get typeId
+     *
+     * @return integer
+     */
+    public function getTypeId()
+    {
+        return $this->type_id;
+    }
+
+    /**
+     * Set modele
+     *
+     * @param string $modele
+     *
+     * @return Vehicule
+     */
+    public function setModele($modele)
+    {
+        $this->modele = $modele;
+
+        return $this;
+    }
+
+    /**
+     * Get modele
+     *
+     * @return string
+     */
+    public function getModele()
+    {
+        return $this->modele;
+    }
+}

@@ -5,11 +5,14 @@ imports:
     - { resource: "@ApiUserBundle/Resources/config/services.yml" }
     - { resource: "@ConstaBundle/Resources/config/services.yml" }
     - { resource: "@AssureurBundle/Resources/config/services.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
+    - { resource: "@UserBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    photo_directory: '%kernel.root_dir%/../web/uploads/photo'
 
 framework:
     #esi: ~
@@ -101,4 +104,6 @@ fos_rest:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: 'json' }
     body_listener:
+        enabled: true
+    param_fetcher_listener:
         enabled: true

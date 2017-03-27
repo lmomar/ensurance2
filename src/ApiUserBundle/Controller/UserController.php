@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use ApiUserBundle\Form\Type\ProfileFormType;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-
+use JsonClassHintingNormalizer;
 
 class UserController extends Controller {
 

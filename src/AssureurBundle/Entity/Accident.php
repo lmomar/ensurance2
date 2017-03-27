@@ -49,6 +49,9 @@ class Accident
      */
     private $created;
 
+    public function __construct() {
+        $this->created = new \DateTime;
+    }
 
     /**
      * Get id

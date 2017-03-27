@@ -11,18 +11,22 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class PhotoType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('url', FileType::class);
+        $builder->add('url', FileType::class,array(
+            'multiple' => true
+            ));
         $builder->add('constat_id', TextType::class);
+        //$builder->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(
                 [
-                    'data_class' => 'AssureurBundle\Entity\Photo'
+                    'data_class' => 'AssureurBundle\Entity\Photo',
+                    'csrf_protection' => false
                 ]
         );
     }
-    
+
     public function getName() {
         return 'Photo';
     }

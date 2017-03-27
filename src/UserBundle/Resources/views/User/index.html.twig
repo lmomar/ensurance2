@@ -1,0 +1,66 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Utilisateurs</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="col-lg-6">Liste des Utilisateurs</div>
+                    <div class="col-lg-6"><a href="{{ path('admin_groupe_new') }}" class="btn btn-primary pull-right">Nouvel utilisateur</a></div>
+                </div>
+                <div class="panel-body">
+                    <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Actif</th>
+                                <th data-sortable="true">Crée le</th>
+                                <th data-sortable="true">Connecté le</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id}}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td><input type="checkbox" disabled="" checked="{{user.enabled}}"></td>
+                                    <td>{{ user.created|date("d/m/Y H:i:s") }}</td>
+                                    <td>{{ app.user ? app.user.lastLogin|date("d/m/Y H:i:s")|default('nan') }}</td>
+                                    <td>
+                                        {% if user.hasRole('ROLE_ADMIN')%}Admin
+                                        {% elseif user.hasRole('ROLE_SUPER_ADMIN')%}
+                                            Admin
+                                        {% elseif user.hasRole('ROLE_USER')%}
+                                            Utilisateur
+                                        {% else %}
+                                            Utilisateur    
+                                        {% endif %}
+
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs"href="#">
+                                            <span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a class="btn btn-danger btn-xs"href="#">
+                                            <span class="glyphicon glyphicon-remove"></span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->	
+{% endblock %}
