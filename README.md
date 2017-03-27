@@ -104,6 +104,13 @@ data :
 	"user_id" : "2"
 	}
 	
+**Get Vehicules :**
+url:`/api/vehicules`
+data : 
+
+    user_id
+    id
+   getting vehicules by user_id or juste by id of vehicule or by all params
 
 
 ----------
