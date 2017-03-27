@@ -125,6 +125,22 @@ data :
 
 
 ----------
+**Edit Vehicule :**
+url :`api/vehicule/edit/{id}`
+data :
+
+    {
+	"id" : 1,
+	"matricule" : "AB-6577",
+	"marque" : "BMV",
+	"modele" : "120D",
+	"type_id" : 2,
+	"num_carte_grise" : "56764543",
+	"user_id" : "2"
+}
+return vehicule 
+
+----------
 
 
 **Part Upload pictures :**
