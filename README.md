@@ -98,10 +98,50 @@ data :
     {
 	"matricule" : "AB-6577",
 	"marque" : "BMV",
-	"type" : "120 D",
+	"modele" : "120 D",
+	"type_id" : 2,
+	"num_carte_grise" : "56764543",
+	"user_id" : "2"
+	}
+	
+**Get Vehicules :**
+url:`/api/vehicules`
+data : 
+
+    user_id
+    id
+   getting vehicules by user_id or juste by id of vehicule or by all params
+
+
+----------
+
+
+**Table TypeVehicule :**
+
+    id	type
+	1	moto
+	2	camion
+	3	Voiture
+
+
+----------
+**Edit Vehicule :**
+url :`api/vehicule/edit/{id}`
+data :
+
+    {
+	"id" : 1,
+	"matricule" : "AB-6577",
+	"marque" : "BMV",
+	"modele" : "120D",
+	"type_id" : 2,
 	"num_carte_grise" : "56764543",
 	"user_id" : "2"
 }
+return vehicule 
+
+----------
+
 
 **Part Upload pictures :**
 url:`/api/upload`
