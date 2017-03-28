@@ -141,6 +141,12 @@ data :
 return vehicule 
 
 ----------
+**Delete Vehicule :**
+url :`/api/vehicule/delete/2`
+no json data
+return Response `204 No Content`
+
+----------
 
 
 **Part Upload pictures :**
