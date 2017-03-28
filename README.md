@@ -73,6 +73,7 @@ result : message
 **Part Accident:**
 
 url:`/api/accident/add`
+Type Request : `POST`
 data:
 
     {
@@ -87,12 +88,14 @@ data:
 
 **Part Constat:**
 url:`api/constat/add`
+Type Request : `POST`
 data : `{
 	"type" : "type constat"
 }`
 
 **Part Vehicule:**
 url:`/api/vehicule/add`
+Type Request : `POST`
 data : 
 
     {
@@ -106,6 +109,7 @@ data :
 	
 **Get Vehicules :**
 url:`/api/vehicules`
+Type request : `GET`
 data : 
 
     user_id
@@ -137,12 +141,14 @@ data :
 	"type_id" : 2,
 	"num_carte_grise" : "56764543",
 	"user_id" : "2"
-}
+	}
+type request : `PUT`
 return vehicule 
 
 ----------
 **Delete Vehicule :**
 url :`/api/vehicule/delete/2`
+type request : `DELETE`
 no json data
 return Response `204 No Content`
 
