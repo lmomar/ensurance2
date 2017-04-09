@@ -34,7 +34,6 @@ class ProfileFormType extends AbstractType {
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => "ApiUserBundle\Entity\User",
-            'csrf_protection' => false,
             'allow_extra_fields' => true
         ));
     }

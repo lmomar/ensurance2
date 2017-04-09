@@ -1,0 +1,8 @@
+{% if app.session.flashBag.has('success') %}
+    <div class="alert alert-success">
+        <a href="#" class="close" aria-label="close">&times;</a>
+        {% for msg in app.session.flashBag.get('success') %}
+            {{ msg }}
+        {% endfor %}
+    </div>
+{% endif %}

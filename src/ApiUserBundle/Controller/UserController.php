@@ -25,12 +25,9 @@ class UserController extends Controller {
         $factory = $this->get('security.encoder_factory');
         $email = $request->request->get('email');
         $password = $request->request->get('password');
-
-
         $user = $user_manager->findUserByEmail($email);
         $encoder_service = $this->get('security.encoder_factory');
         $encoder = $encoder_service->getEncoder($user);
-
         if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
             return $user;
         } else {
@@ -45,6 +42,7 @@ class UserController extends Controller {
      */
     public function updateProfileAction(Request $request) {
         $user_manager = $this->get('fos_user.user_manager');
+        
         $email = $request->request->get('email');
         $user = $user_manager->findUserByEmail($email);
         $nom = $request->request->get('nom');

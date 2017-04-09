@@ -79,6 +79,8 @@
             </ol>
         </div><!--/.row-->
         {% block content %}
+            {% include ':elements:error.html.twig'%}
+            {% include ':elements:success.html.twig'%}
         {% endblock content %}
     </div><!--/.main-->
 {% endblock body %}

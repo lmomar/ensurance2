@@ -73,6 +73,41 @@ class Vehicule
     private $created;
 
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $n_contrat_assur;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $nom_assurance;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $num_attestation;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $num_police;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $valable_du;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $valable_au;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    
+    private $ag_bur_court;
+    
     public function __construct() {
         $this->created = new \DateTime();
     }
@@ -252,5 +287,173 @@ class Vehicule
     public function getModele()
     {
         return $this->modele;
+    }
+
+    /**
+     * Set nContratAssur
+     *
+     * @param integer $nContratAssur
+     *
+     * @return Vehicule
+     */
+    public function setNContratAssur($nContratAssur)
+    {
+        $this->n_contrat_assur = $nContratAssur;
+
+        return $this;
+    }
+
+    /**
+     * Get nContratAssur
+     *
+     * @return integer
+     */
+    public function getNContratAssur()
+    {
+        return $this->n_contrat_assur;
+    }
+
+    /**
+     * Set nomAssurance
+     *
+     * @param string $nomAssurance
+     *
+     * @return Vehicule
+     */
+    public function setNomAssurance($nomAssurance)
+    {
+        $this->nom_assurance = $nomAssurance;
+
+        return $this;
+    }
+
+    /**
+     * Get nomAssurance
+     *
+     * @return string
+     */
+    public function getNomAssurance()
+    {
+        return $this->nom_assurance;
+    }
+
+    /**
+     * Set numAttestation
+     *
+     * @param integer $numAttestation
+     *
+     * @return Vehicule
+     */
+    public function setNumAttestation($numAttestation)
+    {
+        $this->num_attestation = $numAttestation;
+
+        return $this;
+    }
+
+    /**
+     * Get numAttestation
+     *
+     * @return integer
+     */
+    public function getNumAttestation()
+    {
+        return $this->num_attestation;
+    }
+
+    /**
+     * Set numPolice
+     *
+     * @param integer $numPolice
+     *
+     * @return Vehicule
+     */
+    public function setNumPolice($numPolice)
+    {
+        $this->num_police = $numPolice;
+
+        return $this;
+    }
+
+    /**
+     * Get numPolice
+     *
+     * @return integer
+     */
+    public function getNumPolice()
+    {
+        return $this->num_police;
+    }
+
+    /**
+     * Set valableDu
+     *
+     * @param \DateTime $valableDu
+     *
+     * @return Vehicule
+     */
+    public function setValableDu($valableDu)
+    {
+        $this->valable_du = $valableDu;
+
+        return $this;
+    }
+
+    /**
+     * Get valableDu
+     *
+     * @return \DateTime
+     */
+    public function getValableDu()
+    {
+        return $this->valable_du;
+    }
+
+    /**
+     * Set valableAu
+     *
+     * @param \DateTime $valableAu
+     *
+     * @return Vehicule
+     */
+    public function setValableAu($valableAu)
+    {
+        $this->valable_au = $valableAu;
+
+        return $this;
+    }
+
+    /**
+     * Get valableAu
+     *
+     * @return \DateTime
+     */
+    public function getValableAu()
+    {
+        return $this->valable_au;
+    }
+
+    /**
+     * Set agBurCourt
+     *
+     * @param string $agBurCourt
+     *
+     * @return Vehicule
+     */
+    public function setAgBurCourt($agBurCourt)
+    {
+        $this->ag_bur_court = $agBurCourt;
+
+        return $this;
+    }
+
+    /**
+     * Get agBurCourt
+     *
+     * @return string
+     */
+    public function getAgBurCourt()
+    {
+        return $this->ag_bur_court;
     }
 }

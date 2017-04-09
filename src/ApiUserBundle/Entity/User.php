@@ -5,11 +5,12 @@ namespace ApiUserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser  {
+class User extends BaseUser {
 
     /**
      * @ORM\Id
@@ -17,6 +18,15 @@ class User extends BaseUser  {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ApiUserBundle\Entity\Groupe")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
@@ -43,10 +53,37 @@ class User extends BaseUser  {
     protected $date_naissance;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     *
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var type 
      */
-    protected $date_driver_license;
+    protected $created;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var type 
+     */
+    protected $deleted;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $cin;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $photo;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $adresse;
+    
+    public function __construct() {
+        $this->created = new \DateTime;
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->deleted = false;
+    }
 
     /**
      * Set nom
@@ -127,15 +164,7 @@ class User extends BaseUser  {
         return $this;
     }
 
-    /**
-     * Get dateDriverLicense
-     *
-     * @return \DateTime
-     */
-    public function getDateDriverLicense() {
-        return $this->date_driver_license;
-    }
-
+    
     /**
      * Set phone
      *
@@ -158,4 +187,120 @@ class User extends BaseUser  {
         return $this->phone;
     }
 
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return User
+     */
+    public function setCreated($created) {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated() {
+        return $this->created;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return User
+     */
+    public function setDeleted($deleted) {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted() {
+        return $this->deleted;
+    }
+
+
+    /**
+     * Set cin
+     *
+     * @param string $cin
+     *
+     * @return User
+     */
+    public function setCin($cin)
+    {
+        $this->cin = $cin;
+
+        return $this;
+    }
+
+    /**
+     * Get cin
+     *
+     * @return string
+     */
+    public function getCin()
+    {
+        return $this->cin;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return User
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     *
+     * @return User
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
 }
