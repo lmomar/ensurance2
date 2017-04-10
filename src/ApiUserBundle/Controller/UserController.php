@@ -26,6 +26,9 @@ class UserController extends Controller {
         $email = $request->request->get('email');
         $password = $request->request->get('password');
         $user = $user_manager->findUserByEmail($email);
+        if(empty($user)){
+            return new JsonResponse(['message','email not found'],Response::HTTP_NOT_FOUND);
+        }
         $encoder_service = $this->get('security.encoder_factory');
         $encoder = $encoder_service->getEncoder($user);
         if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
