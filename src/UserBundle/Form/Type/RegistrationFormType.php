@@ -27,7 +27,6 @@ class RegistrationFormType extends AbstractType {
         $builder->add('prenom');
         $builder->add('phone');
         $builder->add('date_naissance', DateType::class, ['widget' => 'single_text']);
-        $builder->add('date_driver_license', DateType::class, ['widget' => 'single_text']);
         $builder->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
     }
 
@@ -44,7 +43,7 @@ class RegistrationFormType extends AbstractType {
     }
 
     public function getBlockPrefix() {
-        return 'user_registration';
+        return 'assur_user_registration';
     }
 
 }

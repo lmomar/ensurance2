@@ -24,7 +24,6 @@
                                 <th>Nom complet</th>
                                 <th>Téléphone</th>
                                 <th>Néé le</th>
-                                <th>Date permis</th>
                                 <th>Email</th>
                                 <th>Actif</th>
                                 <th data-sortable="true">Crée le</th>
@@ -40,8 +39,7 @@
                                     <td>{{ user.nom ~ ' ' ~ user.prenom }}</td>
                                     <td>{{ user.phone }}</td>
                                     <td>{{ user.dateNaissance is empty ? "--" : user.dateNaissance|date('m-d-Y') }}</td>
-                                    <td>
-                                        {{ user.dateDriverLicense is empty ? "--" : user.dateDriverLicense|date('m-d-Y') }}
+                                    
                                     <td>{{ user.email }}</td>
                                     <td><input type="checkbox" disabled="" checked="{{user.enabled}}"></td>
                                     <td>{{ user.created|date("d-m-Y") }}</td>
@@ -49,10 +47,10 @@
                                         {% if user.hasRole('ROLE_ADMIN')%}Assureur
                                         {% elseif user.hasRole('ROLE_EXPERT')%}
                                             Expert
-                                        {% elseif user.hasRole('ROLE_USER')%}
-                                            Client
                                         {% elseif user.hasRole('ROLE_CONSTATEUR')%}
                                             Constateur
+                                        {% elseif user.hasRole('ROLE_USER')%}
+                                            Client
                                         {% elseif user.hasRole('ROLE_ASSITANT')%}
                                             Assistant
                                         {% endif %}

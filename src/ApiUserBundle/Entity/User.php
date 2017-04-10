@@ -65,21 +65,22 @@ class User extends BaseUser {
     protected $deleted;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $cin;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $photo;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $adresse;
     
     public function __construct() {
+        parent::__construct();
         $this->created = new \DateTime;
         $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
         $this->deleted = false;

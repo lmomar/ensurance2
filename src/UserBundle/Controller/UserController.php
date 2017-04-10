@@ -43,7 +43,6 @@ class UserController extends Controller {
             $user->setNom($data->getNom());
             $user->setPrenom($data->getPrenom());
             $user->setDateNaissance($data->getDateNaissance());
-            $user->setDateDriverLicense($data->getDateDriverLicense());
             $user->setPhone($data->getPhone());
             $user->setRoles($data->getRoles());
             $user->setEmail($email);
@@ -83,7 +82,6 @@ class UserController extends Controller {
             $user->setNom($data->getNom());
             $user->setPrenom($data->getPrenom());
             $user->setDateNaissance($data->getDateNaissance());
-            $user->setDateDriverLicense($data->getDateDriverLicense());
             $user->setPhone($data->getPhone());
             $user->setRoles($data->getRoles());
             $user->setEmail($email);
