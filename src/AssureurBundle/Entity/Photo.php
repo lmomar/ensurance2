@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="photo")
  * @ORM\Entity(repositoryClass="AssureurBundle\Repository\PhotoRepository")
  */
-class Photo
-{
+class Photo {
+
     /**
      * @var int
      *
@@ -29,6 +29,13 @@ class Photo
     private $url;
 
     /**
+     *
+     * @var type 
+    * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetimetz")
@@ -38,9 +45,9 @@ class Photo
     /**
      * @var int
      *
-     * @ORM\Column(name="constat_id", type="integer")
+     * @ORM\Column(name="accident_id", type="integer")
      */
-    private $constatId;
+    private $accident_id;
 
     public function __construct() {
         $this->created = new \DateTime();
@@ -51,8 +58,7 @@ class Photo
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -63,8 +69,7 @@ class Photo
      *
      * @return Photo
      */
-    public function setUrl($url)
-    {
+    public function setUrl($url) {
         $this->url = $url;
 
         return $this;
@@ -75,8 +80,7 @@ class Photo
      *
      * @return string
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
@@ -87,8 +91,7 @@ class Photo
      *
      * @return Photo
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
 
         return $this;
@@ -99,33 +102,58 @@ class Photo
      *
      * @return \DateTime
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
+    
+
+
     /**
-     * Set constatId
+     * Set type
      *
-     * @param integer $constatId
+     * @param string $type
      *
      * @return Photo
      */
-    public function setConstatId($constatId)
+    public function setType($type)
     {
-        $this->constatId = $constatId;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get constatId
+     * Get type
      *
-     * @return int
+     * @return string
      */
-    public function getConstatId()
+    public function getType()
     {
-        return $this->constatId;
+        return $this->type;
+    }
+
+    /**
+     * Set accidentId
+     *
+     * @param integer $accidentId
+     *
+     * @return Photo
+     */
+    public function setAccidentId($accidentId)
+    {
+        $this->accident_id = $accidentId;
+
+        return $this;
+    }
+
+    /**
+     * Get accidentId
+     *
+     * @return integer
+     */
+    public function getAccidentId()
+    {
+        return $this->accident_id;
     }
 }
-

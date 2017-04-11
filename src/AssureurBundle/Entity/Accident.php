@@ -22,6 +22,20 @@ class Accident
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="dossier_id", type="integer")
+     */
+    private $dossierId;
+    
+     /**
+     * @var int
+     *
+     * @ORM\Column(name="accident_id", type="integer")
+     */
+    private $accidentId;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="coord1", type="float")
@@ -45,13 +59,52 @@ class Accident
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created", type="datetimetz")
+     * @ORM\Column(name="date_accident", type="datetimetz")
      */
-    private $created;
+    private $dateAccident;
 
-    public function __construct() {
-        $this->created = new \DateTime;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rue", type="string", length=255)
+     */
+    private $rue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pays", type="string", length=255)
+     */
+    private $pays;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="blesses", type="boolean")
+     */
+    private $blesses;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="degat_autre", type="boolean")
+     */
+    private $degatAutre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="croquis_url", type="text")
+     */
+    private $croquisUrl;
+
 
     /**
      * Get id
@@ -61,6 +114,30 @@ class Accident
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set dossierId
+     *
+     * @param integer $dossierId
+     *
+     * @return Accident
+     */
+    public function setDossierId($dossierId)
+    {
+        $this->dossierId = $dossierId;
+
+        return $this;
+    }
+
+    /**
+     * Get dossierId
+     *
+     * @return int
+     */
+    public function getDossierId()
+    {
+        return $this->dossierId;
     }
 
     /**
@@ -136,27 +213,194 @@ class Accident
     }
 
     /**
-     * Set created
+     * Set dateAccident
      *
-     * @param \DateTime $created
+     * @param \DateTime $dateAccident
      *
      * @return Accident
      */
-    public function setCreated($created)
+    public function setDateAccident($dateAccident)
     {
-        $this->created = $created;
+        $this->dateAccident = $dateAccident;
 
         return $this;
     }
 
     /**
-     * Get created
+     * Get dateAccident
      *
      * @return \DateTime
      */
-    public function getCreated()
+    public function getDateAccident()
     {
-        return $this->created;
+        return $this->dateAccident;
+    }
+
+    /**
+     * Set rue
+     *
+     * @param string $rue
+     *
+     * @return Accident
+     */
+    public function setRue($rue)
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    /**
+     * Get rue
+     *
+     * @return string
+     */
+    public function getRue()
+    {
+        return $this->rue;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return Accident
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set pays
+     *
+     * @param string $pays
+     *
+     * @return Accident
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
+    }
+
+    /**
+     * Set blesses
+     *
+     * @param boolean $blesses
+     *
+     * @return Accident
+     */
+    public function setBlesses($blesses)
+    {
+        $this->blesses = $blesses;
+
+        return $this;
+    }
+
+    /**
+     * Get blesses
+     *
+     * @return bool
+     */
+    public function getBlesses()
+    {
+        return $this->blesses;
+    }
+
+    /**
+     * Set degatAutre
+     *
+     * @param boolean $degatAutre
+     *
+     * @return Accident
+     */
+    public function setDegatAutre($degatAutre)
+    {
+        $this->degatAutre = $degatAutre;
+
+        return $this;
+    }
+
+    /**
+     * Get degatAutre
+     *
+     * @return bool
+     */
+    public function getDegatAutre()
+    {
+        return $this->degatAutre;
+    }
+
+    /**
+     * Set croquisUrl
+     *
+     * @param string $croquisUrl
+     *
+     * @return Accident
+     */
+    public function setCroquisUrl($croquisUrl)
+    {
+        $this->croquisUrl = $croquisUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get croquisUrl
+     *
+     * @return string
+     */
+    public function getCroquisUrl()
+    {
+        return $this->croquisUrl;
+    }
+
+    /**
+     * Set accidentId
+     *
+     * @param integer $accidentId
+     *
+     * @return Accident
+     */
+    public function setAccidentId($accidentId)
+    {
+        $this->accidentId = $accidentId;
+
+        return $this;
+    }
+
+    /**
+     * Get accidentId
+     *
+     * @return integer
+     */
+    public function getAccidentId()
+    {
+        return $this->accidentId;
     }
 }
-
