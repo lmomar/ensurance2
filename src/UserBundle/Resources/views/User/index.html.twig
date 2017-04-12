@@ -49,10 +49,10 @@
                                             Expert
                                         {% elseif user.hasRole('ROLE_CONSTATEUR')%}
                                             Constateur
+                                        {% elseif user.hasRole('ROLE_ASSISTANT')%}
+                                            Assistant
                                         {% elseif user.hasRole('ROLE_USER')%}
                                             Client
-                                        {% elseif user.hasRole('ROLE_ASSITANT')%}
-                                            Assistant
                                         {% endif %}
 
                                     </td>

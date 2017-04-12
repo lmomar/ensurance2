@@ -1,0 +1,26 @@
+body{
+    
+}
+#constat{
+    width: 720px;
+    background-color: #e3e5e4;
+}
+.border-line{
+    border-bottom: 1px #000 dotted;
+}
+.rtl{
+ direction: rtl;   
+}
+
+#size21{
+    font-size: 21px !important;
+    height: 29px;
+    margin: 0;
+    padding: 0;
+}
+.green{
+    background-color: #6ac978;
+}
+li{
+    list-style: none !important;
+}

@@ -17,7 +17,7 @@ class RegistrationFormType extends AbstractType {
                 'Assureur' => 'ROLE_ADMIN',
                 'Expert' => 'ROLE_EXPERT',
                 'Constateur' => 'ROLE_CONSTATEUR',
-                'Assitant' => 'ROLE_ASSITANT'
+                'Assitant' => 'ROLE_ASSISTANT'
             ),
             'multiple' => true,
             'expanded' => false
