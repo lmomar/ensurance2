@@ -1,8 +1,8 @@
 body{
-    
+  font-family: Tahoma,Verdana,Segoe,sans-serif !important;   
 }
 #constat{
-    width: 720px;
+    /*width: 720px;*/
     background-color: #e3e5e4;
 }
 .border-line{
@@ -20,7 +20,106 @@ body{
 }
 .green{
     background-color: #6ac978;
+    height: 30px !important;
+    line-height: 30px;
 }
 li{
     list-style: none !important;
+}
+.size17{
+    font-size: 17px !important;
+}
+
+.bg1{
+    background-color: #cbe0cd;
+}
+.clear-padd{
+    padding: 0;
+}
+#left li label{
+ float: left;
+ font-size: 13px;
+}
+.data-empty{
+    border-bottom: 1px #000 dotted;
+    overflow: hidden;
+    display: block;
+}
+#left li{
+    clear: both;
+}
+#left label{
+    margin-top: 7px;
+    font-weight: 100;
+}
+#left i{
+    font-size: 11px;
+}
+.full-data-empty{
+    border-bottom: 1px #000 dotted;
+    overflow: hidden;
+    display: block;
+}
+
+.relative{
+    position: relative;
+    height: 35px;
+}
+.absolute{
+    position: absolute;
+    left: 10px;
+    top: 21px;
+}
+.float-to-right{
+    float: right;
+}
+
+.big-label{
+    font-weight: bold !important;
+}
+
+#left strong.big{
+    font-size: 16px;
+}
+
+#left .small-span{
+    font-size: 12px;
+    padding-left: 4px;
+}
+#sep0:after,#sep1:after{
+    content: '';
+    border-bottom: 1px #000 dotted;
+    padding-left: 57px;
+}
+
+.table-cell span{
+    display: table-cell;
+}
+
+.big-border{
+    border-bottom: 5px #000 solid;
+    padding-bottom: 11px;
+}
+#constat .data-empty1{
+    border-bottom: 1px #000 dotted;
+    padding: 0 16%;
+    overflow: hidden;
+}
+#constat .data-empty2{
+    border-bottom: 1px #000 dotted;
+    padding: 0 43%;
+    overflow: hidden;
+}
+div.options{
+    display: inline-block;
+    margin-left: 20px;
+}
+div.options span{
+    float: left;
+    padding: 6px 2px;
+    border: 1px #000 dotted;  
+}
+
+.empty-option{
+    width: 28px
 }

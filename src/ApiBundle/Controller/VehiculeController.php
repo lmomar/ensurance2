@@ -22,7 +22,6 @@ class VehiculeController extends Controller {
         $vehicule = new Vehicule();
         $form = $this->createForm(\AssureurBundle\Form\Type\VehiculeType::class, $vehicule);
         $form->submit($request->request->all());
-
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($vehicule);
@@ -44,9 +43,14 @@ class VehiculeController extends Controller {
         if (empty($vehicule)) {
             return new JsonResponse(['message' => 'Vehicule introuvable'], Response::HTTP_NOT_FOUND);
         }
+        
+        
         $form = $this->createForm(VehiculeType::class, $vehicule);
+        
         $form->submit($request->request->all());
+        //return $vehicule;
         if ($form->isSubmitted()) {
+            
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $vehicule;
@@ -89,6 +93,7 @@ class VehiculeController extends Controller {
         }
         $em->remove($vehicule);
         $em->flush();
+        
     }
 
 }

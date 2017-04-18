@@ -26,7 +26,7 @@ class PermisController extends Controller{
         if($form->isSubmitted())
         {
             $permis->setDateDelivre(new \DateTime($request->request->get('dateDelivre')));
-            $permis->setUserId("1");
+            $permis->setUserId($request->request->get('userId'));
             $em->persist($permis);
             $em->flush();
             return $permis;
@@ -49,6 +49,7 @@ class PermisController extends Controller{
         }
         return $permis;
     }
+    
     /**
      * @Rest\View()
      * @Rest\Put("/api/permis/edit/{id}")
