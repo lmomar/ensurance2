@@ -94,4 +94,20 @@ class UserController extends Controller {
         return $user;
     }
 
+    /**
+     * @Rest\View()
+     * @Rest\Get("/api/profile/get/{id}",name="getprofileuser")
+     */
+    public function getUserAction(Request $request){
+        $id = $request->get('id');
+        //return $id;
+        $user_manager= $this->get('fos_user.user_manager');
+        $user = $user_manager->findUserBy(array('id' => $id));
+        if(empty($user))
+        {
+            return new JsonResponse(['message' => 'not found'],Response::HTTP_NOT_FOUND);
+        }
+        return $user;
+    }
+
 }
