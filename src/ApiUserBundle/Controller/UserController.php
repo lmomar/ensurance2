@@ -59,6 +59,7 @@ class UserController extends Controller {
         $user->setDateNaissance($date_naissance);
         $user->setDateDriverLicense($date_driver_license);
         $user->setPhone($phone);
+        $user->setCin($request->get('cin'));
         $user_manager->updateUser($user, true);
         $serializer = $this->container->get('serializer');
         $reports = $serializer->serialize($user, 'json');
@@ -79,6 +80,18 @@ class UserController extends Controller {
         $user->setPlainPassword($password);
         $user_manager->updateUser($user,true);
         return new JsonResponse(array('message' => 'password_changed'));
+    }
+    
+    
+    /**
+     * @Rest\View()
+     * @Rest\Get("/api/profile/get/{id}",name="getProfile")
+     */
+    public function getProfileAction(Request $request) {
+        $id = $request->get('id');
+        $user_manager= $this->get('fos_user.user_manager');
+        $user = $user_manager->findUserBy(array('id' => $id));
+        return $user;
     }
 
 }
