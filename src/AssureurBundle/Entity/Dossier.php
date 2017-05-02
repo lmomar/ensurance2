@@ -42,13 +42,7 @@ class Dossier
      */
     private $statut;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
-     */
-    private $accidentId;
-
+    
 
     /**
      * Get id
@@ -132,27 +126,5 @@ class Dossier
         return $this->statut;
     }
 
-    /**
-     * Set accidentId
-     *
-     * @param integer $accidentId
-     *
-     * @return Dossier
-     */
-    public function setAccidentId($accidentId)
-    {
-        $this->accidentId = $accidentId;
-
-        return $this;
-    }
-
-    /**
-     * Get accidentId
-     *
-     * @return int
-     */
-    public function getAccidentId()
-    {
-        return $this->accidentId;
-    }
+    
 }
