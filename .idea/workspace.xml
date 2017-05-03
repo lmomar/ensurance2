@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Upstream, based on origin/master
     <list default="true" id="6a51acfb-d6ae-4538-b1b3-c3107a30eeac" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/AssureurBundle/Entity/TypeVehicule.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ApiUserBundle/Controller/UserController.php" afterPath="$PROJECT_DIR$/src/ApiUserBundle/Controller/UserController.php" />
@@ -220,5 +221,34 @@
         </state>
       </provider>
     </entry>
+=======
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1493800757349</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1493800757349</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+>>>>>>> 00c7e78 ensurance dossier web service
   </component>
 </project>

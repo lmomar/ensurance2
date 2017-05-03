@@ -1,31 +1,48 @@
 <?php
-namespace AssureurBundle\Form\Type;
+/**
+ * Created by PhpStorm.
+ * User: omar
+ * Date: 03/05/2017
+ * Time: 09:50
+ */
 
+namespace AssureurBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+class DossierType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('dateOuverture',DateType::class,array(
+            'widget' => 'single_text',
+            'input' => 'datetime',
+            'format' => 'd/M/y'
+        ));
+        $builder->add('dateFermeture',DateType::class,array(
+            'widget' => 'single_text',
+            'input' => 'datetime',
+            'format' => 'd/M/y'
+        ));
+        $builder->add('statut');
+    }
 
-class DossierType extends AbstractType{
-    
-    public function buidForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('date_ouverture');
-        $builder->add('date_fermeture');
-        $builder->add('statut', TextType::class);
-    }
-    
-    public function configureOptions(OptionsResolver $resolver) {
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $resolver->setDefaults(
-                [
-                    'data_class' => 'AssureurBundle\Entity\Dossier',
-                    'csrf_protection' => false,
-                    'allow_extra_fields' => true
-                ]
-                );
+            [
+                'data_class' => 'AssureurBundle\Entity\Dossier',
+                'csrf_protection' => false,
+                'allow_extra_fields' => true,
+                'em' => false
+            ]
+        );
     }
-    
-    public function getName() {
-        return 'Dossier';
+
+    public function getName()
+    {
+        return 'dossier';
     }
 }
-

@@ -42,11 +42,13 @@ class Dossier
      */
     private $statut;
 
-<<<<<<< Upstream, based on origin/master
-    
-=======
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="accident_id", type="integer")
+     */
+    private $accidentId;
 
->>>>>>> 00c7e78 ensurance dossier web service
 
     /**
      * Get id
@@ -130,9 +132,28 @@ class Dossier
         return $this->statut;
     }
 
-<<<<<<< Upstream, based on origin/master
-    
-=======
+    /**
+     * Set accidentId
+     *
+     * @param integer $accidentId
+     *
+     * @return Dossier
+     */
+    public function setAccidentId($accidentId)
+    {
+        $this->accidentId = $accidentId;
 
->>>>>>> 00c7e78 ensurance dossier web service
+        return $this;
+    }
+
+    /**
+     * Get accidentId
+     *
+     * @return int
+     */
+    public function getAccidentId()
+    {
+        return $this->accidentId;
+    }
 }
+
