@@ -1,28 +1,48 @@
 <?php
 namespace AssureurBundle\Form\Type;
 
+use function Sodium\add;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 class AccidentType extends AbstractType{
     
-    public function buidForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('coord1');
-        $builder->add('coord2');
-        $builder->add('description', TextType::class);
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('coord1')
+            ->add('coord2')
+            ->add('description', TextType::class)
+            ->add('dateAccident',DateTimeType::class,array(
+                'widget' => 'single_text',
+                'input' => 'datetime',
+                'format' => 'd/M/y'
+            ))
+            ->add('rue')
+            ->add('ville')
+            ->add('pays')
+            ->add('blesses',CheckboxType::class)
+            ->add('degatAutre',CheckboxType::class)
+            ->add('croquisUrl')
+            ->add('vehiculeId');
     }
+
     
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(
                 [
-                    'data_class' => 'AssureurBundle\Entity\Accident'
+                    'data_class' => 'AssureurBundle\Entity\Accident',
+                    'csrf_protection' => false,
+                    'allow_extra_fields' => true,
+                    'em' => false
                 ]
                 );
     }
     
     public function getName() {
-        return 'Accident';
+        return 'accident';
     }
 }
 

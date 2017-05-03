@@ -24,14 +24,14 @@ class Dossier
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_ouverture", type="datetimetz")
+     * @ORM\Column(name="date_ouverture", type="datetime")
      */
     private $dateOuverture;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fermeture", type="datetimetz")
+     * @ORM\Column(name="date_fermeture", type="datetime")
      */
     private $dateFermeture;
 
@@ -42,11 +42,11 @@ class Dossier
      */
     private $statut;
 
-<<<<<<< Upstream, based on origin/master
-    
-=======
-
->>>>>>> 00c7e78 ensurance dossier web service
+    /**
+     * @var integer
+     * @ORM\Column(name="dossier_id",type="integer")
+     */
+    private $accidentId;
 
     /**
      * Get id
@@ -130,9 +130,28 @@ class Dossier
         return $this->statut;
     }
 
-<<<<<<< Upstream, based on origin/master
-    
-=======
 
->>>>>>> 00c7e78 ensurance dossier web service
+    /**
+     * Set dossierId
+     *
+     * @param integer $accidentId
+     *
+     * @return accidentId
+     */
+    public function setAccidentId($accidentId)
+    {
+        $this->accidentId = $accidentId;
+
+        return $this;
+    }
+
+    /**
+     * Get accidentId
+     *
+     * @return integer
+     */
+    public function getAccidentId()
+    {
+        return $this->accidentId;
+    }
 }

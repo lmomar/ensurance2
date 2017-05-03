@@ -20,21 +20,6 @@ class Accident
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="dossier_id", type="integer")
-     */
-    private $dossierId;
-    
-     /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
-     */
-    private $accidentId;
-
     /**
      * @var float
      *
@@ -59,7 +44,7 @@ class Accident
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_accident", type="datetimetz")
+     * @ORM\Column(name="date_accident", type="datetime")
      */
     private $dateAccident;
 
@@ -101,10 +86,25 @@ class Accident
     /**
      * @var string
      *
-     * @ORM\Column(name="croquis_url", type="text")
+     * @ORM\Column(name="croquis_url", type="string",length=255)
      */
     private $croquisUrl;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="vehicule_id",type="integer")
+     */
+    private $vehiculeId;
+
+    /**
+    * @ORM\Column(name="deleted",type="boolean")
+    */
+    private $deleted;
+
+    /**
+    * @ORM\Column(name="created",type="datetime")
+    */
+    private $created;
 
     /**
      * Get id
@@ -116,29 +116,7 @@ class Accident
         return $this->id;
     }
 
-    /**
-     * Set dossierId
-     *
-     * @param integer $dossierId
-     *
-     * @return Accident
-     */
-    public function setDossierId($dossierId)
-    {
-        $this->dossierId = $dossierId;
 
-        return $this;
-    }
-
-    /**
-     * Get dossierId
-     *
-     * @return int
-     */
-    public function getDossierId()
-    {
-        return $this->dossierId;
-    }
 
     /**
      * Set coord1
@@ -380,27 +358,53 @@ class Accident
         return $this->croquisUrl;
     }
 
+
+
     /**
-     * Set accidentId
+     * Set vehiculeId
      *
-     * @param integer $accidentId
+     * @param integer $vehiculeId
      *
      * @return Accident
      */
-    public function setAccidentId($accidentId)
+    public function setVehiculeId($vehiculeId)
     {
-        $this->accidentId = $accidentId;
+        $this->vehiculeId = $vehiculeId;
 
         return $this;
     }
 
     /**
-     * Get accidentId
+     * Get vehiculeId
      *
      * @return integer
      */
-    public function getAccidentId()
+    public function getVehiculeId()
     {
-        return $this->accidentId;
+        return $this->vehiculeId;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Accident
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

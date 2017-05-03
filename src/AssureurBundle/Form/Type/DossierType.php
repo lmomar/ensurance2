@@ -27,6 +27,7 @@ class DossierType extends AbstractType
             'format' => 'd/M/y'
         ));
         $builder->add('statut');
+        $builder->add('accident_id');
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -24,14 +24,14 @@ class Dossier
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_ouverture", type="datetimetz")
+     * @ORM\Column(name="date_ouverture", type="datetime")
      */
     private $dateOuverture;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fermeture", type="datetimetz")
+     * @ORM\Column(name="date_fermeture", type="datetime")
      */
     private $dateFermeture;
 
@@ -43,12 +43,10 @@ class Dossier
     private $statut;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
+     * @var integer
+     * @ORM\Column(name="dossier_id",type="integer")
      */
     private $accidentId;
-
 
     /**
      * Get id
@@ -132,12 +130,13 @@ class Dossier
         return $this->statut;
     }
 
+
     /**
-     * Set accidentId
+     * Set dossierId
      *
      * @param integer $accidentId
      *
-     * @return Dossier
+     * @return accidentId
      */
     public function setAccidentId($accidentId)
     {
@@ -149,11 +148,10 @@ class Dossier
     /**
      * Get accidentId
      *
-     * @return int
+     * @return integer
      */
     public function getAccidentId()
     {
         return $this->accidentId;
     }
 }
-

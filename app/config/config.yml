@@ -17,6 +17,8 @@ parameters:
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
+    templating:
+        engines: ['twig']
     secret: '%secret%'
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
@@ -109,3 +111,4 @@ fos_rest:
         enabled: true
     param_fetcher_listener:
         enabled: true
+nelmio_api_doc: ~
