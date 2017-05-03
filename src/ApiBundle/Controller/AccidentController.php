@@ -15,6 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class AccidentController extends Controller{
     /**
      * @ApiDoc(
+     *  section="Accident",
      *  description="Create a new Object",
      *  input="AssureurBundle\Form\Type\AccidentType",
      *  output="AssureurBundle\Entity\Accident"
@@ -42,6 +43,7 @@ class AccidentController extends Controller{
 
     /**
      * @ApiDoc(
+     *  section="Accident",
      *  description="Edit Object",
      *  input="AssureurBundle\Form\Type\AccidentType",
      *  output="AssureurBundle\Entity\Accident",
@@ -78,6 +80,18 @@ class AccidentController extends Controller{
         }
     }
     /**
+     * @ApiDoc(
+     *  section="Accident",
+     *  description="Delete Object",
+     *  requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Accident ID"
+     *      }
+     *  }
+     * )
     * @Rest\View
     * @Rest\Delete("/api/accident/delete/{id}")
     */
@@ -95,6 +109,18 @@ class AccidentController extends Controller{
     }
 
     /**
+     * @ApiDoc(
+     *  section="Accident",
+     *  description="Get Object By ID",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Accident ID"
+     *      }
+     *  }
+     * )
     * @Rest\View
     * @Rest\Get("/api/accident/{id}")
     */
@@ -108,6 +134,18 @@ class AccidentController extends Controller{
     }
 
     /**
+     * @ApiDoc(
+     *  section="Accident",
+     *  description="Get Liste of Accident by Vehicule ID",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Vehicule ID"
+     *      }
+     *  }
+     * )
     * @Rest\View
     * @Rest\Get("/api/accident/vehicule/{id}")
     */
