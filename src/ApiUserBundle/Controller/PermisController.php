@@ -10,31 +10,47 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 
 use ApiUserBundle\Entity\Permis;
-use ApiUserBundle\Form\Type\PermisFormType;
-
+use ApiUserBundle\Form\Type\PermisType;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class PermisController extends Controller{
     
     /**
+     * @ApiDoc(
+     *  section="Permis",
+     *  description="Create a new Object",
+     *  input="ApiUserBundle\Form\Type\PermisType",
+     *  output="ApiUserBundle\Entity\Permis"
+     * )
      * @Rest\View()
      * @Rest\Post("/api/permis/add")
      */
     public function postPermisAction(Request $request) {
         $permis = new Permis();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(PermisFormType::class,$permis);
-        $form->submit($request->request->all());
+        $form = $this->createForm(PermisType::class,$permis);
+        $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-            $permis->setDateDelivre(new \DateTime($request->request->get('dateDelivre')));
-            $permis->setUserId($request->request->get('userId'));
-            $em->persist($permis);
-            $em->flush();
+            //$em->persist($permis);
+            //$em->flush();
             return $permis;
         }
         
     }
     
-    /**
+   /**
+     * @ApiDoc(
+     *  section="Permis",
+     *  description="Get Permis By User ID",
+     *  requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="User ID"
+     *      }
+     *  }
+     * )
      * @Rest\View()
      * @Rest\Get("/api/permis/get/{id}",name="getPermisByUserId")
      */
@@ -51,6 +67,20 @@ class PermisController extends Controller{
     }
     
     /**
+     * @ApiDoc(
+     *  section="Permis",
+     *  description="Edit Object",
+     *  input="ApiUserBundle\Form\Type\PermisType",
+     *  output="ApiUserBundle\Entity\Permis",
+     *  requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Permis ID"
+     *      }
+     *  }
+     * )
      * @Rest\View()
      * @Rest\Put("/api/permis/edit/{id}")
      */
@@ -63,7 +93,7 @@ class PermisController extends Controller{
             return new JsonResponse(['message' => 'not found'],Response::HTTP_NOT_FOUND);
         }
         $form = $this->createForm(PermisFormType::class,$permis);
-        $form->submit($request->request->all());
+        $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
             $permis->setDateDelivre(new \DateTime($request->request->get('dateDelivre')));

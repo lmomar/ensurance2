@@ -8,13 +8,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class AccidentType extends AbstractType{
     
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('coord1')
             ->add('coord2')
-            ->add('description', TextType::class)
             ->add('dateAccident',DateTimeType::class,array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
@@ -25,7 +26,7 @@ class AccidentType extends AbstractType{
             ->add('pays')
             ->add('blesses',CheckboxType::class)
             ->add('degatAutre',CheckboxType::class)
-            ->add('croquisUrl')
+            ->add('croquisUrl',FileType::class,array('multiple' => false))
             ->add('vehiculeId');
     }
 

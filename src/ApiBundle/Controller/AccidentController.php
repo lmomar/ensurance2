@@ -28,9 +28,14 @@ class AccidentController extends Controller{
     public function postAccidentAction(Request $request) {
         $accident = new Accident();
         $form = $this->createForm(AccidentType::class,$accident);
-        $form->submit($request->request->all());
+        $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $file= $request->files->get('accident')['croquisUrl'];
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('photo_directory') . '/accident/', $filename);
+            $fullUrl =  '/uploads/accident/' .  $filename;
+            $accident->setCroquisUrl($fullUrl);
             $em = $this->getDoctrine()->getManager();
             $em->persist($accident);
             $em->flush();
@@ -63,20 +68,21 @@ class AccidentController extends Controller{
      * @Rest\Put("/api/accident/edit/{id}")
      */
     public function putAccidentAction(Request $request,$id){
+
         $em = $this->getDoctrine()->getManager();
         $accident = $em->getRepository('AssureurBundle:Accident')->find($id);
         if(empty($accident)){
-            return new JsonResponse('not found',404);
+            return new JsonResponse(['message' => 'not found'],404);
         }
         $form = $this->createForm(AccidentType::class,$accident);
-        $form->submit($request->request->all());
+        $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
             $em->flush();
             return $accident;
         }
         else{
-            return $form->getErrors();
+            return new JsonResponse(['error' => $form->getErrors()]);
         }
     }
     /**

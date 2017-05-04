@@ -35,7 +35,23 @@ class Facture
      */
     private $dossierId;
 
+    /**
+     * @var datetime
+     * @ORM\Column(name="created",type="datetime")
+     */
+    private $created;
 
+    /**
+     * @var Boolean
+     * @ORM\Column(name="deleted",type="boolean")
+     */
+    private $deleted;
+
+    function __construct()
+    {
+        $this->deleted = false;
+        $this->created = new \DateTime('now');
+    }
     /**
      * Get id
      *
@@ -94,4 +110,3 @@ class Facture
         return $this->dossierId;
     }
 }
-

@@ -3,6 +3,8 @@
 namespace AssureurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Temoin
@@ -24,16 +26,16 @@ class Temoin
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_assure", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nomAssure;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom_temoin", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255)
      */
-    private $prenomTemoin;
+    private $prenom;
 
     /**
      * @var string
@@ -63,6 +65,23 @@ class Temoin
      */
     private $accidentId;
 
+    /**
+     * @var DateTime
+     * @ORM\Column(name="created",type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var Boolean
+     * @ORM\Column(name="deleted",type="boolean")
+     */
+    private $deleted;
+
+    function __construct()
+    {
+        $this->deleted = false;
+        $this->created = new \DateTime('now');
+    }
 
     /**
      * Get id
@@ -74,53 +93,7 @@ class Temoin
         return $this->id;
     }
 
-    /**
-     * Set nomAssure
-     *
-     * @param string $nomAssure
-     *
-     * @return Temoin
-     */
-    public function setNomAssure($nomAssure)
-    {
-        $this->nomAssure = $nomAssure;
-
-        return $this;
-    }
-
-    /**
-     * Get nomAssure
-     *
-     * @return string
-     */
-    public function getNomAssure()
-    {
-        return $this->nomAssure;
-    }
-
-    /**
-     * Set prenomTemoin
-     *
-     * @param string $prenomTemoin
-     *
-     * @return Temoin
-     */
-    public function setPrenomTemoin($prenomTemoin)
-    {
-        $this->prenomTemoin = $prenomTemoin;
-
-        return $this;
-    }
-
-    /**
-     * Get prenomTemoin
-     *
-     * @return string
-     */
-    public function getPrenomTemoin()
-    {
-        return $this->prenomTemoin;
-    }
+   
 
     /**
      * Set tel
@@ -216,5 +189,101 @@ class Temoin
     public function getAccidentId()
     {
         return $this->accidentId;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Temoin
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Temoin
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Temoin
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Temoin
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

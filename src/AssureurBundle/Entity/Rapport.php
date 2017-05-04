@@ -27,15 +27,14 @@ class Rapport
      * @ORM\Column(name="user_id", type="integer")
      */
     private $userId;
-
     /**
-     * @var int
-     *
-     * @ORM\Column(name="dossier_id", type="integer")
-     */
-    private $dossierId;
+    * @ORM\Column(name="created",type="datetime")
+    */
+    private $created;
 
-
+    public function __construct(){
+     $this->created = new \DateTime('now')   ;
+    }
     /**
      * Get id
      *
@@ -70,27 +69,29 @@ class Rapport
         return $this->userId;
     }
 
+    
+
     /**
-     * Set dossierId
+     * Set created
      *
-     * @param integer $dossierId
+     * @param \DateTime $created
      *
      * @return Rapport
      */
-    public function setDossierId($dossierId)
+    public function setCreated($created)
     {
-        $this->dossierId = $dossierId;
+        $this->created = $created;
 
         return $this;
     }
 
     /**
-     * Get dossierId
+     * Get created
      *
-     * @return int
+     * @return \DateTime
      */
-    public function getDossierId()
+    public function getCreated()
     {
-        return $this->dossierId;
+        return $this->created;
     }
 }

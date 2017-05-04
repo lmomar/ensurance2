@@ -34,12 +34,6 @@ class Accident
      */
     private $coord2;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
 
     /**
      * @var \DateTime
@@ -171,29 +165,7 @@ class Accident
         return $this->coord2;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Accident
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
 
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Set dateAccident

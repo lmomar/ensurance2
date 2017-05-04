@@ -44,7 +44,7 @@ class Dossier
 
     /**
      * @var integer
-     * @ORM\Column(name="dossier_id",type="integer")
+     * @ORM\Column(name="accident_id",type="integer")
      */
     private $accidentId;
 

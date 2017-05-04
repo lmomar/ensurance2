@@ -24,273 +24,6 @@ class Vehicule
     /**
      * @var string
      *
-<<<<<<< Upstream, based on origin/master
-     * @ORM\Column(name="matricule", type="string", length=10, unique=true)
-     */
-    private $matricule;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="marque", type="string", length=255)
-     */
-    private $marque;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="type_id", type="integer")
-     */
-    private $type_id;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="modele", type="string", length=255)
-     */
-    private $modele;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="num_carte_grise", type="string", length=30)
-     */
-    
-    
-    private $numCarteGrise;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetimetz")
-     */
-    private $created;
-
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $n_contrat_assur;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $nom_assurance;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $num_attestation;
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $num_police;
-    
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $valable_du;
-    
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $valable_au;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    
-    private $ag_bur_court;
-    
-    public function __construct() {
-        $this->created = new \DateTime();
-    }
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set matricule
-     *
-     * @param string $matricule
-     *
-     * @return Vehicule
-     */
-    public function setMatricule($matricule)
-    {
-        $this->matricule = $matricule;
-
-        return $this;
-    }
-
-    /**
-     * Get matricule
-     *
-     * @return string
-     */
-    public function getMatricule()
-    {
-        return $this->matricule;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Vehicule
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set marque
-     *
-     * @param string $marque
-     *
-     * @return Vehicule
-     */
-    public function setMarque($marque)
-    {
-        $this->marque = $marque;
-
-        return $this;
-    }
-
-    /**
-     * Get marque
-     *
-     * @return string
-     */
-    public function getMarque()
-    {
-        return $this->marque;
-    }
-
-    /**
-     * Set numCarteGrise
-     *
-     * @param string $numCarteGrise
-     *
-     * @return Vehicule
-     */
-    public function setNumCarteGrise($numCarteGrise)
-    {
-        $this->numCarteGrise = $numCarteGrise;
-
-        return $this;
-    }
-
-    /**
-     * Get numCarteGrise
-     *
-     * @return string
-     */
-    public function getNumCarteGrise()
-    {
-        return $this->numCarteGrise;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Vehicule
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set typeId
-     *
-     * @param integer $typeId
-     *
-     * @return Vehicule
-     */
-    public function setTypeId($typeId)
-    {
-        $this->type_id = $typeId;
-
-        return $this;
-    }
-
-    /**
-     * Get typeId
-     *
-     * @return integer
-     */
-    public function getTypeId()
-    {
-        return $this->type_id;
-    }
-
-    /**
-     * Set modele
-     *
-     * @param string $modele
-     *
-     * @return Vehicule
-     */
-    public function setModele($modele)
-    {
-        $this->modele = $modele;
-
-        return $this;
-    }
-
-    /**
-     * Get modele
-     *
-     * @return string
-     */
-    public function getModele()
-    {
-        return $this->modele;
-    }
-}
-=======
      * @ORM\Column(name="matricule", type="string", length=255, unique=true)
      */
     private $matricule;
@@ -309,6 +42,12 @@ class Vehicule
      */
     private $modele;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="type_id", type="integer")
+     */
+    private $typeId;
     /**
      * @var string
      *
@@ -338,14 +77,14 @@ class Vehicule
     private $numPolice;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="valable_du", type="datetime")
      */
     private $valableDu;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="valable_au", type="datetime")
      */
@@ -372,8 +111,13 @@ class Vehicule
      */
     private $created;
 
-    
+    /**
+    * @ORM\Column(name="deleted",type="boolean")
+    */
+    private $deleted;
+
     public function __construct() {
+        $this->deleted=false;
         $this->created = new \DateTime;
     }
 
@@ -582,7 +326,7 @@ class Vehicule
     /**
      * Set valableAu
      *
-     * @param \DateTime $valableAu
+     * @param \Date $valableAu
      *
      * @return Vehicule
      */
@@ -596,7 +340,7 @@ class Vehicule
     /**
      * Get valableAu
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getValableAu()
     {
@@ -650,6 +394,52 @@ class Vehicule
     {
         return $this->userId;
     }
-}
 
->>>>>>> 00c7e78 ensurance dossier web service
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Vehicule
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set typeId
+     *
+     * @param integer $typeId
+     *
+     * @return Vehicule
+     */
+    public function setTypeId($typeId)
+    {
+        $this->typeId = $typeId;
+
+        return $this;
+    }
+
+    /**
+     * Get typeId
+     *
+     * @return int
+     */
+    public function getTypeId()
+    {
+        return $this->typeId;
+    }
+}

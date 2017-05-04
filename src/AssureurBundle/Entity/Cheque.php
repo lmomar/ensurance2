@@ -35,6 +35,23 @@ class Cheque
      */
     private $dossierId;
 
+    /**
+     * @var datetime
+     * @ORM\Column(name="created",type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var Boolean
+     * @ORM\Column(name="deleted",type="boolean")
+     */
+    private $deleted;
+
+    function __construct()
+    {
+        $this->deleted = false;
+        $this->created = new \DateTime('now');
+    }
 
     /**
      * Get id
@@ -92,5 +109,53 @@ class Cheque
     public function getDossierId()
     {
         return $this->dossierId;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Cheque
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Cheque
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

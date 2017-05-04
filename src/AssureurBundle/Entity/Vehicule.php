@@ -111,8 +111,13 @@ class Vehicule
      */
     private $created;
 
-    
+    /**
+    * @ORM\Column(name="deleted",type="boolean")
+    */
+    private $deleted;
+
     public function __construct() {
+        $this->deleted=false;
         $this->created = new \DateTime;
     }
 
@@ -436,5 +441,29 @@ class Vehicule
     public function getTypeId()
     {
         return $this->typeId;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Vehicule
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

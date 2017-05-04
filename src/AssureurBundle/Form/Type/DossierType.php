@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 class DossierType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -27,7 +28,7 @@ class DossierType extends AbstractType
             'format' => 'd/M/y'
         ));
         $builder->add('statut');
-        $builder->add('accident_id');
+        $builder->add('accident_id',IntegerType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
