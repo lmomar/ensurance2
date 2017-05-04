@@ -53,12 +53,12 @@ class ChequeController extends Controller{
      *  description="Edit Object via Post(file upload)",
      *  input="AssureurBundle\Form\Type\ChequeType",
      *  output="AssureurBundle\Entity\Cheque",
-     *    requirements={
+     * requirements={
      *      {
      *          "name"="id",
      *          "dataType"="integer",
      *          "requirement"="\d+",
-     *          "description"="Cheque Id"
+     *          "description"="Cheque ID"
      *      }
      *  }
      * )
@@ -67,7 +67,7 @@ class ChequeController extends Controller{
      * @Rest\Post("/api/cheque/edit/{id}")
      * @return Cheque
      */
-    public function postModifAction(Request $request,$id){
+    public function postChequeEditAction(Request $request,$id){
 
         $em = $this->getDoctrine()->getManager();
         $chequeToEdit = $em->getRepository('AssureurBundle:Cheque')->findOneBy(array('deleted' => false,'id' => $id));

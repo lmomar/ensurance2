@@ -1,14 +1,15 @@
 <?php
 namespace ApiBundle\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-use AssureurBundle\Entity\Cheque;
-use AssureurBundle\Form\Type\ChequeType;
+use AssureurBundle\Entity\Facture;
+use AssureurBundle\Form\Type\FactureType;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
@@ -26,14 +27,14 @@ class FactureController extends Controller{
      * @Rest\Post("/api/facture/add")
      * @return Facture
      */
-    public function postChequeAction(Request $request){
+    public function postFactureAction(Request $request){
         $facture = new Facture();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(FactureType::class,$facture);
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-            $file = $request->files->get('cheque')['url'];
+            $file = $request->files->get('facture')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/facture/', $fileName);
             $fullUrl =  '/uploads/photo/facture/' .  $fileName;
@@ -67,7 +68,7 @@ class FactureController extends Controller{
      * @Rest\Post("/api/facture/edit/{id}")
      * @return Facture
      */
-    public function postModifAction(Request $request,$id){
+    public function postFactureEditAction(Request $request,$id){
 
         $em = $this->getDoctrine()->getManager();
         $factureToEdit = $em->getRepository('AssureurBundle:Facture')->findOneBy(array('deleted' => false,'id' => $id));
@@ -82,9 +83,9 @@ class FactureController extends Controller{
         if($form->isSubmitted())
         {
 
-            $file = $request->files->get('cheque')['url'];
+            $file = $request->files->get('facture')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $file->move($this->getParameter('photo_directory') . '/cheque/', $fileName);
+            $file->move($this->getParameter('photo_directory') . '/facture/', $fileName);
             $fullUrl =  '/uploads/photo/facture/' .  $fileName;
             $factureToEdit->setUrl($fullUrl);
             $em->flush();
@@ -114,12 +115,12 @@ class FactureController extends Controller{
      */
     public function deleteFactureAction($id){
         $em = $this->getDoctrine()->getManager();
-        $cheque= $em->getRepository('AssureurBundle:Facture')->findOneBy(array('deleted' => false,'id' => $id));
+        $facture= $em->getRepository('AssureurBundle:Facture')->findOneBy(array('deleted' => false,'id' => $id));
         if(empty($facture))
         {
             return new JsonResponse(['message' => 'not found'],404);
         }
-        $cheque->setDeleted(true);
+        $facture->setDeleted(true);
         $em->flush();
         return new JsonResponse(['message' => 'deleted'],Response::HTTP_NO_CONTENT);
     }
@@ -140,7 +141,7 @@ class FactureController extends Controller{
      * @Rest\View
      * @Rest\Get("/api/facture/dossier/{dossierId}")
      */
-    public function getChequeByDossierIdAction($dossierId){
+    public function getFactureByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();
         $facture= $em->getRepository('AssureurBundle:Facture')->findOneBy(array('deleted' => false,'dossierId' => $dossierId));
         if(empty($facture))

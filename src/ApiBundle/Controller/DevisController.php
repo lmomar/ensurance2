@@ -67,7 +67,7 @@ class DevisController extends Controller{
      * @Rest\Post("/api/devis/edit/{id}")
      * @return Accident
      */
-    public function postModifAction(Request $request,$id){
+    public function postDevisEditAction(Request $request,$id){
 
         $em = $this->getDoctrine()->getManager();
         $devisToEdit = $em->getRepository('AssureurBundle:Devis')->findOneBy(array('deleted' => false,'id' => $id));
