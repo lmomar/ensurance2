@@ -28,7 +28,16 @@ class TemoinController extends Controller{
      * @return Temoin
      */
     public function postTemoinAction(Request $request){
+        //return $request->request->all();
         $em = $this->getDoctrine()->getManager();
+        $object =$em->getRepository('AssureurBundle:Temoin')->find(1);
+
+        $serializer = $this->get('serializer');
+        $json = $serializer->serialize($object,'json');
+        //return $json;
+        $d = $serializer->deserialize($json,Temoin::class,'json',array('object' => $object));
+        return d;
+
         $temoin = new Temoin();
         $form = $this->createForm(TemoinType::class,$temoin);
         $form->submit($request->request->get($form->getName()));

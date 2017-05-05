@@ -22,16 +22,16 @@ class Dossier
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="date_ouverture", type="datetime")
      */
     private $dateOuverture;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="date_fermeture", type="datetime")
+     * @ORM\Column(name="date_fermeture", type="datetime",nullable=true)
      */
     private $dateFermeture;
 
@@ -44,7 +44,7 @@ class Dossier
 
     /**
      * @var integer
-     * @ORM\Column(name="dossier_id",type="integer")
+     * @ORM\Column(name="accident_id",type="integer")
      */
     private $accidentId;
 
@@ -61,7 +61,7 @@ class Dossier
     /**
      * Set dateOuverture
      *
-     * @param \DateTime $dateOuverture
+     * @param \Date $dateOuverture
      *
      * @return Dossier
      */
@@ -75,17 +75,17 @@ class Dossier
     /**
      * Get dateOuverture
      *
-     * @return \DateTime
+     * @return \Date
      */
-    public function getDateOuverture()
+    public function getDateOuverture($format="d/m/Y")
     {
-        return $this->dateOuverture;
+        return $this->dateOuverture->format($format);
     }
 
     /**
      * Set dateFermeture
      *
-     * @param \DateTime $dateFermeture
+     * @param \Date $dateFermeture
      *
      * @return Dossier
      */
@@ -99,11 +99,13 @@ class Dossier
     /**
      * Get dateFermeture
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getDateFermeture()
     {
-        return $this->dateFermeture;
+
+            return $this->dateFermeture;
+
     }
 
     /**

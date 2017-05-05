@@ -25,10 +25,11 @@ class DossierType extends AbstractType
         $builder->add('dateFermeture',DateType::class,array(
             'widget' => 'single_text',
             'input' => 'datetime',
-            'format' => 'd/M/y'
+            'format' => 'd/M/y',
+            'required' => false
         ));
         $builder->add('statut');
-        $builder->add('accident_id',IntegerType::class);
+        $builder->add('accidentId',IntegerType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

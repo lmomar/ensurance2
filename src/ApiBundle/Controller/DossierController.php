@@ -33,19 +33,26 @@ class DossierController extends Controller
      * @return Dossier
      */
     public function postDossierAction(Request $request){
+        $validator = $this->get('validator');
+
         $dossier = new Dossier();
         $form = $this->createForm(DossierType::class,$dossier);
         $form->submit($request->request->get($form->getName()));
-        if($form->isSubmitted())
+        if($form->isSubmitted() && $form->isValid())
         {
-
+            //return $dossier;
             $em = $this->getDoctrine()->getManager();
             $em->persist($dossier);
             $em->flush();
             return $dossier;
         }
         else{
-            return new JsonResponse(['message' => $form->getErrors()]);
+            $errors = $validator->validate($dossier);
+            $er=Array();
+            foreach ($errors as $error) {
+                $er[]= $error->getMessage();
+            }
+            return $er;
         }
     }
 

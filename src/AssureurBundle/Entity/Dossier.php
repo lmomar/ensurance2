@@ -3,6 +3,8 @@
 namespace AssureurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Dossier
@@ -22,16 +24,17 @@ class Dossier
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="date_ouverture", type="datetime")
+     * @Assert\DateTime()
      */
     private $dateOuverture;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="date_fermeture", type="datetime")
+     * @ORM\Column(name="date_fermeture", type="datetime",nullable=true)
      */
     private $dateFermeture;
 
@@ -39,12 +42,14 @@ class Dossier
      * @var string
      *
      * @ORM\Column(name="statut", type="string", length=255)
+     * @Assert\Length(min=5,minMessage="Veuillez remplir ce champ statut")
      */
     private $statut;
 
     /**
      * @var integer
      * @ORM\Column(name="accident_id",type="integer")
+     * @Assert\Range(min="1",max="9000",minMessage="entre 1 et 9000")
      */
     private $accidentId;
 
@@ -103,7 +108,9 @@ class Dossier
      */
     public function getDateFermeture()
     {
-        return $this->dateFermeture;
+
+            return $this->dateFermeture;
+
     }
 
     /**

@@ -38,4 +38,5 @@ class RapportController extends Controller{
             return $form->getErrors();
         }
     }
+
 }
