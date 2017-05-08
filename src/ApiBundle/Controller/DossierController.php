@@ -116,7 +116,9 @@ class DossierController extends Controller
      * @Rest\Get("/api/dossier/get/{id}")
      */
     public function getDossierAction($id){
+
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
+        return $em->findByUserId($id);
         $dossier = $em->find($id);
         if(empty($dossier))
         {

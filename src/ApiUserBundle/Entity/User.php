@@ -2,6 +2,7 @@
 
 namespace ApiUserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser {
+
 
     /**
      * @ORM\Id
@@ -78,11 +80,16 @@ class User extends BaseUser {
      * @ORM\Column(type="string", nullable=true)
      */
     protected $adresse;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="user")
+     */
+    private $vehicules;
     public function __construct() {
         parent::__construct();
         $this->created = new \DateTime;
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new ArrayCollection();
+        $this->vehicules = new ArrayCollection();
         $this->deleted = false;
     }
 
@@ -303,5 +310,39 @@ class User extends BaseUser {
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Add vehicule
+     *
+     * @param \AssureurBundle\Entity\Vehicule $vehicule
+     *
+     * @return User
+     */
+    public function addVehicule(\AssureurBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules[] = $vehicule;
+
+        return $this;
+    }
+
+    /**
+     * Remove vehicule
+     *
+     * @param \AssureurBundle\Entity\Vehicule $vehicule
+     */
+    public function removeVehicule(\AssureurBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules->removeElement($vehicule);
+    }
+
+    /**
+     * Get vehicules
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVehicules()
+    {
+        return $this->vehicules;
     }
 }

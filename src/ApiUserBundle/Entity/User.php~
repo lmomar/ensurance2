@@ -2,9 +2,9 @@
 
 namespace ApiUserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-<<<<<<< Upstream, based on origin/master
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser {
+
 
     /**
      * @ORM\Id
@@ -66,23 +67,29 @@ class User extends BaseUser {
     protected $deleted;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $cin;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $photo;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $adresse;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="user")
+     */
+    private $vehicules;
     public function __construct() {
+        parent::__construct();
         $this->created = new \DateTime;
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new ArrayCollection();
+        $this->vehicules = new ArrayCollection();
         $this->deleted = false;
     }
 
@@ -165,15 +172,7 @@ class User extends BaseUser {
         return $this;
     }
 
-    /**
-     * Get dateDriverLicense
-     *
-     * @return \DateTime
-     */
-    public function getDateDriverLicense() {
-        return $this->date_driver_license;
-    }
-
+    
     /**
      * Set phone
      *
@@ -240,164 +239,76 @@ class User extends BaseUser {
         return $this->deleted;
     }
 
-=======
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="fos_user")
- */
-class User extends BaseUser {
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * Set cin
      *
-     */
-    protected $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     */
-    protected $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     */
-    protected $phone;
-
-    /**
-     * @ORM\Column(type="date")
-     *
-     */
-    protected $date_naissance;
-
-    /**
-     * @ORM\Column(type="date")
-     *
-     */
-    protected $date_driver_license;
-
-    
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
+     * @param string $cin
      *
      * @return User
      */
-    public function setNom($nom) {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom() {
-        return $this->nom;
-    }
-
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     *
-     * @return User
-     */
-    public function setPrenom($prenom) {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string
-     */
-    public function getPrenom() {
-        return $this->prenom;
-    }
-
-    /**
-     * Set dateNaissance
-     *
-     * @param \DateTime $dateNaissance
-     *
-     * @return User
-     */
-    public function setDateNaissance($dateNaissance) {
-        $this->date_naissance = $dateNaissance;
-
-        return $this;
-    }
-
-    /**
-     * Get dateNaissance
-     *
-     * @return \DateTime
-     */
-    public function getDateNaissance() {
-        return $this->date_naissance;
-    }
-
-    /**
-     * Set dateDriverLicense
-     *
-     * @param \DateTime $dateDriverLicense
-     *
-     * @return User
-     */
-    public function setDateDriverLicense($dateDriverLicense) {
-        $this->date_driver_license = $dateDriverLicense;
-
-        return $this;
-    }
-
-    /**
-     * Get dateDriverLicense
-     *
-     * @return \DateTime
-     */
-    public function getDateDriverLicense() {
-        return $this->date_driver_license;
-    }
-
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return User
-     */
-    public function setPhone($phone)
+    public function setCin($cin)
     {
-        $this->phone = $phone;
+        $this->cin = $cin;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get cin
      *
      * @return string
      */
-    public function getPhone()
+    public function getCin()
     {
-        return $this->phone;
+        return $this->cin;
     }
->>>>>>> 00c7e78 ensurance dossier web service
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return User
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     *
+     * @return User
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
 }

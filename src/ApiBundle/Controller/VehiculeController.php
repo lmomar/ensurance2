@@ -12,6 +12,11 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use AssureurBundle\Form\Type\VehiculeType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use FOS\RestBundle\Serializer\Serializer;
 class VehiculeController extends Controller {
 
     /**
@@ -109,6 +114,19 @@ class VehiculeController extends Controller {
      * @return JsonResponse
      */
     public function getVehiculeByUserIdAction(Request $request, $user_id) {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getName();
+        });
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+
+        $userManager = $this->container->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('id' => $user_id));
+        return $serializer->serialize($user->getVehicules(), 'json');
         $data= $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findBy(array('deleted' => false,'userId' => $user_id));
         if(empty($data))
         {
