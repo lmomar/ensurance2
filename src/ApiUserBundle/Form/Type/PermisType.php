@@ -16,7 +16,7 @@ class PermisType extends AbstractType{
                 ->add('dateDelivre', DateTimeType::class,array(
                     'widget' => 'single_text',
                     'input' => 'datetime',
-                    'format' => 'd/M/y'
+                    'format' => 'd-M-y'
                 ))
                 ->add('prefecture', TextType::class)
                 ->add('userId',IntegerType::class);

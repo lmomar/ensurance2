@@ -67,7 +67,7 @@ class TemoinController extends Controller{
      */
     public function putTemoinAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        $temoin = $em->getRepository('AssureurBundle:Temoin')->find($id);
+        $temoin = $em->getRepository('AssureurBundle:Temoin')->findOneBy(array('id' => $id,'deleted' => false));
         if(empty($temoin))
         {
             return new JsonResponse(['message' => 'not found'],404);
@@ -105,7 +105,7 @@ class TemoinController extends Controller{
      */
     public function getTemoinByIdAction($id){
         $em = $this->getDoctrine()->getManager();
-        $temoin = $em->getRepository('AssureurBundle:Temoin')->findBy(array(
+        $temoin = $em->getRepository('AssureurBundle:Temoin')->findOneBy(array(
             'id' => $id,
             'deleted' => false
         ));

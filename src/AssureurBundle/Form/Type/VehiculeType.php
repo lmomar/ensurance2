@@ -18,21 +18,21 @@ class VehiculeType extends AbstractType {
 
         $builder->add('modele', TextType::class);
 
-        $builder->add('type_id', TextType::class);
+        $builder->add('typeId', TextType::class);
 
-        $builder->add('n_contrat_assur', TextType::class);
+        $builder->add('nContratAssur', TextType::class);
 
-        $builder->add('nom_assurance', TextType::class);
+        $builder->add('nomAssurance', TextType::class);
 
-        $builder->add('num_attestation', TextType::class);
+        $builder->add('numAttestation', TextType::class);
 
-        $builder->add('num_police', TextType::class);
+        $builder->add('numPolice', TextType::class);
 
-        $builder->add('valable_du', DateType::class, array('widget' => 'single_text', 'format' => "yyyy-mm-dd"));
+        $builder->add('valableDu', DateType::class, array('widget' => 'single_text', 'format' => "d-M-y"));
 
-        $builder->add('valable_au', DateType::class, array('widget' => 'single_text', 'format' => "yyyy-mm-dd"));
+        $builder->add('valableAu', DateType::class, array('widget' => 'single_text', 'format' => "d-M-y"));
 
-        $builder->add('ag_bur_court', TextType::class);
+        $builder->add('agBurCourt', TextType::class);
 
 
 

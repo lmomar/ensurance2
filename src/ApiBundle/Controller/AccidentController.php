@@ -31,6 +31,8 @@ class AccidentController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+
+
             $file= $request->files->get('accident')['croquisUrl'];
             $filename = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/accident/', $filename);
@@ -70,7 +72,7 @@ class AccidentController extends Controller{
     public function putAccidentAction(Request $request,$id){
 
         $em = $this->getDoctrine()->getManager();
-        $accident = $em->getRepository('AssureurBundle:Accident')->find($id);
+        $accident = $em->getRepository('AssureurBundle:Accident')->findOneBy(array('id' => $id,'deleted' => false));
         if(empty($accident)){
             return new JsonResponse(['message' => 'not found'],404);
         }
@@ -104,7 +106,7 @@ class AccidentController extends Controller{
 
     public function deleteAccidentAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        $accident = $em->getRepository("AssureurBundle:Accident")->find($id);
+        $accident = $em->getRepository("AssureurBundle:Accident")->findOneBy(array('id' => $id,'deleted' => false));
         if(empty($accident))
         {
             return new JsonResponse(['message' => 'not found'],404);
@@ -132,7 +134,7 @@ class AccidentController extends Controller{
     */
     public function getAccidentAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        $accident = $em->getRepository("AssureurBundle:Accident")->find($id);
+        $accident = $em->getRepository("AssureurBundle:Accident")->findOneBy(array('id' => $id,'deleted' => false));
         if(empty($accident)){
             return new JsonResponse(['message' => 'not found'],404);
         }
@@ -157,7 +159,7 @@ class AccidentController extends Controller{
     */
     public function getAccidentByVehiculeIdAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('AssureurBundle:Accident')->findBy(array('vehiculeId' => $id));
+        $liste = $em->getRepository('AssureurBundle:Accident')->findBy(array('vehiculeId' => $id,'deleted' => false));
         return $liste;
     }
 }

@@ -80,26 +80,41 @@ class VehiculeController extends Controller {
     /**
      * @ApiDoc(
      *  section="Vehicule",
-     *  description="Get Vehicule(s) By Id or UserID"
+     *  description="Get Vehicule By Id "
      * )
      * @Rest\View()
-     * @Rest\Get("api/vehicules",name="getVehicules")
+     * @Rest\Get("api/vehicule/{id}",name="getVehicule")
      * @param Request $request
+     * @param integer $id
      * @return JsonResponse
-     * @QueryParam(name="id", requirements="\d+", default="", description="id vehicule")
-     * @QueryParam(name="user_id", requirements="\d+", default="", description="user_id")
      */
-    public function getVehiculeAction(Request $request, ParamFetcher $paramFetcher) {
-        $id = $paramFetcher->get('id');
-        $user_id = $paramFetcher->get('user_id');
-        $filter = [];
-        if (isset($id) && !empty($id)) {
-            $filter['id'] = $id;
+    public function getVehiculeByIdAction(Request $request, $id) {
+        $data= $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findBy(array('deleted' => false,'id' => $id));
+        if(empty($data))
+        {
+            return new JsonResponse(['message' => 'not found'],404);
         }
-        if (isset($user_id) && !empty($user_id)) {
-            $filter['userId'] = $user_id;
+        return $data;
+    }
+
+    /**
+     * @ApiDoc(
+     *  section="Vehicule",
+     *  description="Get Vehicule(s) By UserID"
+     * )
+     * @Rest\View()
+     * @Rest\Get("api/vehicules/user/{user_id}",name="getVehicules")
+     * @param Request $request
+     * @param integer $user_id
+     * @return JsonResponse
+     */
+    public function getVehiculeByUserIdAction(Request $request, $user_id) {
+        $data= $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findBy(array('deleted' => false,'userId' => $user_id));
+        if(empty($data))
+        {
+            return new JsonResponse(['message' => 'not found'],404);
         }
-        return $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findBy($filter);
+        return $data;
     }
 
     /**

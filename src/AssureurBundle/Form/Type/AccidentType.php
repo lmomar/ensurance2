@@ -19,7 +19,7 @@ class AccidentType extends AbstractType{
             ->add('dateAccident',DateTimeType::class,array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'format' => 'd/M/y'
+                'format' => 'd-M-y'
             ))
             ->add('rue')
             ->add('ville')
