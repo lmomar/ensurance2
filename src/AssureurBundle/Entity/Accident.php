@@ -2,6 +2,7 @@
 
 namespace AssureurBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -84,11 +85,6 @@ class Accident
      */
     private $croquisUrl;
 
-    /**
-     * @var integer
-     * @ORM\Column(name="vehicule_id",type="integer")
-     */
-    private $vehiculeId;
 
     /**
     * @ORM\Column(name="deleted",type="boolean")
@@ -100,10 +96,38 @@ class Accident
     */
     private $created;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="accidents")
+     */
+    private $vehicules;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="dossiers")
+     */
+    private $dossiers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="photos")
+     */
+    private $photos;
+
+    /**
+ * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="temoins")
+ */
+    private $temoins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="constats")
+     */
+    private $constats;
     public function __construct()
     {
         $this->deleted = false;
         $this->created = new \DateTime('now');
+        $this->vehicules = new ArrayCollection();
+        $this->photos = new ArrayCollection();
+        $this->temoins = new ArrayCollection();
+        $this->constats = new ArrayCollection();
     }
     /**
      * Get id
@@ -407,5 +431,199 @@ class Accident
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Add vehicule
+     *
+     * @param \AssureurBundle\Entity\Vehicule $vehicule
+     *
+     * @return Accident
+     */
+    public function addVehicule(\AssureurBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules[] = $vehicule;
+
+        return $this;
+    }
+
+    /**
+     * Remove vehicule
+     *
+     * @param \AssureurBundle\Entity\Vehicule $vehicule
+     */
+    public function removeVehicule(\AssureurBundle\Entity\Vehicule $vehicule)
+    {
+        $this->vehicules->removeElement($vehicule);
+    }
+
+    /**
+     * Get vehicules
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVehicules()
+    {
+        return $this->vehicules;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param \AssureurBundle\Entity\Dossier $dossier
+     *
+     * @return Accident
+     */
+    public function setDossier(\AssureurBundle\Entity\Dossier $dossier = null)
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Get dossier
+     *
+     * @return \AssureurBundle\Entity\Dossier
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
+    }
+
+    /**
+     * Add photo
+     *
+     * @param \AssureurBundle\Entity\Photo $photo
+     *
+     * @return Accident
+     */
+    public function addPhoto(\AssureurBundle\Entity\Photo $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \AssureurBundle\Entity\Photo $photo
+     */
+    public function removePhoto(\AssureurBundle\Entity\Photo $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Add temoin
+     *
+     * @param \AssureurBundle\Entity\Temoin $temoin
+     *
+     * @return Accident
+     */
+    public function addTemoin(\AssureurBundle\Entity\Temoin $temoin)
+    {
+        $this->temoins[] = $temoin;
+
+        return $this;
+    }
+
+    /**
+     * Remove temoin
+     *
+     * @param \AssureurBundle\Entity\Temoin $temoin
+     */
+    public function removeTemoin(\AssureurBundle\Entity\Temoin $temoin)
+    {
+        $this->temoins->removeElement($temoin);
+    }
+
+    /**
+     * Get temoins
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTemoins()
+    {
+        return $this->temoins;
+    }
+
+    /**
+     * Add constat
+     *
+     * @param \AssureurBundle\Entity\Constat $constat
+     *
+     * @return Accident
+     */
+    public function addConstat(\AssureurBundle\Entity\Constat $constat)
+    {
+        $this->constats[] = $constat;
+
+        return $this;
+    }
+
+    /**
+     * Remove constat
+     *
+     * @param \AssureurBundle\Entity\Constat $constat
+     */
+    public function removeConstat(\AssureurBundle\Entity\Constat $constat)
+    {
+        $this->constats->removeElement($constat);
+    }
+
+    /**
+     * Get constats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConstats()
+    {
+        return $this->constats;
+    }
+
+    /**
+     * Add dossier
+     *
+     * @param \AssureurBundle\Entity\Dossier $dossier
+     *
+     * @return Accident
+     */
+    public function addDossier(\AssureurBundle\Entity\Dossier $dossier)
+    {
+        $this->dossiers[] = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Remove dossier
+     *
+     * @param \AssureurBundle\Entity\Dossier $dossier
+     */
+    public function removeDossier(\AssureurBundle\Entity\Dossier $dossier)
+    {
+        $this->dossiers->removeElement($dossier);
+    }
+
+    /**
+     * Get dossiers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDossiers()
+    {
+        return $this->dossiers;
     }
 }

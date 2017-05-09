@@ -22,15 +22,22 @@ class Rapport
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
-    /**
     * @ORM\Column(name="created",type="datetime")
     */
     private $created;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="rapports")
+     * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier",inversedBy="rapports")
+     * @ORM\JoinColumn(name="dossier_id",referencedColumnName="id")
+     */
+    private $dossier;
+
 
     public function __construct(){
      $this->created = new \DateTime('now')   ;
@@ -93,5 +100,53 @@ class Rapport
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ApiUserBundle\Entity\User $user
+     *
+     * @return Rapport
+     */
+    public function setUser(\ApiUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ApiUserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param \ApiUserBundle\Entity\Dossier $dossier
+     *
+     * @return Rapport
+     */
+    public function setDossier(\ApiUserBundle\Entity\Dossier $dossier = null)
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Get dossier
+     *
+     * @return \ApiUserBundle\Entity\Dossier
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AssureurBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -123,9 +124,19 @@ class Vehicule
      */
     private $user;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident", inversedBy="vehicules")
+     * @ORM\JoinTable(name="vehicules_accidents")
+     */
+    private $accidents;
+
+
+
     public function __construct() {
         $this->deleted=false;
         $this->created = new \DateTime;
+        $this->accidents = new ArrayCollection();
     }
 
     /**
@@ -496,5 +507,39 @@ class Vehicule
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     *
+     * @return Vehicule
+     */
+    public function addAccident(\AssureurBundle\Entity\Accident $accident)
+    {
+        $this->accidents[] = $accident;
+
+        return $this;
+    }
+
+    /**
+     * Remove accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     */
+    public function removeAccident(\AssureurBundle\Entity\Accident $accident)
+    {
+        $this->accidents->removeElement($accident);
+    }
+
+    /**
+     * Get accidents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccidents()
+    {
+        return $this->accidents;
     }
 }

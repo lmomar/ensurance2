@@ -58,12 +58,6 @@ class Temoin
      */
     private $adresse;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
-     */
-    private $accidentId;
 
     /**
      * @var DateTime
@@ -76,6 +70,12 @@ class Temoin
      * @ORM\Column(name="deleted",type="boolean")
      */
     private $deleted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident",inversedBy="accident")
+     * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
+     */
+    private $accident;
 
     function __construct()
     {
@@ -285,5 +285,29 @@ class Temoin
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     *
+     * @return Temoin
+     */
+    public function setAccident(\AssureurBundle\Entity\Accident $accident = null)
+    {
+        $this->accident = $accident;
+
+        return $this;
+    }
+
+    /**
+     * Get accident
+     *
+     * @return \AssureurBundle\Entity\Accident
+     */
+    public function getAccident()
+    {
+        return $this->accident;
     }
 }

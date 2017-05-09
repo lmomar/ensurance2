@@ -43,11 +43,10 @@ class Photo {
     private $created;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident")
+     * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
-    private $accident_id;
+    private $accident;
 
     public function __construct() {
         $this->created = new \DateTime();
@@ -155,5 +154,29 @@ class Photo {
     public function getAccidentId()
     {
         return $this->accident_id;
+    }
+
+    /**
+     * Set accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     *
+     * @return Photo
+     */
+    public function setAccident(\AssureurBundle\Entity\Accident $accident = null)
+    {
+        $this->accident = $accident;
+
+        return $this;
+    }
+
+    /**
+     * Get accident
+     *
+     * @return \AssureurBundle\Entity\Accident
+     */
+    public function getAccident()
+    {
+        return $this->accident;
     }
 }

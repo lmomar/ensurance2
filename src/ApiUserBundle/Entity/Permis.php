@@ -21,12 +21,6 @@ class Permis
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
 
     /**
      * @var string
@@ -56,7 +50,11 @@ class Permis
      */
     private $created;
 
-    
+    /**
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User", inversedBy="user")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
     public function __construct() {
         $this->created = new \DateTime;
     }
@@ -189,5 +187,29 @@ class Permis
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ApiUserBundle\Entity\User $user
+     *
+     * @return Permis
+     */
+    public function setUser(\ApiUserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ApiUserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

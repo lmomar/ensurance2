@@ -175,13 +175,12 @@ class Constat
      */
     private $adresseConducteur;
 
-    
-     /**
-     * @var int
-     *
-     * @ORM\Column(name="accident_id", type="integer")
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="accidents")
+     * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
-    private $accidentId;
+    private $accident;
     
 
     /**
@@ -744,5 +743,29 @@ class Constat
     public function getAccidentId()
     {
         return $this->accidentId;
+    }
+
+    /**
+     * Set accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     *
+     * @return Constat
+     */
+    public function setAccident(\AssureurBundle\Entity\Accident $accident = null)
+    {
+        $this->accident = $accident;
+
+        return $this;
+    }
+
+    /**
+     * Get accident
+     *
+     * @return \AssureurBundle\Entity\Accident
+     */
+    public function getAccident()
+    {
+        return $this->accident;
     }
 }

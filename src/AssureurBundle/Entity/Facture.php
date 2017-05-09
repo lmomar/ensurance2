@@ -28,12 +28,7 @@ class Facture
      */
     private $url;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="dossier_id", type="integer")
-     */
-    private $dossierId;
+
 
     /**
      * @var datetime
@@ -46,6 +41,12 @@ class Facture
      * @ORM\Column(name="deleted",type="boolean")
      */
     private $deleted;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier", inversedBy="factures")
+     * @ORM\JoinColumn(name="dossier_id", referencedColumnName="id")
+     */
+    private $dossier;
 
     function __construct()
     {
@@ -156,5 +157,29 @@ class Facture
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param \AssureurBundle\Entity\Dossier $dossier
+     *
+     * @return Facture
+     */
+    public function setDossier(\AssureurBundle\Entity\Dossier $dossier = null)
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Get dossier
+     *
+     * @return \AssureurBundle\Entity\Dossier
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
     }
 }
