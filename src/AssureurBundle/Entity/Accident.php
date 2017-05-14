@@ -102,11 +102,6 @@ class Accident
     private $vehicules;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="dossiers")
-     */
-    private $dossiers;
-
-    /**
      * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="photos")
      */
     private $photos;

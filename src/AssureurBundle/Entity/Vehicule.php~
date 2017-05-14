@@ -124,10 +124,9 @@ class Vehicule
      */
     private $user;
 
-
     /**
      * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident", inversedBy="vehicules")
-     * @ORM\JoinTable(name="vehicules_accidents")
+     * @ORM\JoinTable(name="accidents_vehicules")
      */
     private $accidents;
 

@@ -124,17 +124,9 @@ class Vehicule
      */
     private $user;
 
-
     /**
      * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident", inversedBy="vehicules")
-     * @ORM\JoinTable(name="Vehicule", inverseJoinColumns={id} )
-     * @ORM\JoinTable(name="Dossier", inverseJoinColumns={id} )
-     * @ORM\JoinTable(name="Accident", inverseJoinColumns={id} )
-     * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="vehicule_id",referencedColumnName="id"),
-     *  @ORM\JoinColumn(name="dossier_id",referencedColumnName="id"),
-     *  @ORM\JoinColumn(name="accident_id",referencedColumnName="id")
-     * })
+     * @ORM\JoinTable(name="accidents_vehicules")
      */
     private $accidents;
 

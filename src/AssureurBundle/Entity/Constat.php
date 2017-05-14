@@ -181,9 +181,31 @@ class Constat
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;
-    
 
     /**
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="Constat")
+     */
+    private $dossier;
+
+    /**
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+    function __construct()
+    {
+        $this->created = new \DateTime('now');
+        $this->deleted = false;
+
+    }
+
+    /**
+     *
      * Get id
      *
      * @return int
@@ -767,5 +789,53 @@ class Constat
     public function getAccident()
     {
         return $this->accident;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param \AssureurBundle\Entity\Dossier $dossier
+     *
+     * @return Constat
+     */
+    public function setDossier(\AssureurBundle\Entity\Dossier $dossier = null)
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+    /**
+     * Get dossier
+     *
+     * @return \AssureurBundle\Entity\Dossier
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Constat
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

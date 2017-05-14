@@ -8,7 +8,32 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ConstatType extends AbstractType{
     
     public function buildForm(FormBuilderInterface $builder,array $options) {
-        $builder->add('type', \Symfony\Component\Form\Extension\Core\Type\TextType::class);
+        $builder
+            ->add('venantDe')
+            ->add('allantVers')
+            ->add('pointChoc')
+            ->add('descDegat')
+            ->add('c1')
+            ->add('c2')
+            ->add('c3')
+            ->add('c4')
+            ->add('c5')
+            ->add('c6')
+            ->add('c7')
+            ->add('c8')
+            ->add('c9')
+            ->add('c10')
+            ->add('c11')
+            ->add('c12')
+            ->add('c13')
+            ->add('c14')
+            ->add('observations')
+            ->add('nomConducteur')
+            ->add('prenomConducteur')
+            ->add('adresseConducteur')
+            ->add('accidentId');
+
+
     }
     
     public function configureOptions(OptionsResolver $resolver) {
@@ -21,4 +46,5 @@ class ConstatType extends AbstractType{
         return 'Constat';
     }
 }
+
 

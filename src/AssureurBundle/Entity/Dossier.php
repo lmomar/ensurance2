@@ -68,10 +68,9 @@ class Dossier
     private $cheques;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Accident", mappedBy="accidents")
-     * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="Dossier")
      */
-    private $accidents;
+    private $constat;
 
     function __construct()
     {
@@ -438,5 +437,29 @@ class Dossier
     public function getAccidents()
     {
         return $this->accidents;
+    }
+
+    /**
+     * Set constat
+     *
+     * @param \AssureurBundle\Entity\Constat $constat
+     *
+     * @return Dossier
+     */
+    public function setConstat(\AssureurBundle\Entity\Constat $constat = null)
+    {
+        $this->constat = $constat;
+
+        return $this;
+    }
+
+    /**
+     * Get constat
+     *
+     * @return \AssureurBundle\Entity\Constat
+     */
+    public function getConstat()
+    {
+        return $this->constat;
     }
 }
