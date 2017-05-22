@@ -1,7 +1,8 @@
 <?php
 
 namespace AssureurBundle\Repository;
-
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query;
 /**
  * RapportRepository
  *
@@ -10,4 +11,17 @@ namespace AssureurBundle\Repository;
  */
 class RapportRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getOne($id){
+        $q = $this->createQueryBuilder('r')
+            ->select('r')
+            ->where('r.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery();
+        try {
+            return $q->getSingleResult();
+        }
+        catch (NoResultException $e){
+            return null;
+        }
+    }
 }

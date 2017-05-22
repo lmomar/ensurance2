@@ -72,12 +72,20 @@ class Dossier
      */
     private $constat;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="dossier")
+     */
+    private $temoins;
+
+
+
     function __construct()
     {
         $this->rapports = new ArrayCollection();
         $this->devis = new ArrayCollection();
         $this->factures = new ArrayCollection();
         $this->cheques = new ArrayCollection();
+        $this->temoins = new ArrayCollection();
     }
 
     /**

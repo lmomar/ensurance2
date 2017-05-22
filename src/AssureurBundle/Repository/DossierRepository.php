@@ -26,4 +26,17 @@ class DossierRepository extends \Doctrine\ORM\EntityRepository
         }
 
     }
+
+    public function getOne($id){
+        $q = $this->createQueryBuilder('d')
+            ->select('d')
+            ->where('d.id = :id')
+            ->setParameter('id',$id)
+            ->getQuery();
+        try{
+            return $q->getSingleResult();
+        }catch (NoResultException $e){
+            return null;
+        }
+    }
 }

@@ -11,7 +11,8 @@ class RapportType extends AbstractType{
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('userId',IntegerType::class);
+        $builder->add('user');
+        $builder->add('dossier');
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -13,6 +13,7 @@ imports:
 parameters:
     locale: en
     photo_directory: '%kernel.root_dir%/../web/uploads/photo'
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 framework:
     #esi: ~
@@ -42,7 +43,7 @@ framework:
     php_errors:
         log: true
     serializer:
-        enabled: true
+        enabled: false
 
 # Twig Configuration
 twig:
@@ -98,6 +99,8 @@ fos_user:
            
            
 fos_rest:
+    serializer:
+        serialize_null:  true
     zone:
         - { path: ^/api/* }
     routing_loader:
@@ -112,3 +115,8 @@ fos_rest:
     param_fetcher_listener:
         enabled: true
 nelmio_api_doc: ~
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-d\\TH:i:sP"
+            default_timezone: "UTC"

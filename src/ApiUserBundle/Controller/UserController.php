@@ -45,26 +45,16 @@ class UserController extends Controller {
      */
     public function updateProfileAction(Request $request) {
         $user_manager = $this->get('fos_user.user_manager');
-        
         $email = $request->request->get('email');
         $user = $user_manager->findUserByEmail($email);
-        $nom = $request->request->get('nom');
-        $prenom = $request->get('prenom');
-        $date_naissance = new \DateTime($request->request->get('date_naissance'));
-        $date_driver_license = new \DateTime($request->request->get('date_driver_license'));
-        $phone = $request->request->get('phone');
-        $user->setNom($nom);
-        $user->setEmail($email);
-        $user->setPrenom($prenom);
-        $user->setDateNaissance($date_naissance);
-        $user->setDateDriverLicense($date_driver_license);
-        $user->setPhone($phone);
-        $user->setCin($request->get('cin'));
-        $user_manager->updateUser($user, true);
-        $serializer = $this->container->get('serializer');
-        $reports = $serializer->serialize($user, 'json');
+        $form = $this->createForm(ProfileFormType::class,$user);
+        $form->submit($request->request->get($form->getName()));
+        if($form->isSubmitted())
+        {
+            return $user;
+        }
         
-        return new JsonResponse(array('message' => 'user_saved', 'user' => $reports));
+        //return new JsonResponse(array('message' => 'user_saved', 'user' => $reports));
     }
 
     /**

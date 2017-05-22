@@ -51,34 +51,7 @@ class Rapport
     {
         return $this->id;
     }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Rapport
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    
-
-    /**
+   /**
      * Set created
      *
      * @param \DateTime $created
@@ -101,6 +74,8 @@ class Rapport
     {
         return $this->created;
     }
+
+    
 
     /**
      * Set user
@@ -129,11 +104,11 @@ class Rapport
     /**
      * Set dossier
      *
-     * @param \ApiUserBundle\Entity\Dossier $dossier
+     * @param \AssureurBundle\Entity\Dossier $dossier
      *
      * @return Rapport
      */
-    public function setDossier(\ApiUserBundle\Entity\Dossier $dossier = null)
+    public function setDossier(\AssureurBundle\Entity\Dossier $dossier = null)
     {
         $this->dossier = $dossier;
 
@@ -143,7 +118,7 @@ class Rapport
     /**
      * Get dossier
      *
-     * @return \ApiUserBundle\Entity\Dossier
+     * @return \AssureurBundle\Entity\Dossier
      */
     public function getDossier()
     {
