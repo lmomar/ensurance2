@@ -92,7 +92,7 @@ class User extends BaseUser {
     private $rapports;
 
     /**
-     * @ORM\OneToMany(targetEntity="ApiUserBundle\Entity\Permis",mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ApiUserBundle\Entity\Permis",mappedBy="user", cascade={"persist", "remove"})
      */
     private $permis;
 

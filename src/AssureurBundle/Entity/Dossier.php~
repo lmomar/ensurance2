@@ -68,9 +68,13 @@ class Dossier
     private $cheques;
 
     /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="Dossier")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="dossier")
      */
     private $constat;
+
+
+
+
 
     function __construct()
     {
@@ -78,6 +82,7 @@ class Dossier
         $this->devis = new ArrayCollection();
         $this->factures = new ArrayCollection();
         $this->cheques = new ArrayCollection();
+        
     }
 
     /**

@@ -51,7 +51,7 @@ class Permis
     private $created;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User", inversedBy="user")
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User", inversedBy="permis")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

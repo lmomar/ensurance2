@@ -33,9 +33,10 @@ class DossierRepository extends \Doctrine\ORM\EntityRepository
             ->where('d.id = :id')
             ->setParameter('id',$id)
             ->getQuery();
-        try{
+        try {
             return $q->getSingleResult();
-        }catch (NoResultException $e){
+        }
+        catch (NoResultException $e){
             return null;
         }
     }

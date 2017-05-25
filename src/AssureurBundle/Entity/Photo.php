@@ -43,7 +43,7 @@ class Photo {
     private $created;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="photos")
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;

@@ -102,17 +102,17 @@ class Accident
     private $vehicules;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="photos")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="accident")
      */
     private $photos;
 
     /**
- * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="temoins")
- */
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="accident")
+     */
     private $temoins;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="constats")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="accident")
      */
     private $constats;
     public function __construct()

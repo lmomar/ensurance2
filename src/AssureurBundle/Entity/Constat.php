@@ -177,7 +177,7 @@ class Constat
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="accidents")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="constats")
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;
@@ -189,7 +189,7 @@ class Constat
 
 
     /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="Constat")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="constat")
      */
     private $dossier;
 
@@ -837,5 +837,29 @@ class Constat
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Constat
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }

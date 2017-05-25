@@ -68,14 +68,11 @@ class Dossier
     private $cheques;
 
     /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="Dossier")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="dossier")
      */
     private $constat;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="dossier")
-     */
-    private $temoins;
+
 
 
 
@@ -85,7 +82,7 @@ class Dossier
         $this->devis = new ArrayCollection();
         $this->factures = new ArrayCollection();
         $this->cheques = new ArrayCollection();
-        $this->temoins = new ArrayCollection();
+        
     }
 
     /**
@@ -173,29 +170,6 @@ class Dossier
     }
 
 
-    /**
-     * Set dossierId
-     *
-     * @param integer $accidentId
-     *
-     * @return accidentId
-     */
-    public function setAccidentId($accidentId)
-    {
-        $this->accidentId = $accidentId;
-
-        return $this;
-    }
-
-    /**
-     * Get accidentId
-     *
-     * @return integer
-     */
-    public function getAccidentId()
-    {
-        return $this->accidentId;
-    }
 
     /**
      * Set rapports

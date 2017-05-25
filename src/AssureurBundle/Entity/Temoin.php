@@ -72,7 +72,7 @@ class Temoin
     private $deleted;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident",inversedBy="accident")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident",inversedBy="temoins")
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;
