@@ -87,29 +87,6 @@ class Cheque
         return $this->url;
     }
 
-    /**
-     * Set dossierId
-     *
-     * @param integer $dossierId
-     *
-     * @return Cheque
-     */
-    public function setDossierId($dossierId)
-    {
-        $this->dossierId = $dossierId;
-
-        return $this;
-    }
-
-    /**
-     * Get dossierId
-     *
-     * @return int
-     */
-    public function getDossierId()
-    {
-        return $this->dossierId;
-    }
 
     /**
      * Set created

@@ -29,7 +29,7 @@ class DossierType extends AbstractType
             'required' => false
         ));
         $builder->add('statut');
-        $builder->add('accidentId',IntegerType::class);
+        $builder->add('accident');
     }
 
     public function configureOptions(OptionsResolver $resolver)

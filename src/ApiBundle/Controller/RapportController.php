@@ -39,7 +39,6 @@ class RapportController extends Controller{
         if ($form->isSubmitted()) {
             $dossier_id = $request->request->get('rapport')['dossier'];
             $dossier = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->getOne(1);
-            //return $dossier;
             if (empty($dossier)) {
                 return new JsonResponse(array('message' => 'dossier not found'));
             } else {
@@ -82,7 +81,6 @@ class RapportController extends Controller{
             return new JsonResponse(array('message' => 'not found'));
         }*/
         return $rapport;
-
     }
 
 }

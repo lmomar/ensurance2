@@ -16,7 +16,7 @@ class TemoinType extends AbstractType
                 ->add('tel',TextType::class)
                 ->add('email',TextType::class)
                 ->add('adresse',TextType::class)
-                ->add('accidentId',IntegerType::class);
+                ->add('accident');
                 
     }
 

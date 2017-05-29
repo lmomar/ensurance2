@@ -99,12 +99,7 @@ class Vehicule
      */
     private $agBurCourt;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
+
 
     /**
      * @var \DateTime
@@ -119,23 +114,19 @@ class Vehicule
     private $deleted;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User", inversedBy="vehicules")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="vehicules")
+     * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
      */
     private $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident", inversedBy="vehicules")
-     * @ORM\JoinTable(name="accidents_vehicules")
-     */
-    private $accidents;
+
 
 
 
     public function __construct() {
         $this->deleted=false;
         $this->created = new \DateTime;
-        $this->accidents = new ArrayCollection();
+
     }
 
     /**
@@ -388,29 +379,7 @@ class Vehicule
         return $this->agBurCourt;
     }
 
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Vehicule
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
 
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 
     /**
      * Set created
@@ -487,11 +456,11 @@ class Vehicule
     /**
      * Set user
      *
-     * @param \AssureurBundle\Entity\User $user
+     * @param \ApiUserBundle\Entity\User $user
      *
      * @return Vehicule
      */
-    public function setUser(\AssureurBundle\Entity\User $user = null)
+    public function setUser(\ApiUserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -501,44 +470,12 @@ class Vehicule
     /**
      * Get user
      *
-     * @return \AssureurBundle\Entity\User
+     * @return \ApiUserBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
     }
 
-    /**
-     * Add accident
-     *
-     * @param \AssureurBundle\Entity\Accident $accident
-     *
-     * @return Vehicule
-     */
-    public function addAccident(\AssureurBundle\Entity\Accident $accident)
-    {
-        $this->accidents[] = $accident;
 
-        return $this;
-    }
-
-    /**
-     * Remove accident
-     *
-     * @param \AssureurBundle\Entity\Accident $accident
-     */
-    public function removeAccident(\AssureurBundle\Entity\Accident $accident)
-    {
-        $this->accidents->removeElement($accident);
-    }
-
-    /**
-     * Get accidents
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccidents()
-    {
-        return $this->accidents;
-    }
 }

@@ -19,7 +19,7 @@ class PermisType extends AbstractType{
                     'format' => 'd-M-y'
                 ))
                 ->add('prefecture', TextType::class)
-                ->add('userId',IntegerType::class);
+                ->add('user');
     }
     
     public function configureOptions(OptionsResolver $resolver) {

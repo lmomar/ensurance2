@@ -11,7 +11,7 @@ class ChequeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('url',FileType::class);
-        $builder->add('DossierId',IntegerType::class);
+        $builder->add('dossier');
     }
 
     public function configureOptions(OptionsResolver $resolver)

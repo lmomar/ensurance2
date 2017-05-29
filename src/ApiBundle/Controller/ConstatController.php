@@ -29,7 +29,14 @@ class ConstatController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accidentID))
+            {
+                return new JsonResponse(['message' => 'not found'],404);
+            }
             $em = $this->getDoctrine()->getManager();
+            $constat->setAccident($accident);
             $em->persist($constat);
             $em->flush();
             return $constat;
@@ -67,6 +74,13 @@ class ConstatController extends Controller{
         $form = $this->createForm(ConstatType::class,$constat);
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted() && $form->isValid()){
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accidentID))
+            {
+                return new JsonResponse(['message' => 'not found'],404);
+            }
+            $constat->setAccident($accident);
             $em->flush();
             return $constat;
         }else{
@@ -102,5 +116,63 @@ class ConstatController extends Controller{
         }
         $constat->setDeleted(true);
         return new JsonResponse(array('message' => 'Deleted'),201);
+    }
+
+    /**
+     * @ApiDoc(
+     *  section="Constat",
+     *  description="Get Object By ID",
+     *  output="AssureurBundle\Entity\Constat",
+     *  requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Constat ID"
+     *      }
+     *  }
+     * )
+     * @Rest\View
+     * @Rest\Get("/api/constat/get/{id}")
+     * @return ConstatType
+     */
+    public function getConstatAction(Request $request,$id){
+        $constat = $this->getDoctrine()->getRepository('AssureurBundle:Constat')->findOneBy(array(
+            'deleted' => false,'id' => $id
+        ));
+        if(empty($constat))
+        {
+            return new JsonResponse(['message' => 'not found'],404);
+        }
+        return $constat;
+    }
+
+    /**
+     * @ApiDoc(
+     *  section="Constat",
+     *  description="Get Objects By Constat ID",
+     * requirements={
+     *      {
+     *          "name"="accidentID",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Accident ID"
+     *      }
+     *  }
+     * )
+     * @Rest\View
+     * @Rest\Get("/api/constats/accident/{accidentID}")
+     * @return Array()
+     */
+    public function getConstatsByAccidentAction(Request $request,$accidentID){
+        $constats = $this->getDoctrine()->getRepository('AssureurBundle:Constat')->findBy(array(
+            'deleted' => false,'accident' => $accidentID
+        ));
+        if(empty($constats))
+        {
+            return new JsonResponse(['message' => 'no constat found'],404);
+        }
+        return $constats;
+
     }
 }

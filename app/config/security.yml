@@ -7,8 +7,8 @@ security:
         ROLE_ASSUREUR:    ROLE_ASSUREUR
         ROLE_EXPERT:      ROLE_EXPERT
         ROLE_ASSISTANT:   ROLE_ASSISTANT
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_USER:        ROLE_USER
+        ROLE_ADMIN:       ROLE_ADMIN
 
     providers:
         fos_userbundle:

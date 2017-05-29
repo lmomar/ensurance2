@@ -96,10 +96,7 @@ class Accident
     */
     private $created;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="accidents")
-     */
-    private $vehicules;
+
 
     /**
      * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="accident")
@@ -115,6 +112,13 @@ class Accident
      * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="accident")
      */
     private $constats;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule")
+     * @ORM\JoinTable(name="accidents_vehicules")
+     */
+    protected $vehicules;
+
     public function __construct()
     {
         $this->deleted = false;
@@ -122,6 +126,7 @@ class Accident
         $this->vehicules = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->temoins = new ArrayCollection();
+
         $this->constats = new ArrayCollection();
     }
     /**
@@ -588,37 +593,5 @@ class Accident
         return $this->constats;
     }
 
-    /**
-     * Add dossier
-     *
-     * @param \AssureurBundle\Entity\Dossier $dossier
-     *
-     * @return Accident
-     */
-    public function addDossier(\AssureurBundle\Entity\Dossier $dossier)
-    {
-        $this->dossiers[] = $dossier;
 
-        return $this;
-    }
-
-    /**
-     * Remove dossier
-     *
-     * @param \AssureurBundle\Entity\Dossier $dossier
-     */
-    public function removeDossier(\AssureurBundle\Entity\Dossier $dossier)
-    {
-        $this->dossiers->removeElement($dossier);
-    }
-
-    /**
-     * Get dossiers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDossiers()
-    {
-        return $this->dossiers;
-    }
 }

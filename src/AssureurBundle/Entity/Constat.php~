@@ -188,10 +188,7 @@ class Constat
     private $deleted;
 
 
-    /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Dossier", mappedBy="constat")
-     */
-    private $dossier;
+
 
     /**
      * @ORM\Column(name="created", type="datetime")
@@ -743,29 +740,7 @@ class Constat
         return $this->adresseConducteur;
     }
 
-    /**
-     * Set accidentId
-     *
-     * @param integer $accidentId
-     *
-     * @return Constat
-     */
-    public function setAccidentId($accidentId)
-    {
-        $this->accidentId = $accidentId;
 
-        return $this;
-    }
-
-    /**
-     * Get accidentId
-     *
-     * @return integer
-     */
-    public function getAccidentId()
-    {
-        return $this->accidentId;
-    }
 
     /**
      * Set accident
@@ -791,29 +766,7 @@ class Constat
         return $this->accident;
     }
 
-    /**
-     * Set dossier
-     *
-     * @param \AssureurBundle\Entity\Dossier $dossier
-     *
-     * @return Constat
-     */
-    public function setDossier(\AssureurBundle\Entity\Dossier $dossier = null)
-    {
-        $this->dossier = $dossier;
 
-        return $this;
-    }
-
-    /**
-     * Get dossier
-     *
-     * @return \AssureurBundle\Entity\Dossier
-     */
-    public function getDossier()
-    {
-        return $this->dossier;
-    }
 
     /**
      * Set deleted
@@ -837,5 +790,29 @@ class Constat
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Constat
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }

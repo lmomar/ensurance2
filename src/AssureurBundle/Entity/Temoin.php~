@@ -167,29 +167,6 @@ class Temoin
         return $this->adresse;
     }
 
-    /**
-     * Set accidentId
-     *
-     * @param integer $accidentId
-     *
-     * @return Temoin
-     */
-    public function setAccidentId($accidentId)
-    {
-        $this->accidentId = $accidentId;
-
-        return $this;
-    }
-
-    /**
-     * Get accidentId
-     *
-     * @return int
-     */
-    public function getAccidentId()
-    {
-        return $this->accidentId;
-    }
 
     /**
      * Set nom

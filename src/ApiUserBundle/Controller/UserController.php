@@ -10,12 +10,32 @@ use \Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use ApiUserBundle\Form\Type\ProfileFormType;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use JsonClassHintingNormalizer;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class UserController extends Controller {
 
+    /**
+     * @ApiDoc(
+     *  section="User",
+     *  description="Login By email and password",
+     *  output="ApiUserBundle\Entity\User",
+     *  requirements={
+     *      {
+     *          "name"="email",
+     *          "dataType"="string",
+     *          "requirement"=".+",
+     *          "description"="return one Object"
+     *      },{
+     *          "name"="password",
+     *          "dataType"="string",
+     *          "requirement"=".+",
+     *          "description"="return one Object"  
+     *        },
+     *
+     *
+     *  }
+     * )
+    /**
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/api/login")
@@ -37,20 +57,40 @@ class UserController extends Controller {
             return false;
         }
     }
-
+    /**
+     * @ApiDoc(
+     *  section="User",
+     *  description="Edit Profile",
+     *  input="ApiUserBundle\Form\Type\ProfileFormType",
+     *  output="ApiUserBundle\Entity\User",
+     *  requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="return one Object"
+     *      }
+     *  }
+     * )
     /**
      * @Rest\View()
-     * @Rest\Put("/api/profile/{id}")
+     * @Rest\Post("/api/profile/{id}")
      * @param Request $request
      */
     public function updateProfileAction(Request $request) {
         $user_manager = $this->get('fos_user.user_manager');
-        $email = $request->request->get('email');
-        $user = $user_manager->findUserByEmail($email);
+        $id = $request->request->get('id');
+        $user = $user_manager->findUserBy(array('id' => $id));
         $form = $this->createForm(ProfileFormType::class,$user);
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+             $file = $request->files->get($form->getName())['photo'];
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('photo_directory') . '/users/', $fileName);
+            $fullUrl =  '/uploads/photo/users/' .  $fileName;
+            $user->setPhoto($fullUrl);
+            $user_manager->updateUser($user);
             return $user;
         }
         
@@ -73,17 +113,21 @@ class UserController extends Controller {
     }
     
     
+    
     /**
-     * @Rest\View()
-     * @Rest\Get("/api/profile/get/{id}",name="getProfile")
-     */
-    public function getProfileAction(Request $request) {
-        $id = $request->get('id');
-        $user_manager= $this->get('fos_user.user_manager');
-        $user = $user_manager->findUserBy(array('id' => $id));
-        return $user;
-    }
-
+     * @ApiDoc(
+     *  section="User",
+     *  description="Get Object By ID",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="User ID"
+     *      }
+     *  }
+     * )
+    /**
     /**
      * @Rest\View()
      * @Rest\Get("/api/profile/get/{id}",name="getprofileuser")

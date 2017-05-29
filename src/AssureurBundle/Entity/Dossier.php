@@ -67,12 +67,13 @@ class Dossier
      */
     private $cheques;
 
+
+
     /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Constat",inversedBy="dossier")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Accident")
+     * @ORM\JoinColumn(name="accident_id",referencedColumnName="id")
      */
-    private $constat;
-
-
+    private $accident;
 
 
 
@@ -387,61 +388,7 @@ class Dossier
         $this->cheques->removeElement($cheque);
     }
 
-    /**
-     * Add accident
-     *
-     * @param \AssureurBundle\Entity\Accident $accident
-     *
-     * @return Dossier
-     */
-    public function addAccident(\AssureurBundle\Entity\Accident $accident)
-    {
-        $this->accidents[] = $accident;
 
-        return $this;
-    }
 
-    /**
-     * Remove accident
-     *
-     * @param \AssureurBundle\Entity\Accident $accident
-     */
-    public function removeAccident(\AssureurBundle\Entity\Accident $accident)
-    {
-        $this->accidents->removeElement($accident);
-    }
 
-    /**
-     * Get accidents
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccidents()
-    {
-        return $this->accidents;
-    }
-
-    /**
-     * Set constat
-     *
-     * @param \AssureurBundle\Entity\Constat $constat
-     *
-     * @return Dossier
-     */
-    public function setConstat(\AssureurBundle\Entity\Constat $constat = null)
-    {
-        $this->constat = $constat;
-
-        return $this;
-    }
-
-    /**
-     * Get constat
-     *
-     * @return \AssureurBundle\Entity\Constat
-     */
-    public function getConstat()
-    {
-        return $this->constat;
-    }
 }

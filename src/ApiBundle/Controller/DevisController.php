@@ -33,11 +33,18 @@ class DevisController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-            $file = $request->files->get('devis')['url'];
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
+
+            $file = $request->files->get($form->getName())['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/devis/', $fileName);
             $fullUrl =  '/uploads/photo/devis/' .  $fileName;
             $devis->setUrl($fullUrl);
+            $devis->setDossier($dossier);
             $em->persist($devis);
             $em->flush();
             return $devis;
@@ -81,12 +88,17 @@ class DevisController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
             $file = $request->files->get('devis')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/devis/', $fileName);
             $fullUrl =  '/uploads/photo/devis/' .  $fileName;
             $devisToEdit->setUrl($fullUrl);
+            $devisToEdit->setDossier($dossier);
             $em->flush();
             return $devisToEdit;
         }
@@ -142,7 +154,7 @@ class DevisController extends Controller{
      */
     public function getDevisByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();
-        $devis= $em->getRepository('AssureurBundle:Devis')->findOneBy(array('deleted' => false,'dossierId' => $dossierId));
+        $devis= $em->getRepository('AssureurBundle:Devis')->findBy(array('deleted' => false,'dossier' => $dossierId));
         if(empty($devis))
         {
             return new JsonResponse(['message' => 'not found'],404);

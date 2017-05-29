@@ -33,11 +33,17 @@ class ChequeController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
             $file = $request->files->get('cheque')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/cheque/', $fileName);
             $fullUrl =  '/uploads/photo/cheque/' .  $fileName;
             $cheque->setUrl($fullUrl);
+            $cheque->setDossier($dossier);
             $em->persist($cheque);
             $em->flush();
             return $cheque;
@@ -81,12 +87,17 @@ class ChequeController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
             $file = $request->files->get('cheque')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/cheque/', $fileName);
             $fullUrl =  '/uploads/photo/cheque/' .  $fileName;
             $chequeToEdit->setUrl($fullUrl);
+            $chequeToEdit->setDossier($dossier);
             $em->flush();
             return $chequeToEdit;
         }
@@ -142,7 +153,7 @@ class ChequeController extends Controller{
      */
     public function getChequeByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();
-        $cheque= $em->getRepository('AssureurBundle:Cheque')->findOneBy(array('deleted' => false,'dossierId' => $dossierId));
+        $cheque= $em->getRepository('AssureurBundle:Cheque')->findBy(array('deleted' => false,'dossier' => $dossierId));
         if(empty($cheque))
         {
             return new JsonResponse(['message' => 'not found'],404);

@@ -87,37 +87,7 @@ class Facture
         return $this->url;
     }
 
-    /**
-     * Set dossierId
-     *
-     * @param integer $dossierId
-     *
-     * @return Facture
-     */
-    public function setDossierId($dossierId)
-    {
-        $this->dossierId = $dossierId;
-
-        return $this;
-    }
-
-    /**
-     * Get dossierId
-     *
-     * @return int
-     */
-    public function getDossierId()
-    {
-        return $this->dossierId;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Facture
-     */
+    
     public function setCreated($created)
     {
         $this->created = $created;

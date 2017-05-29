@@ -40,7 +40,12 @@ class DossierController extends Controller
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted() && $form->isValid())
         {
-            //return $dossier;
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accident)){
+                return new JsonResponse(['message' => 'no accident found'],404);
+            }
+            $dossier->setAccident($accident);
             $em = $this->getDoctrine()->getManager();
             $em->persist($dossier);
             $em->flush();
@@ -88,7 +93,13 @@ class DossierController extends Controller
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accident)){
+                return new JsonResponse(['message' => 'no accident found'],404);
+            }
+            $dossier->setAccident($accident);
+            $dossier->setAccident($accident);
             $em->flush();
             return $dossier;
         }
@@ -118,7 +129,6 @@ class DossierController extends Controller
     public function getDossierAction($id){
 
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
-        return $em->findByUserId($id);
         $dossier = $em->find($id);
         if(empty($dossier))
         {
@@ -147,7 +157,7 @@ class DossierController extends Controller
      */
     public function getDossierByAccidentIdAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
-        $dossier = $em->findBy(array('accidentId' => $id));
+        $dossier = $em->findBy(array('accident' => $id));
         if(empty($dossier))
         {
             return new JsonResponse(['message' => 'not found'],404);

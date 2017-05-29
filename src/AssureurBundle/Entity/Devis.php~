@@ -87,37 +87,7 @@ class Devis
         return $this->url;
     }
 
-    /**
-     * Set dossierId
-     *
-     * @param integer $dossierId
-     *
-     * @return Devis
-     */
-    public function setDossierId($dossierId)
-    {
-        $this->dossierId = $dossierId;
 
-        return $this;
-    }
-
-    /**
-     * Get dossierId
-     *
-     * @return int
-     */
-    public function getDossierId()
-    {
-        return $this->dossierId;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Devis
-     */
     public function setCreated($created)
     {
         $this->created = $created;

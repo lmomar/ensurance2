@@ -51,12 +51,19 @@ class Permis
     private $created;
 
     /**
+     * @var
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User", inversedBy="permis")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     public function __construct() {
         $this->created = new \DateTime;
+        $this->deleted = false;
     }
 
     /**
@@ -69,29 +76,6 @@ class Permis
         return $this->id;
     }
 
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Permis
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 
     /**
      * Set categorie
@@ -211,5 +195,29 @@ class Permis
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Permis
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 }

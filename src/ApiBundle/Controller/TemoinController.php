@@ -30,19 +30,18 @@ class TemoinController extends Controller{
     public function postTemoinAction(Request $request){
         //return $request->request->all();
         $em = $this->getDoctrine()->getManager();
-        $object =$em->getRepository('AssureurBundle:Temoin')->find(1);
-
-        $serializer = $this->get('serializer');
-        $json = $serializer->serialize($object,'json');
-        //return $json;
-        $d = $serializer->deserialize($json,Temoin::class,'json',array('object' => $object));
-        return d;
 
         $temoin = new Temoin();
         $form = $this->createForm(TemoinType::class,$temoin);
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accident)){
+                return new JsonResponse(['message' => 'no accident found'],404);
+            }
+            $temoin->setAccident($accident);
             $em->persist($temoin);
             $em->flush();
             return $temoin;
@@ -76,6 +75,12 @@ class TemoinController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $accidentID = $request->request->get($form->getName())['accident'];
+            $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
+            if(empty($accident)){
+                return new JsonResponse(['message' => 'no accident found'],404);
+            }
+            $temoin->setAccident($accident);
             $em->flush();
             return $temoin;
         }
@@ -138,7 +143,7 @@ class TemoinController extends Controller{
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AssureurBundle:Temoin')->findBy(array(
             'deleted' => false,
-            'accidentId' => $accident_id
+            'accident' => $accident_id
         ));
         if(empty($liste))
         {

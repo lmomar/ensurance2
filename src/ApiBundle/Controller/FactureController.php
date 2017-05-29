@@ -34,11 +34,17 @@ class FactureController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-            $file = $request->files->get('facture')['url'];
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
+            $file = $request->files->get($form->getName())['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/facture/', $fileName);
             $fullUrl =  '/uploads/photo/facture/' .  $fileName;
             $facture->setUrl($fullUrl);
+            $facture->setDossier($dossier);
             $em->persist($facture);
             $em->flush();
             return $facture;
@@ -82,12 +88,17 @@ class FactureController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-
+            $dossierId = $request->request->get($form->getName())['dossier'];
+            $dossier  = $this->getDoctrine()->getRepository('AssureurBundle:Dossier')->find($dossierId);
+            if(empty($dossier)){
+                return new JsonResponse(['message' => 'not found'],404);
+            }
             $file = $request->files->get('facture')['url'];
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/facture/', $fileName);
             $fullUrl =  '/uploads/photo/facture/' .  $fileName;
             $factureToEdit->setUrl($fullUrl);
+            $factureToEdit->setDossier($dossier);
             $em->flush();
             return $factureToEdit;
         }
@@ -143,7 +154,7 @@ class FactureController extends Controller{
      */
     public function getFactureByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();
-        $facture= $em->getRepository('AssureurBundle:Facture')->findOneBy(array('deleted' => false,'dossierId' => $dossierId));
+        $facture= $em->getRepository('AssureurBundle:Facture')->findBy(array('deleted' => false,'dossier' => $dossierId));
         if(empty($facture))
         {
             return new JsonResponse(['message' => 'not found'],404);

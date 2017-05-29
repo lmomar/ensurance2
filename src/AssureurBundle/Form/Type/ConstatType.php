@@ -31,7 +31,7 @@ class ConstatType extends AbstractType{
             ->add('nomConducteur')
             ->add('prenomConducteur')
             ->add('adresseConducteur')
-            ->add('accidentId');
+            ->add('accident');
 
 
     }

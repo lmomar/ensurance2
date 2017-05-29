@@ -34,7 +34,15 @@ class VehiculeController extends Controller {
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->submit($request->request->get($form->getName()));
         if ($form->isSubmitted()) {
+            $userID = $request->request->get($form->getName())['user'];
+            $userManager = $this->get('fos_user.user_manager');
+            $user  = $userManager->findUserBy(array('id' => $userID));
+            if(empty($user))
+            {
+                return new JsonResponse(['message' => 'user not found'],404);
+            }
             $em = $this->getDoctrine()->getManager();
+            $vehicule->setUser($user);
             $em->persist($vehicule);
             $em->flush();
             return $vehicule;
@@ -60,22 +68,24 @@ class VehiculeController extends Controller {
      * @Rest\Put("api/vehicule/edit/{id}")
      * @param Request $request
      */
-    public function putVehiculeAction(Request $request) {
-        $id = $request->request->get('id');
-
-        $vehicule = $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->find($id);
-
+    public function putVehiculeAction(Request $request,$id) {
+        $vehicule = $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findOneBy(array(
+            'deleted' => false,'id' => $id
+        ));
         if (empty($vehicule)) {
             return new JsonResponse(['message' => 'Vehicule introuvable'], Response::HTTP_NOT_FOUND);
         }
-        
-        
         $form = $this->createForm(VehiculeType::class, $vehicule);
-        
         $form->submit($request->request->get($form->getName()));
         //return $vehicule;
         if ($form->isSubmitted()) {
-            
+            $userID = $request->request->get($form->getName())['user'];
+            $userManager = $this->get('fos_user.user_manager');
+            $user  = $userManager->findUserBy(array('id' => $userID));
+            if(empty($user))
+            {
+                return new JsonResponse(['message' => 'user not found'],404);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $vehicule;
@@ -114,25 +124,9 @@ class VehiculeController extends Controller {
      * @return JsonResponse
      */
     public function getVehiculeByUserIdAction(Request $request, $user_id) {
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getName();
-        });
-
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
-
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('id' => $user_id));
-        return $serializer->serialize($user->getVehicules(), 'json');
-        $data= $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->findBy(array('deleted' => false,'userId' => $user_id));
-        if(empty($data))
-        {
-            return new JsonResponse(['message' => 'not found'],404);
-        }
-        return $data;
+        return $user->getVehicules();
     }
 
     /**

@@ -1,14 +1,21 @@
 <?php
 namespace AssureurBundle\Form\Type;
 
-use function Sodium\add;
+use AssureurBundle\Entity\Vehicule;
+
+use AssureurBundle\Entity\Accident;
+
 use Symfony\Component\Form\AbstractType;
+
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class AccidentType extends AbstractType{
     
@@ -27,14 +34,24 @@ class AccidentType extends AbstractType{
             ->add('blesses',CheckboxType::class)
             ->add('degatAutre',CheckboxType::class)
             ->add('croquisUrl',FileType::class,array('multiple' => false))
-            ->add('vehiculeId');
+            /*->add('vehicules',CollectionType::class,array(
+                'entry_type' => Vehicule::class
+            ))*/
+        ->add("vehicules", CollectionType::class, array(
+                'entry_type' => VehiculeType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            )
+        );
+
     }
 
     
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(
                 [
-                    'data_class' => 'AssureurBundle\Entity\Accident',
+                    'data_class' => Accident::class,
                     'csrf_protection' => false,
                     'allow_extra_fields' => true,
                     'em' => false

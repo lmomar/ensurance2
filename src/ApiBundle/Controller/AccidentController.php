@@ -31,8 +31,15 @@ class AccidentController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-
-
+            $ids = $request->request->get($form->getName())['vehicules'];
+            //return count($ids);
+            for ($i=0;$i<count($ids);$i++){
+                $vehicule = $this->getDoctrine()->getRepository('AssureurBundle:Vehicule')->find($ids[$i]);
+                if(!empty($vehicule))
+                {
+                    $accident->getVehicules()->add($vehicule);
+                }
+            }
             $file= $request->files->get('accident')['croquisUrl'];
             $filename = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move($this->getParameter('photo_directory') . '/accident/', $filename);
@@ -159,7 +166,7 @@ class AccidentController extends Controller{
     */
     public function getAccidentByVehiculeIdAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('AssureurBundle:Accident')->findBy(array('vehiculeId' => $id,'deleted' => false));
+        $liste = $em->getRepository('AssureurBundle:Accident')->findBy(array('vehicule' => $id,'deleted' => false));
         return $liste;
     }
 }

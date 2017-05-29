@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
-
-
 use ApiUserBundle\Entity\Permis;
 use ApiUserBundle\Form\Type\PermisType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -31,8 +29,16 @@ class PermisController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-            //$em->persist($permis);
-            //$em->flush();
+            $userID = $request->request->get($form->getName())['user'];
+            $userManager = $this->get('fos_user.user_manager');
+            $user  = $userManager->findUserBy(array('id' => $userID));
+            if(empty($user))
+            {
+                return new JsonResponse(['message' => 'user not found'],404);
+            }
+            $permis->setUser($user);
+            $em->persist($permis);
+            $em->flush();
             return $permis;
         }
         
@@ -59,7 +65,7 @@ class PermisController extends Controller{
         $id = $request->get('id');
         
         $rep = $this->getDoctrine()->getManager()->getRepository("ApiUserBundle:Permis");
-        $permis = $rep->findBy(array('userId' => $id));
+        $permis = $rep->findBy(array('user' => $id,'deleted' => false));
         if(empty($permis)){
             return new JsonResponse(['message' => 'not found'],Response::HTTP_NOT_FOUND);
         }
@@ -84,15 +90,14 @@ class PermisController extends Controller{
      * @Rest\View()
      * @Rest\Put("/api/permis/edit/{id}")
      */
-    public function putPermisAction(Request $request) {
-        $id = $request->get('id');
+    public function putPermisAction(Request $request,$id) {
         $em = $this->getDoctrine()->getManager();
         $rep = $em->getRepository("ApiUserBundle:Permis");
-        $permis = $rep->find($id);
+        $permis = $rep->findOneBy(array('id' => $id,'deleted' => false));
         if(empty($permis)){
             return new JsonResponse(['message' => 'not found'],Response::HTTP_NOT_FOUND);
         }
-        $form = $this->createForm(PermisFormType::class,$permis);
+        $form = $this->createForm(PermisType::class,$permis);
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {

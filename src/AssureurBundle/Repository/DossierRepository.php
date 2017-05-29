@@ -14,14 +14,16 @@ use Doctrine\ORM\NoResultException;
 class DossierRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findByUserId($user_id){
-        $query = $this->createQueryBuilder('u')
-            ->select('u,v')
-            ->leftJoin('u.vehicule','v')
-            ->where('u.id = :id')
-            ->setParameter('id',$user_id);
-        try{
-            $query->getQuery()->getResult();
-        }catch (NoResultException $e){
+        $q = $this->createQueryBuilder('d');
+        $q->select(array('d','r'))
+            ->from('AssureurBundle:Rapport','r')
+            ->leftJoin('r.dossier','dd');
+        $query = $q->getQuery();
+        return $query->getResult();
+        try {
+            return $q->getArrayResult();
+        }
+        catch (NoResultException $e){
             return null;
         }
 

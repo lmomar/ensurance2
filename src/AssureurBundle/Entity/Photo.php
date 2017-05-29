@@ -132,29 +132,6 @@ class Photo {
         return $this->type;
     }
 
-    /**
-     * Set accidentId
-     *
-     * @param integer $accidentId
-     *
-     * @return Photo
-     */
-    public function setAccidentId($accidentId)
-    {
-        $this->accident_id = $accidentId;
-
-        return $this;
-    }
-
-    /**
-     * Get accidentId
-     *
-     * @return integer
-     */
-    public function getAccidentId()
-    {
-        return $this->accident_id;
-    }
 
     /**
      * Set accident
