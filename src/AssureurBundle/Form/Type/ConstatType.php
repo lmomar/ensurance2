@@ -4,6 +4,7 @@ namespace AssureurBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ConstatType extends AbstractType{
     
@@ -11,7 +12,7 @@ class ConstatType extends AbstractType{
         $builder
             ->add('venantDe')
             ->add('allantVers')
-            ->add('pointChoc')
+            ->add('pointChoc',FileType::class,array('mapped' => false))
             ->add('descDegat')
             ->add('c1')
             ->add('c2')
@@ -31,6 +32,7 @@ class ConstatType extends AbstractType{
             ->add('nomConducteur')
             ->add('prenomConducteur')
             ->add('adresseConducteur')
+            ->add('signature',FileType::class,array('mapped' => false))
             ->add('accident');
 
 

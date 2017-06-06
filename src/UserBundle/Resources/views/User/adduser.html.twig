@@ -1,61 +1,74 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block content %}
-    {{ parent() }}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-info">
-                <header class="panel-heading"><h2 class="panel-title">Nouvel Utilisateur</h2></header>
-                <div class="panel-body">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Info</h5>
+                </div>
+                <div class="widget-content nopadding">
                     <form class="form-horizontal" action="{{ path('add_user') }}" method="post">
-
-
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Nom</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Prénom</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }}</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Téléphone</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.phone, { 'attr': {'class': 'form-control'} }) }}</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Date naissance</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.date_naissance, { 'attr': {'class': 'form-control','type' : 'date'} }) }}</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Role</label></div>
-                            <div class="col-sm-6">
-                                {{ form_widget(form.roles,{'attr' : {'class' : 'form-control'}})}}
-
+                        <div class="control-group">
+                            <label class="control-label">Nom</label>
+                            <div class="controls">
+                                {{ form_widget(form.nom, { 'attr': {'class': 'span11'} }) }}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Email</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}</div>
+                        <div class="control-group">
+                            <label class="control-label">Prénom</label>
+                            <div class="controls">
+                                {{ form_widget(form.prenom, { 'attr': {'class': 'span11'} }) }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Mot de passe</label></div>
-                            <div class="col-sm-6">{{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control' }}) }}</div>
+                        <div class="control-group">
+                            <label class="control-label">Téléphone</label>
+                            <div class="controls">
+                                {{ form_widget(form.phone, { 'attr': {'class': 'span11'} }) }}
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-2"><label>Confirmer </label></div>
-                            <div class="col-sm-6">{{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control' }}) }}</div>
+                        <div class="control-group">
+                            <label class="control-label">Date naissance</label>
+                            <div class="controls">
+                                {{ form_widget(form.date_naissance, { 'attr': {'class': 'span11'} }) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Role</label>
+                            <div class="controls">
+                                {{ form_widget(form.roles, { 'attr': {'class': 'span11'} }) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Email</label>
+                            <div class="controls">
+                                {{ form_widget(form.email, { 'attr': {'class': 'span11'} }) }}
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            {{ form_widget(form.submit,{'attr' : {'class' : 'btn btn-primary'}})}}
+                        <div class="control-group">
+                            <label class="control-label">Mot de passe</label>
+                            <div class="controls">
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'span11' }}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Confirmer</label>
+                            <div class="controls">
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'span11' }}) }}
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions">
+                            {{ form_widget(form.submit,{'attr' : {'class' : 'btn btn-success'}})}}
                             <a href="{{ path('users_list')}}" class="btn btn-warning">Annuler</a>
                         </div>
-                        <input id="form__token" name="form[_token]" value="{{ csrf_token('form') }}" type="hidden">
-
                     </form>
                 </div>
             </div>
+
+
         </div>
     </div>
 {% endblock %}

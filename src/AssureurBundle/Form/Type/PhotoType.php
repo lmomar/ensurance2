@@ -14,8 +14,8 @@ class PhotoType extends AbstractType {
         $builder->add('url', FileType::class,array(
             'multiple' => true
             ));
-        $builder->add('constat');
-        //$builder->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class);
+        $builder->add('accident');
+        
     }
 
     public function configureOptions(OptionsResolver $resolver) {

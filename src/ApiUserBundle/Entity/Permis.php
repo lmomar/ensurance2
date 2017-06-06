@@ -21,6 +21,13 @@ class Permis
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_permis", type="string", length=255)
+     */
+
+    private $numPermis;
 
     /**
      * @var string
@@ -219,5 +226,29 @@ class Permis
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set numPermis
+     *
+     * @param string $numPermis
+     *
+     * @return Permis
+     */
+    public function setNumPermis($numPermis)
+    {
+        $this->numPermis = $numPermis;
+
+        return $this;
+    }
+
+    /**
+     * Get numPermis
+     *
+     * @return string
+     */
+    public function getNumPermis()
+    {
+        return $this->numPermis;
     }
 }

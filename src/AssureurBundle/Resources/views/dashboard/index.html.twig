@@ -1,65 +1,22 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 {% block content %}
-    <!--Action boxes-->
-    <div class="container-fluid">
-        <div class="quick-actions_homepage">
-            <ul class="quick-actions">
-                <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-                <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-                <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-                <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-                <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-                <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-                <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-                <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-                <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-                <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
-
-            </ul>
-        </div>
-        <!--End-Action boxes-->    
-        <div class="row-fluid">
-            <div class="span12">
-         
-                <div class="widget-box">
-                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                        <h5>Collspan Table Example</h5>
-                        <span class="label label-info">Featured</span> </div>
-                    <div class="widget-content nopadding">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>steave</td>
-                                    <td>marki</td>
-                                    <td>@hahas</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>john</td>
-                                    <td>deo</td>
-                                    <td>@john</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td colspan="2">collspan text</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+    <div class="span9">
+        <div class="content">
+            <div class="btn-controls">
+                <div class="btn-box-row row-fluid">
+                    <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
+                        <p class="text-muted">
+                            Growth</p>
+                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                        <p class="text-muted">
+                            New Users</p>
+                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
+                        <p class="text-muted">
+                            Profit</p>
+                    </a>
                 </div>
-                
+                <!--/#btn-controls-->
             </div>
         </div>
-        
-
-    {% endblock content %}
+    </div>
+{% endblock content %}

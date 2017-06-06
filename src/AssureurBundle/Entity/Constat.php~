@@ -38,9 +38,16 @@ class Constat
     /**
      * @var bool
      *
-     * @ORM\Column(name="point_choc", type="boolean")
+     * @ORM\Column(name="point_choc", type="string")
      */
     private $pointChoc;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="signature", type="string")
+     */
+    private $signature;
 
     /**
      * @var string
@@ -260,29 +267,7 @@ class Constat
         return $this->allantVers;
     }
 
-    /**
-     * Set pointChoc
-     *
-     * @param boolean $pointChoc
-     *
-     * @return Constat
-     */
-    public function setPointChoc($pointChoc)
-    {
-        $this->pointChoc = $pointChoc;
 
-        return $this;
-    }
-
-    /**
-     * Get pointChoc
-     *
-     * @return bool
-     */
-    public function getPointChoc()
-    {
-        return $this->pointChoc;
-    }
 
     /**
      * Set descDegat
@@ -814,5 +799,29 @@ class Constat
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set pointChoc
+     *
+     * @param string $pointChoc
+     *
+     * @return Constat
+     */
+    public function setPointChoc($pointChoc)
+    {
+        $this->pointChoc = $pointChoc;
+
+        return $this;
+    }
+
+    /**
+     * Get pointChoc
+     *
+     * @return string
+     */
+    public function getPointChoc()
+    {
+        return $this->pointChoc;
     }
 }

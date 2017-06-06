@@ -21,6 +21,13 @@ class Permis
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_permis", type="string", length=255)
+     */
+
+    private $numPermis;
 
     /**
      * @var string

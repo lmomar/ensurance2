@@ -11,7 +11,7 @@ class DashboardController extends Controller{
      * @return type
      */
     public function index() {
-        return $this->render("AssureurBundle:dashboard:index.html.twig");
+        //return $this->render("AssureurBundle:dashboard:index.html.twig");
     }
 }
 

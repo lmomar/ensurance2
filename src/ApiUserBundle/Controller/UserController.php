@@ -85,11 +85,14 @@ class UserController extends Controller {
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
-             $file = $request->files->get($form->getName())['photo'];
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $file->move($this->getParameter('photo_directory') . '/users/', $fileName);
-            $fullUrl =  '/uploads/photo/users/' .  $fileName;
-            $user->setPhoto($fullUrl);
+            $file = $request->files->get($form->getName())['photo'];
+            if(isset($file)){
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('photo_directory') . '/users/', $fileName);
+                $fullUrl =  '/uploads/photo/users/' .  $fileName;
+                $user->setPhoto($fullUrl);
+            }
+
             $user_manager->updateUser($user);
             return $user;
         }

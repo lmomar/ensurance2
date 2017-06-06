@@ -29,13 +29,6 @@ class Photo {
     private $url;
 
     /**
-     *
-     * @var type 
-    * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetimetz")
@@ -107,30 +100,6 @@ class Photo {
 
     
 
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Photo
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
 
 
     /**

@@ -1,20 +1,50 @@
 {% extends "::base.html.twig" %}
 {% block body %}
-    {% if app.request.hasPreviousSession %}
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    {% endif %}
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-7 col-md-offset-3">
-            <div>
-                {% block fos_user_content %}
-                {% endblock fos_user_content %}
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <i class="icon-reorder shaded"></i>
+                </a>
+                <a class="brand" href="index.html">
+                    Admin
+                </a>
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav pull-right">
+
+                        <li><a href="#">
+                                Mot de passe oublié?
+                            </a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
             </div>
-        </div><!-- /.col-->
-    </div><!-- /.row -->	
+        </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="flash-{{ type }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div class="module module-login span4 offset4">
+
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </div>
+            </div>
+        </div>
+    </div><!--/.wrapper-->
+
+    <div class="footer">
+        <div class="container">
+            <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b> All rights reserved.
+        </div>
+    </div>
+
 {% endblock body %}

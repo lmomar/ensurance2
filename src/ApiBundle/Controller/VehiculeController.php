@@ -75,6 +75,7 @@ class VehiculeController extends Controller {
         if (empty($vehicule)) {
             return new JsonResponse(['message' => 'Vehicule introuvable'], Response::HTTP_NOT_FOUND);
         }
+
         $form = $this->createForm(VehiculeType::class, $vehicule);
         $form->submit($request->request->get($form->getName()));
         //return $vehicule;

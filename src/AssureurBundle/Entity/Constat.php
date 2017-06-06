@@ -38,9 +38,16 @@ class Constat
     /**
      * @var bool
      *
-     * @ORM\Column(name="point_choc", type="boolean")
+     * @ORM\Column(name="point_choc", type="string")
      */
     private $pointChoc;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="signature", type="string")
+     */
+    private $signature;
 
     /**
      * @var string
@@ -52,98 +59,98 @@ class Constat
     /**
      * @var int
      *
-     * @ORM\Column(name="c1", type="integer")
+     * @ORM\Column(name="c1", type="integer",nullable=true)
      */
     private $c1;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="c2", type="integer")
+     * @ORM\Column(name="c2", type="integer",nullable=true)
      */
     private $c2;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="c3", type="integer")
+     * @ORM\Column(name="c3", type="integer",nullable=true)
      */
     private $c3;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c4", type="boolean")
+     * @ORM\Column(name="c4", type="boolean",nullable=true)
      */
     private $c4;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c5", type="boolean")
+     * @ORM\Column(name="c5", type="boolean",nullable=true)
      */
     private $c5;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c6", type="boolean")
+     * @ORM\Column(name="c6", type="boolean",nullable=true)
      */
     private $c6;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c7", type="boolean")
+     * @ORM\Column(name="c7", type="boolean",nullable=true)
      */
     private $c7;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="c8", type="integer")
+     * @ORM\Column(name="c8", type="integer",nullable=true)
      */
     private $c8;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="c9", type="integer")
+     * @ORM\Column(name="c9", type="integer",nullable=true)
      */
     private $c9;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c10", type="boolean")
+     * @ORM\Column(name="c10", type="boolean",nullable=true)
      */
     private $c10;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c11", type="boolean")
+     * @ORM\Column(name="c11", type="boolean",nullable=true)
      */
     private $c11;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c12", type="boolean")
+     * @ORM\Column(name="c12", type="boolean",nullable=true)
      */
     private $c12;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c13", type="boolean")
+     * @ORM\Column(name="c13", type="boolean",nullable=true)
      */
     private $c13;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="c14", type="boolean")
+     * @ORM\Column(name="c14", type="boolean",nullable=true)
      */
     private $c14;
 
@@ -260,29 +267,7 @@ class Constat
         return $this->allantVers;
     }
 
-    /**
-     * Set pointChoc
-     *
-     * @param boolean $pointChoc
-     *
-     * @return Constat
-     */
-    public function setPointChoc($pointChoc)
-    {
-        $this->pointChoc = $pointChoc;
 
-        return $this;
-    }
-
-    /**
-     * Get pointChoc
-     *
-     * @return bool
-     */
-    public function getPointChoc()
-    {
-        return $this->pointChoc;
-    }
 
     /**
      * Set descDegat
@@ -814,5 +799,53 @@ class Constat
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set pointChoc
+     *
+     * @param string $pointChoc
+     *
+     * @return Constat
+     */
+    public function setPointChoc($pointChoc)
+    {
+        $this->pointChoc = $pointChoc;
+
+        return $this;
+    }
+
+    /**
+     * Get pointChoc
+     *
+     * @return string
+     */
+    public function getPointChoc()
+    {
+        return $this->pointChoc;
+    }
+
+    /**
+     * Set signature
+     *
+     * @param string $signature
+     *
+     * @return Constat
+     */
+    public function setSignature($signature)
+    {
+        $this->signature = $signature;
+
+        return $this;
+    }
+
+    /**
+     * Get signature
+     *
+     * @return string
+     */
+    public function getSignature()
+    {
+        return $this->signature;
     }
 }

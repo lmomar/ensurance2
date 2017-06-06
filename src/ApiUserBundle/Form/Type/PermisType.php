@@ -12,6 +12,7 @@ class PermisType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
+            ->add('numPermis',TextType::class)
                 ->add('categorie', TextType::class)
                 ->add('dateDelivre', DateTimeType::class,array(
                     'widget' => 'single_text',

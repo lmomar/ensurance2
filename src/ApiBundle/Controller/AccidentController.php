@@ -41,10 +41,13 @@ class AccidentController extends Controller{
                 }
             }
             $file= $request->files->get('accident')['croquisUrl'];
-            $filename = md5(uniqid()) . '.' . $file->guessExtension();
-            $file->move($this->getParameter('photo_directory') . '/accident/', $filename);
-            $fullUrl =  '/uploads/accident/' .  $filename;
-            $accident->setCroquisUrl($fullUrl);
+            if(isset($file)){
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('photo_directory') . '/accident/croquis/', $filename);
+                $fullUrl =  '/uploads/accident/croquis/' .  $filename;
+                $accident->setCroquisUrl($fullUrl);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($accident);
             $em->flush();
@@ -87,6 +90,13 @@ class AccidentController extends Controller{
         $form->submit($request->request->get($form->getName()));
         if($form->isSubmitted())
         {
+            $file= $request->files->get('accident')['croquisUrl'];
+            if(isset($file)){
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('photo_directory') . '/accident/croquis/', $filename);
+                $fullUrl =  '/uploads/accident/croquis/' .  $filename;
+                $accident->setCroquisUrl($fullUrl);
+            }
             $em->flush();
             return $accident;
         }

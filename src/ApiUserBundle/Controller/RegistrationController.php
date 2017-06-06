@@ -54,7 +54,9 @@ class RegistrationController extends Controller {
         {
 
             $user->setEnabled(1);
-            $user->setRoles(array('ROLE_USER'));
+            //$user->setRoles(array('ROLE_USER'));
+            $user->addRole('ROLE_CLIENT');
+
             $user->setUsername($user->getEmail());
             $user->setPlainPassword($user->getPassword());
             $user->setEmailCanonical($user->getEmail());

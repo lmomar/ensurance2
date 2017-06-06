@@ -22,7 +22,7 @@ class ProfileFormType extends AbstractType {
         ));
         $builder->add('cin');
         $builder->add('adresse');
-        $builder->add('photo',FileType::class);
+        $builder->add('photo',FileType::class,array('mapped' => false));
     }
 
     /*public function getParent() {
