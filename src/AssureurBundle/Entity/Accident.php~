@@ -99,22 +99,22 @@ class Accident
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="accident")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Photo", mappedBy="accident", fetch="LAZY")
      */
     private $photos;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="accident")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Temoin", mappedBy="accident", fetch="LAZY")
      */
     private $temoins;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="accident")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Constat", mappedBy="accident", fetch="LAZY")
      */
     private $constats;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule")
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule",inversedBy="accidents", fetch="LAZY")
      * @ORM\JoinTable(name="accidents_vehicules")
      */
     protected $vehicules;

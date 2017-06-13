@@ -1,0 +1,121 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="span9" id="app">
+        <div class="content">
+            <div class="btn-controls">
+
+                <div class="module">
+                    <div class="module-head">
+                        <h3>Liste des dossiers</h3>
+
+                    </div>
+                    <div class="module-body table">
+                        <table class="datatable-1 table table-bordered table-striped display">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date ouverture</th>
+                                <th>Date fermeture</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for d in dossiers %}
+                                <tr>
+                                    <td>{{ d.id }}</td>
+                                    <td>{{ d.dateOuverture|date('d-m-Y') }}</td>
+                                    <td>{{ d.dateFermeture|date('d-m-Y') }}</td>
+                                    <td>{{ d.statut }}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs"
+                                           @click="getDossierObjects({{ d.id }})">
+                                            <i class="icon-search"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="module">
+
+                        <ul class="nav nav-tabs">
+                            <li><a data-toggle="tab" href="#devis">Devis</a></li>
+                            <li><a data-toggle="tab" href="#facture">Facture</a></li>
+                            <li><a data-toggle="tab" href="#cheque">Cheque</a></li>
+
+                        </ul>
+
+                        <div class="module-body">
+                            <div class="tab-content">
+                                <div id="devis" class="tab-pane fade in active">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>url</th>
+                                            <th>Crée le</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="d in all.devis">
+                                            <td>${ d.id }</td>
+                                            <td><a :href="d.url" target="_blank" class="btn btn-success btn-sm"><i
+                                                            class="fa fa-download"></i></a></td>
+                                            <td>${ d.created|moment}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="facture" class="tab-pane fade">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>url</th>
+                                            <th>Crée le</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="f in all.factures">
+                                            <td>${ f.id }</td>
+                                            <td><a :href="f.url" target="_blank" class="btn btn-success btn-sm"><i
+                                                            class="fa fa-download"></i></a></td>
+                                            <td>${ f.created|moment}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="cheque" class="tab-pane fade">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>url</th>
+                                            <th>Crée le</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="c in all.cheques">
+                                            <td>${ c.id }</td>
+                                            <td><a :href="c.url" target="_blank" class="btn btn-success btn-sm"><i
+                                                            class="fa fa-download"></i></a></td>
+                                            <td>${ c.created|moment}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock scripts %}

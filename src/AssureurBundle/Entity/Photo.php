@@ -29,6 +29,11 @@ class Photo {
     private $url;
 
     /**
+     * @var string
+     * @ORM\Column(name="type",type="string")
+     */
+    private $type;
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetimetz")
@@ -124,5 +129,29 @@ class Photo {
     public function getAccident()
     {
         return $this->accident;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Photo
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

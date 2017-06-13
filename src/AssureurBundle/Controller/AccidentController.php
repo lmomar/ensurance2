@@ -8,8 +8,18 @@
 
 namespace AssureurBundle\Controller;
 
-
-class AccidentController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+class AccidentController extends Controller
 {
+    /**
+     * @Route("/admin/accidents",name="accidents_list")
+     */
+    public function index(){
+        $em= $this->getDoctrine()->getManager();
+        $accidents = $em->getRepository('AssureurBundle:Accident')->findBy(array('deleted' => false));
 
+        return $this->render("AssureurBundle:accident:index.html.twig",array('accidents' => $accidents));
+    }
 }

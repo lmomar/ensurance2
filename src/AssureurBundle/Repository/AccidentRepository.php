@@ -10,4 +10,5 @@ namespace AssureurBundle\Repository;
  */
 class AccidentRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

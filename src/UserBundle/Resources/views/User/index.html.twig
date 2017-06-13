@@ -1,29 +1,17 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block content %}
-    <div class="span9">
+    <div class="span9" id="app">
         <div class="content">
             <div class="btn-controls">
-                <div class="btn-box-row row-fluid">
-                    <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
-                        <p class="text-muted">
-                            Growth</p>
-                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
-                        <p class="text-muted">
-                            New Users</p>
-                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
-                        <p class="text-muted">
-                            Profit</p>
-                    </a>
-                </div>
-                <!--/#btn-controls-->
+
                 <div class="module">
                     <div class="module-head">
                         <h3>Liste des utilisateurs</h3>
                         <button class="btn btn-primary btn-sm pull-right">Nouvel utilisateur</button>
                     </div>
                     <div class="module-body table">
-                        <table class="datatable-1 table table-bordered table-striped	 display">
+                        <table class="datatable-1 table table-bordered table-striped table-condensed table-responsive display">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -62,8 +50,10 @@
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary btn-xs"href="{{ path('edit_user',{'id' : user.id})}}">
+                                        <a class="btn btn-primary btn-xs" href="{{ path('edit_user',{'id' : user.id})}}">
                                             <i class="icon-edit"></i></a>
+                                        <a class="btn btn-success btn-xs" @click="getUserObjects({{ user.id }})">
+                                            <i class="icon-search"></i></a>
                                         <a class="btn btn-danger btn-xs"href="#">
                                             <i class="icon-remove"></i></a>
                                     </td>
@@ -71,6 +61,71 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="module">
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#vehicules">Les vehicules</a></li>
+                        <li><a data-toggle="tab" href="#permis">Les Permis</a></li>
+                    </ul>
+                    <div class="module-body">
+                        <div class="tab-content">
+
+                            <div id="vehicules" class="tab-pane fade in active">
+                                <table class="table table-bordered table-striped display">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Matricule</th>
+                                        <th>Marque</th>
+                                        <th>Model</th>
+                                        <th>Type</th>
+                                        <th>Crée le</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="v in vehicules">
+                                        <td>${ v.id }</td>
+                                        <td>${ v.matricule }</td>
+                                        <td>${ v.marque }</td>
+                                        <td>${ v.modele }</td>
+                                        <td>${ getVehiculeTypeById(v.typeId) }</td>
+                                        <td>${ v.created|moment }</td>
+                                    </tr>
+                                    <tr v-if="empty"><td colspan="5"><p class="text-center">--------</p></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="permis" class="tab-pane fade">
+                                <table class="table table-bordered table-striped display">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Numero de permis</th>
+                                        <th>Catégorie</th>
+                                        <th>Date delivre</th>
+                                        <th>Prefecture</th>
+                                        <th>Ajouté le</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="p in permis">
+                                        <td>${ p.id }</td>
+                                        <td>${ p.numPermis }</td>
+                                        <td>${ p.categorie }</td>
+                                        <td>${ p.dateDelivre|moment }</td>
+                                        <td>${ p.prefecture }</td>
+                                        <td>${ p.created|moment }</td>
+                                    </tr>
+                                    <tr v-if="empty"><td colspan="5"><p class="text-center">--------</p></td></tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
             </div>

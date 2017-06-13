@@ -1,0 +1,154 @@
+{% extends 'FOSUserBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="span9" id="app">
+        <div class="content">
+            <div class="btn-controls">
+                <div class="btn-box-row row-fluid">
+                    <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
+                        <p class="text-muted">
+                            Growth</p>
+                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                        <p class="text-muted">
+                            New Users</p>
+                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
+                        <p class="text-muted">
+                            Profit</p>
+                    </a>
+                </div>
+                <!--/#btn-controls-->
+                <div class="module">
+                    <div class="module-head">
+                        <h3>Liste des accidents</h3>
+
+                    </div>
+                    <div class="module-body table">
+                        <table class="datatable-1 table table-bordered table-striped display">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Ville</th>
+                                <th>Rue</th>
+                                <th>Blessés</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for acc in accidents %}
+
+                                <tr>
+                                    <td>{{ acc.id }}</td>
+                                    <td>{{ acc.dateAccident|date('d-m-Y') }}</td>
+                                    <td>{{ acc.ville }}</td>
+                                    <td>{{ acc.rue }}</td>
+                                    <td>{{ acc.blesses }}</td>
+                                    <td>
+
+                                        <a class="btn btn-primary btn-xs"
+                                           @click="getUsers({{ acc.id }})">
+                                            <i class="icon-search"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="module">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#users">Les utilisateurs</a></li>
+                            <li><a data-toggle="tab" href="#vehicules">Les vehicules</a></li>
+                            <li><a data-toggle="tab" href="#constat">Constat</a></li>
+                            <li><a data-toggle="tab" href="#temoins">Les temoins</a></li>
+                            <li><a data-toggle="tab" href="#photos">Les photos</a></li>
+                        </ul>
+
+                        <div class="module-body">
+                            <div class="tab-content">
+                                <div id="users" class="tab-pane fade in active">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Nom complet</th>
+                                            <th>Tel</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="v in all.vehicules">
+                                            <td>${ v.user.id }</td>
+                                            <td>${ v.user.email }</td>
+                                            <td>${ v.user.nom + ' ' + v.user.prenom }</td>
+                                            <td>${ v.user.phone }</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="vehicules" class="tab-pane fade">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Matricule</th>
+                                            <th>Marque</th>
+                                            <th>Model</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="v in all.vehicules">
+                                            <td>${ v.id }</td>
+                                            <td>${ v.matricule }</td>
+                                            <td>${ v.marque }</td>
+                                            <td>${ v.modele }</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="constat" class="tab-pane fade">
+
+
+                                </div>
+                                <div id="temoins" class="tab-pane fade">
+                                    <table class="table table-bordered table-striped display">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nom complet</th>
+                                            <th>Tel</th>
+                                            <th>Email</th>
+                                            <th>Adresse</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="t in all.temoins">
+                                            <td>${ t.id }</td>
+                                            <td>${ t.nom + t.prenom }</td>
+                                            <td>${ t.tel }</td>
+                                            <td>${ t.email }</td>
+                                            <td>${ t.adresse }</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="photos" class="tab-pane fade">
+                                    <div class="owl-carousel owl-theme">
+                                        <div class="item" v-for="p in all.photos">
+                                            <a :href="p.url"><img :src="p.url" :alt="p.created"></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock scripts %}

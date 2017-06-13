@@ -1,4 +1,5 @@
 <?php
+
 namespace ApiBundle\Controller;
 
 use ApiUserBundle\Entity\Permis;
@@ -11,7 +12,8 @@ use AssureurBundle\Entity\Constat;
 use AssureurBundle\Form\Type\ConstatType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class ConstatController extends Controller{
+class ConstatController extends Controller
+{
 
     /**
      * @ApiDoc(
@@ -25,32 +27,29 @@ class ConstatController extends Controller{
      * @param Request $request
      * @return Constat
      */
-    public function postConstatAction(Request $request) {
+    public function postConstatAction(Request $request)
+    {
         $constat = new Constat();
-        $form = $this->createForm(ConstatType::class,$constat);
+        $form = $this->createForm(ConstatType::class, $constat);
         $form->submit($request->request->get($form->getName()));
-        if($form->isSubmitted())
-        {
+        if ($form->isSubmitted()) {
             $accidentID = $request->request->get($form->getName())['accident'];
             $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
-            if(empty($accidentID))
-            {
-                return new JsonResponse(['message' => 'not found'],404);
+            if (empty($accidentID)) {
+                return new JsonResponse(['message' => 'not found'], 404);
             }
-            $file= $request->files->get($form->getName())['pointChoc'];
-            if(isset($file))
-            {
+            $file = $request->files->get($form->getName())['pointChoc'];
+            if (isset($file)) {
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('photo_directory') . '/constat/', $filename);
-                $fullUrl =  '/uploads/constat/' .  $filename;
+                $fullUrl = '/uploads/constat/' . $filename;
                 $constat->setPointChoc($fullUrl);
             }
-            $signature= $request->files->get($form->getName())['signature'];
-            if(isset($signature))
-            {
+            $signature = $request->files->get($form->getName())['signature'];
+            if (isset($signature)) {
                 $filename = md5(uniqid()) . '.' . $signature->guessExtension();
                 $signature->move($this->getParameter('photo_directory') . '/constat/', $filename);
-                $fullUrl =  '/uploads/constat/' .  $filename;
+                $fullUrl = '/uploads/constat/' . $filename;
                 $constat->setSignature($fullUrl);
             }
             $em = $this->getDoctrine()->getManager();
@@ -77,47 +76,44 @@ class ConstatController extends Controller{
      *          "requirement"="\d+",
      *          "description"="Constat ID"
      * }
-*     }
+     *     }
      * )
      * @Rest\View()
      * @Rest\Put("/api/constat/{id}",name="constat_edit")
      */
-    public function putConstatAction(Request $request,$id){
+    public function putConstatAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
-        $constat = $em->getRepository('AssureurBundle:Constat')->findOneBy(array('id' => $id,'deleted' => false));
-        if(empty($constat))
-        {
-            return new JsonResponse(['message' => 'not found'],404);
+        $constat = $em->getRepository('AssureurBundle:Constat')->findOneBy(array('id' => $id, 'deleted' => false));
+        if (empty($constat)) {
+            return new JsonResponse(['message' => 'not found'], 404);
         }
-        $form = $this->createForm(ConstatType::class,$constat);
+        $form = $this->createForm(ConstatType::class, $constat);
         $form->submit($request->request->get($form->getName()));
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $accidentID = $request->request->get($form->getName())['accident'];
             $accident = $this->getDoctrine()->getRepository('AssureurBundle:Accident')->find($accidentID);
-            if(empty($accidentID))
-            {
-                return new JsonResponse(['message' => 'not found'],404);
+            if (empty($accidentID)) {
+                return new JsonResponse(['message' => 'not found'], 404);
             }
             $file = $request->request->get($form->getName())['pointChoc'];
-            if(isset($file))
-            {
+            if (isset($file)) {
                 $filename = md5(uniqid()) . '.' . $file->guessExtension();
                 $file->move($this->getParameter('photo_directory') . '/constat/', $filename);
-                $fullUrl =  '/uploads/constat/' .  $filename;
+                $fullUrl = '/uploads/constat/' . $filename;
                 $constat->setPointChoc($fullUrl);
             }
-            $signature= $request->files->get($form->getName())['signature'];
-            if(isset($signature))
-            {
+            $signature = $request->files->get($form->getName())['signature'];
+            if (isset($signature)) {
                 $filename = md5(uniqid()) . '.' . $signature->guessExtension();
                 $signature->move($this->getParameter('photo_directory') . '/constat/', $filename);
-                $fullUrl =  '/uploads/constat/' .  $filename;
+                $fullUrl = '/uploads/constat/' . $filename;
                 $constat->setSignature($fullUrl);
             }
             $constat->setAccident($accident);
             $em->flush();
             return $constat;
-        }else{
+        } else {
             return $form->getErrors();
         }
     }
@@ -141,15 +137,15 @@ class ConstatController extends Controller{
      * @Rest\View()
      * @Rest\Delete("/api/constat/delete/{id}",name="constat_delete")
      */
-    public function deleteConstatAction(Request $request,$id){
+    public function deleteConstatAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
-        $constat = $em->getRepository('AssureurBundle:Constat')->findOneBy(array('id' => $id,'deleted' => false));
-        if(empty($constat))
-        {
-            return new JsonResponse(array('message' => 'not found'),404);
+        $constat = $em->getRepository('AssureurBundle:Constat')->findOneBy(array('id' => $id, 'deleted' => false));
+        if (empty($constat)) {
+            return new JsonResponse(array('message' => 'not found'), 404);
         }
         $constat->setDeleted(true);
-        return new JsonResponse(array('message' => 'Deleted'),201);
+        return new JsonResponse(array('message' => 'Deleted'), 201);
     }
 
     /**
@@ -170,13 +166,13 @@ class ConstatController extends Controller{
      * @Rest\Get("/api/constat/get/{id}")
      * @return ConstatType
      */
-    public function getConstatAction(Request $request,$id){
+    public function getConstatAction(Request $request, $id)
+    {
         $constat = $this->getDoctrine()->getRepository('AssureurBundle:Constat')->findOneBy(array(
-            'deleted' => false,'id' => $id
+            'deleted' => false, 'id' => $id
         ));
-        if(empty($constat))
-        {
-            return new JsonResponse(['message' => 'not found'],404);
+        if (empty($constat)) {
+            return new JsonResponse(['message' => 'not found'], 404);
         }
         return $constat;
     }
@@ -198,13 +194,13 @@ class ConstatController extends Controller{
      * @Rest\Get("/api/constats/accident/{accidentID}")
      * @return Array()
      */
-    public function getConstatsByAccidentAction(Request $request,$accidentID){
+    public function getConstatsByAccidentAction(Request $request, $accidentID)
+    {
         $constats = $this->getDoctrine()->getRepository('AssureurBundle:Constat')->findBy(array(
-            'deleted' => false,'accident' => $accidentID
+            'deleted' => false, 'accident' => $accidentID
         ));
-        if(empty($constats))
-        {
-            return new JsonResponse(['message' => 'no constat found'],404);
+        if (empty($constats)) {
+            return new JsonResponse(['message' => 'no constat found'], 404);
         }
         return $constats;
 
@@ -229,18 +225,18 @@ class ConstatController extends Controller{
      * @param $id
      * @return Constat|null|object|JsonResponse
      */
-    public function getGenerateConstatAction(Request $request,$accidentID){
+    public function getGenerateConstatAction(Request $request, $accidentID)
+    {
         $accident = $this->getDoctrine()->getManager()
             ->getRepository('AssureurBundle:Accident')
             ->find($accidentID);
-        if(empty($accident))
-        {
-            return new JsonResponse(['message' => 'no consta found'],404);
+        if (empty($accident)) {
+            return new JsonResponse(['message' => 'no consta found'], 404);
         }
 
-        $constats =  $accident->getConstats();
+        $constats = $accident->getConstats();
         $vehicules = $accident->getVehicules();
-        $path =  $this->container->getParameter('kernel.root_dir') . '/../web/uploads';
+        $path = $this->container->getParameter('kernel.root_dir') . '/../web/uploads';
         //return new Response($path);
         //Set the Content Type
         //header('Content-type: image/jpeg');
@@ -252,7 +248,7 @@ class ConstatController extends Controller{
         $color = imagecolorallocate($jpg_image, 0, 0, 0);
 
         // Set Path to Font File
-        $font_path = $path . '/arial.TTF';
+        $font_path = $path . '/twcent.ttf';
         //return new Response($font_path);
         // Set Text to Be Printed On Image
         $text = "ab-rtqsdf";
@@ -260,74 +256,88 @@ class ConstatController extends Controller{
         // Print Text On Image
         $em = $this->getDoctrine()->getManager();
         /* constat data A*/
-        $categorieVehicule = array('1' => 'voiture','2' => 'moto','3' => 'camion');
+        $categorieVehicule = array('1' => 'B', '2' => 'A', '3' => 'C');
         $vehicule1 = new Vehicule();
         $vehicule1 = $vehicules[0];
         $constat1 = $constats[0];
         $user1 = $vehicule1->getUser();
         $permis = $em->getRepository('ApiUserBundle:Permis')->findOneBy(array('user' => $user1->getId(),
-            'categorie' => $categorieVehicule[$vehicule1->getTypeId()] ));
-        $permis = new Permis();
-        $size = 14;
+            'categorie' => $categorieVehicule[$vehicule1->getTypeId()]));
+
+
+        $size = 12;
         //return $vehicule1->getValableDu()->format('Y-m-d');
-        imagettftext($jpg_image, $size, 0, 69, 289, $color, $font_path, $vehicule1->getMarque() . '.' . $vehicule1->getModele());
-        imagettftext($jpg_image, $size, 0, 78, 313, $color, $font_path, $vehicule1->getMatricule());
-        imagettftext($jpg_image, $size, 0, 63, 330, $color, $font_path, $constat1->getVenantDe());
-        imagettftext($jpg_image, $size, 0, 61, 345, $color, $font_path, $constat1->getAllantVers());
-        imagettftext($jpg_image, $size, 0, 49, 389, $color, $font_path, $user1->getnom());
-        imagettftext($jpg_image, $size, 0, 56, 402, $color, $font_path, $user1->getPrenom());
-        imagettftext($jpg_image, $size, 0, 56, 416, $color, $font_path, $user1->getAdresse());
-        imagettftext($jpg_image, $size, 0, 87, 447, $color, $font_path, $vehicule1->getNomAssurance());
-        imagettftext($jpg_image, $size, 0, 84, 463, $color, $font_path, $vehicule1->getNumAttestation());
-        imagettftext($jpg_image, $size, 0, 72, 477, $color, $font_path, $vehicule1->getNumPolice());
-        imagettftext($jpg_image, $size, 0, 93, 510, $color, $font_path, $vehicule1->getValableDu()->format('Y-m-d'));
-        imagettftext($jpg_image, $size, 0, 141, 510, $color, $font_path, $vehicule1->getValableAu()->format('Y-m-d'));
-        imagettftext($jpg_image, $size, 0, 44, 567, $color, $font_path, $user1->getnom());
-        imagettftext($jpg_image, $size, 0, 53, 580, $color, $font_path, $user1->getPrenom());
-        imagettftext($jpg_image, $size, 0, 51, 596, $color, $font_path, $user1->getAdresse());
-        imagettftext($jpg_image, $size, 0, 101, 623, $color, $font_path, $permis->getNumPermis());
-        imagettftext($jpg_image, $size, 0, 130, 638, $color, $font_path, $permis->getDateDelivre());
-        imagettftext($jpg_image, $size, 0, 91, 651, $color, $font_path, $permis->getPrefecture());
-        imagettftext($jpg_image, $size, 0, 106, 663, $color, $font_path, $permis->getDateDelivre());/* + 12 ans PERMIS VALABLE JUSQAU */
-        imagettftext($jpg_image, $size, 0, 22, 810, $color, $font_path, $constat1->getDescDegat());
-        imagettftext($jpg_image, $size, 0, 22, 868, $color, $font_path, $constat1->getObservations());
+        imagettftext($jpg_image, $size, 0, 80, 280, $color, $font_path, $vehicule1->getMarque() . '.' . $vehicule1->getModele());
+        imagettftext($jpg_image, $size, 0, 78, 298, $color, $font_path, $vehicule1->getMatricule());
+        imagettftext($jpg_image, $size, 0, 78, 314, $color, $font_path, $constat1->getVenantDe());
+        imagettftext($jpg_image, $size, 0, 80, 346, $color, $font_path, $constat1->getAllantVers());
+        imagettftext($jpg_image, $size, 0, 60, 391, $color, $font_path, $user1->getnom());
+        imagettftext($jpg_image, $size, 0, 65, 404, $color, $font_path, $user1->getPrenom());
+
+
+        $adresse = wordwrap($user1->getAdresse(), 14, PHP_EOL);
+        //return $adresse;
+
+        imagettftext($jpg_image, $size, 0, 64, 417, $color, $font_path, $adresse);
+
+        imagettftext($jpg_image, $size, 0, 97, 449, $color, $font_path, $vehicule1->getNomAssurance());
+        imagettftext($jpg_image, $size, 0, 89, 464, $color, $font_path, $vehicule1->getNumAttestation());
+        imagettftext($jpg_image, $size, 0, 89, 477, $color, $font_path, $vehicule1->getNumPolice());
+        imagettftext($jpg_image, 10, 0, 92, 510, $color, $font_path, $vehicule1->getValableDu()->format('d-m-Y'));
+        imagettftext($jpg_image, 10, 0, 140, 510, $color, $font_path, $vehicule1->getValableAu()->format('d-m-Y'));
+        imagettftext($jpg_image, $size, 0, 48, 567, $color, $font_path, $user1->getnom());
+        imagettftext($jpg_image, $size, 0, 55, 580, $color, $font_path, $user1->getPrenom());
+        imagettftext($jpg_image, $size, 0, 54, 596, $color, $font_path, $adresse);
+        imagettftext($jpg_image, $size, 0, 100, 628, $color, $font_path, $permis->getNumPermis());
+        imagettftext($jpg_image, 10, 0, 128, 638, $color, $font_path, $permis->getDateDelivre()->format('d-m-Y'));
+        imagettftext($jpg_image, $size, 0, 97, 651, $color, $font_path, $permis->getPrefecture());
+        $str = strtotime($permis->getDateDelivre()->format('d-m-Y'));
+        $t2 = strtotime('+ 12 years', $str);
+
+        imagettftext($jpg_image, 10, 0, 107, 665, $color, $font_path, date('d-m-Y', $t2));/* + 12 ans PERMIS VALABLE JUSQAU */
+        imagettftext($jpg_image, $size, 0, 21, 811, $color, $font_path, $constat1->getDescDegat());
+        imagettftext($jpg_image, $size, 0, 17, 870, $color, $font_path, $constat1->getObservations());
         /* end data A*/
         /* dataa B*/
         $vehicule2 = new Vehicule();
         $vehicule2 = $vehicules[1];
         $constat2 = $constats[1];
         $user2 = $vehicule2->getUser();
-        $permis = $em->getRepository('ApiUserBundle:Permis')->findOneBy(array('user' => $user1->getId(),
-            'categorie' => $categorieVehicule[$vehicule1->getTypeId()] ));
-        $permis = new Permis();
+        $permis = $em->getRepository('ApiUserBundle:Permis')->findOneBy(array('user' => $user2->getId(),
+            'categorie' => $categorieVehicule[$vehicule2->getTypeId()]));
 
-        imagettftext($jpg_image, $size, 0, 542, 280, $color, $font_path, $vehicule2->getMarque() . '.' . $vehicule2->getModele());
-        imagettftext($jpg_image, $size, 0, 540, 309, $color, $font_path, $vehicule2->getMatricule());
-        imagettftext($jpg_image, $size, 0, 539, 330, $color, $font_path, $constat2->getVenantDe());
-        imagettftext($jpg_image, $size, 0, 541, 345, $color, $font_path, $constat2->getAllantVers());
-        imagettftext($jpg_image, $size, 0, 539, 389, $color, $font_path, $user2->getnom());
-        imagettftext($jpg_image, $size, 0, 539, 402, $color, $font_path, $user2->getPrenom());
-        imagettftext($jpg_image, $size, 0, 539, 416, $color, $font_path, $user2->getAdresse());
-        imagettftext($jpg_image, $size, 0, 539, 447, $color, $font_path, $vehicule2->getNomAssurance());
-        imagettftext($jpg_image, $size, 0, 539, 463, $color, $font_path, $vehicule2->getNumAttestation());
-        imagettftext($jpg_image, $size, 0, 539, 477, $color, $font_path, $vehicule2->getNumPolice());
-        imagettftext($jpg_image, $size, 0, 539, 510, $color, $font_path, $vehicule2->getValableDu()->format('Y-m-d'));
-        imagettftext($jpg_image, $size, 0, 539, 510, $color, $font_path, $vehicule2->getValableAu()->format('Y-m-d'));
-        imagettftext($jpg_image, $size, 0, 539, 567, $color, $font_path, $user2->getnom());
-        imagettftext($jpg_image, $size, 0, 539, 580, $color, $font_path, $user2->getPrenom());
-        imagettftext($jpg_image, $size, 0, 539, 596, $color, $font_path, $user2->getAdresse());
-        imagettftext($jpg_image, $size, 0, 539, 623, $color, $font_path, $permis->getNumPermis());
-        imagettftext($jpg_image, $size, 0, 539, 638, $color, $font_path, $permis->getDateDelivre());
-        imagettftext($jpg_image, $size, 0, 539, 651, $color, $font_path, $permis->getPrefecture());
-        imagettftext($jpg_image, $size, 0, 539, 663, $color, $font_path, $permis->getDateDelivre());/* + 12 ans PERMIS VALABLE JUSQAU */
-        imagettftext($jpg_image, $size, 0, 539, 810, $color, $font_path, $constat2->getDescDegat());
-        imagettftext($jpg_image, $size, 0, 539, 868, $color, $font_path, $constat2->getObservations());
+        imagettftext($jpg_image, $size, 0, 538, 281, $color, $font_path, $vehicule2->getMarque() . '.' . $vehicule2->getModele());
+        imagettftext($jpg_image, $size, 0, 538, 294, $color, $font_path, $vehicule2->getMatricule());
+        imagettftext($jpg_image, $size, 0, 537, 309, $color, $font_path, $constat2->getVenantDe());
+        imagettftext($jpg_image, $size, 0, 537, 331, $color, $font_path, $constat2->getAllantVers());
+        imagettftext($jpg_image, $size, 0, 537, 346, $color, $font_path, $user2->getNom());
+        imagettftext($jpg_image, $size, 0, 537, 393, $color, $font_path, $user2->getPrenom());
+        $adresse = wordwrap($user2->getAdresse(), 16, PHP_EOL);
+
+        imagettftext($jpg_image, $size, 0, 537, 408, $color, $font_path, $adresse);
+        imagettftext($jpg_image, $size, 0, 537, 440, $color, $font_path, $vehicule2->getNomAssurance());
+        imagettftext($jpg_image, $size, 0, 537, 456, $color, $font_path, $vehicule2->getNumAttestation());
+        imagettftext($jpg_image, $size, 0, 537, 470, $color, $font_path, $vehicule2->getNumPolice());
+        imagettftext($jpg_image, 7, 0, 611, 509, $color, $font_path, $vehicule2->getValableDu()->format('Y-m-d'));
+        imagettftext($jpg_image, 7, 0, 534, 509, $color, $font_path, $vehicule2->getValableAu()->format('Y-m-d'));
+        imagettftext($jpg_image, $size, 0, 533, 559, $color, $font_path, $user2->getNom());
+        imagettftext($jpg_image, $size, 0, 533, 574, $color, $font_path, $user2->getPrenom());
+        imagettftext($jpg_image, $size, 0, 533, 588, $color, $font_path, $adresse);
+        imagettftext($jpg_image, $size, 0, 533, 621, $color, $font_path, $permis->getNumPermis());
+        imagettftext($jpg_image, $size, 0, 533, 639, $color, $font_path, $permis->getDateDelivre()->format('Y-m-d'));
+        imagettftext($jpg_image, $size, 0, 533, 657, $color, $font_path, $permis->getPrefecture());
+        $str = strtotime($permis->getDateDelivre()->format('d-m-Y'));
+        $t2 = strtotime('+ 12 years', $str);
+        imagettftext($jpg_image, $size, 0, 533, 669, $color, $font_path, date('d-m-Y', $t2));/* + 12 ans PERMIS VALABLE JUSQAU */
+        /*imagettftext($jpg_image, $size, 0, 537, 810, $color, $font_path, $constat2->getDescDegat());
+        imagettftext($jpg_image, $size, 0, 537, 868, $color, $font_path, $constat2->getObservations());
+        */
         /* end data B*/
 
-        imagettftext($jpg_image, 16, 0, 82, 279, $color, $font_path, $text);
+        /*imagettftext($jpg_image, 16, 0, 82, 279, $color, $font_path, $text);*/
 
         // Send Image to Browser
-        imagejpeg($jpg_image,$path .'/newConstat.jpg');
+        imagejpeg($jpg_image, $path . '/newConstat.jpg');
         //imagejpeg($jpg_image);
         return true;
 

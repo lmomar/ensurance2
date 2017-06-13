@@ -120,7 +120,10 @@ class Vehicule
     private $user;
 
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident",mappedBy="vehicules",fetch="LAZY")
+     */
+    private $accidents;
 
 
     public function __construct() {

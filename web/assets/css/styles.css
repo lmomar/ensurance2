@@ -9,3 +9,56 @@
 .module-head button{
 
 }
+div.sidebar li a i.fa{
+    margin-right: 10px;
+}
+#app .nav-tabs>li:not(.active)>a{
+    background: #337ab7;
+    color: #fff;
+}
+#app .nav-tabs>li>a:hover{
+    color: #000;
+}
+#app .owl-carousel{
+    /*display: block;*/
+}
+#app .owl-carousel .item{
+    height:150px;
+}
+#app .owl-carousel .item a{
+
+}
+.text-center{
+    text-align: center;
+}
+p{
+    margin:0;
+}
+@media (min-width: 1200px) {
+    .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+        width: 99%;
+    }
+}
+@media (min-width: 1200px) {
+    .span3 {
+        width: 18%;
+        padding-left: 1%;
+    }
+}
+@media (min-width: 1200px) {
+    .span9 {
+        width: 75%;
+    }
+}
+.footer .container{
+    text-align: center;
+}
+.navbar .nav.pull-right{
+    padding-right: 1%;
+}
+.navbar-inner .container{
+    padding-left:1%;
+}
+.footer{
+    padding: 14px 0 9px;
+}
