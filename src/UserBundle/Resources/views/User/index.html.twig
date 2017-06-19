@@ -1,6 +1,7 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block content %}
+
     <div class="span9" id="app">
         <div class="content">
             <div class="btn-controls">
@@ -8,9 +9,23 @@
                 <div class="module">
                     <div class="module-head">
                         <h3>Liste des utilisateurs</h3>
-                        <button class="btn btn-primary btn-sm pull-right">Nouvel utilisateur</button>
+                        <a class="btn btn-primary btn-sm pull-right" href="{{ path('add_user') }}">Nouvel
+                            utilisateur</a>
                     </div>
                     <div class="module-body table">
+                        {% if app.request.hasPreviousSession %}
+                            {% for type, messages in app.session.flashbag.all() %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ type }}">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ message }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                        {% endif %}
+
+
                         <table class="datatable-1 table table-bordered table-striped table-condensed table-responsive display">
                             <thead>
                             <tr>
@@ -28,33 +43,39 @@
                             <tbody>
                             {% for user in users %}
                                 <tr>
-                                    <td>{{ user.id}}</td>
+                                    <td>{{ user.id }}</td>
                                     <td>{{ user.nom ~ ' ' ~ user.prenom }}</td>
                                     <td>{{ user.phone }}</td>
                                     <td>{{ user.dateNaissance is empty ? "--" : user.dateNaissance|date('m-d-Y') }}</td>
-
                                     <td>{{ user.email }}</td>
-                                    <td><input type="checkbox" disabled="" checked="{{user.enabled}}"></td>
+                                    <td>
+                                        {% if(user.enabled) %}
+                                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                                            {% else %}
+                                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </td>
                                     <td>{{ user.created|date("d-m-Y") }}</td>
                                     <td>
-                                        {% if user.hasRole('ROLE_ADMIN')%}Assureur
-                                        {% elseif user.hasRole('ROLE_EXPERT')%}
+                                        {% if user.hasRole('ROLE_ADMIN') %}Assureur
+                                        {% elseif user.hasRole('ROLE_EXPERT') %}
                                             Expert
-                                        {% elseif user.hasRole('ROLE_CONSTATEUR')%}
+                                        {% elseif user.hasRole('ROLE_CONSTATEUR') %}
                                             Constateur
-                                        {% elseif user.hasRole('ROLE_ASSISTANT')%}
+                                        {% elseif user.hasRole('ROLE_ASSISTANT') %}
                                             Assistant
-                                        {% elseif user.hasRole('ROLE_USER')%}
+                                        {% elseif user.hasRole('ROLE_USER') %}
                                             Client
                                         {% endif %}
 
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary btn-xs" href="{{ path('edit_user',{'id' : user.id})}}">
+                                        <a class="btn btn-primary btn-xs"
+                                           href="{{ path('edit_user',{'id' : user.id}) }}">
                                             <i class="icon-edit"></i></a>
                                         <a class="btn btn-success btn-xs" @click="getUserObjects({{ user.id }})">
                                             <i class="icon-search"></i></a>
-                                        <a class="btn btn-danger btn-xs"href="#">
+                                        <a class="btn btn-danger btn-xs" href="{{ path('disable_user',{'id' : user.id}) }}">
                                             <i class="icon-remove"></i></a>
                                     </td>
                                 </tr>
@@ -93,7 +114,9 @@
                                         <td>${ getVehiculeTypeById(v.typeId) }</td>
                                         <td>${ v.created|moment }</td>
                                     </tr>
-                                    <tr v-if="empty"><td colspan="5"><p class="text-center">--------</p></td></tr>
+                                    <tr v-if="empty">
+                                        <td colspan="5"><p class="text-center">--------</p></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -118,7 +141,9 @@
                                         <td>${ p.prefecture }</td>
                                         <td>${ p.created|moment }</td>
                                     </tr>
-                                    <tr v-if="empty"><td colspan="5"><p class="text-center">--------</p></td></tr>
+                                    <tr v-if="empty">
+                                        <td colspan="5"><p class="text-center">--------</p></td>
+                                    </tr>
                                     </tbody>
                                 </table>
 
@@ -133,6 +158,5 @@
     </div>
 
 
-
-
 {% endblock %}
+

@@ -114,14 +114,14 @@ class Vehicule
     private $deleted;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="vehicules")
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="vehicules",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
      */
     private $user;
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident",mappedBy="vehicules",fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Accident",mappedBy="vehicules",fetch="EXTRA_LAZY")
      */
     private $accidents;
 
@@ -481,4 +481,38 @@ class Vehicule
     }
 
 
+
+    /**
+     * Add accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     *
+     * @return Vehicule
+     */
+    public function addAccident(\AssureurBundle\Entity\Accident $accident)
+    {
+        $this->accidents[] = $accident;
+
+        return $this;
+    }
+
+    /**
+     * Remove accident
+     *
+     * @param \AssureurBundle\Entity\Accident $accident
+     */
+    public function removeAccident(\AssureurBundle\Entity\Accident $accident)
+    {
+        $this->accidents->removeElement($accident);
+    }
+
+    /**
+     * Get accidents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccidents()
+    {
+        return $this->accidents;
+    }
 }

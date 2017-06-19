@@ -24,7 +24,7 @@ class FactureController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/facture/add")
+     * @Rest\Post("/facture/add")
      * @return Facture
      */
     public function postFactureAction(Request $request){
@@ -71,7 +71,7 @@ class FactureController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_ACCEPTED)
-     * @Rest\Post("/api/facture/edit/{id}")
+     * @Rest\Post("/facture/edit/{id}")
      * @return Facture
      */
     public function postFactureEditAction(Request $request,$id){
@@ -121,7 +121,7 @@ class FactureController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Delete("/api/facture/delete/{id}")
+     * @Rest\Delete("/facture/delete/{id}")
      * @return JsonResponse
      */
     public function deleteFactureAction($id){
@@ -150,7 +150,7 @@ class FactureController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/facture/dossier/{dossierId}")
+     * @Rest\Get("/facture/dossier/{dossierId}")
      */
     public function getFactureByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();

@@ -23,7 +23,7 @@ class ChequeController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/cheque/add")
+     * @Rest\Post("/cheque/add")
      * @return Cheque
      */
     public function postChequeAction(Request $request){
@@ -70,7 +70,7 @@ class ChequeController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_ACCEPTED)
-     * @Rest\Post("/api/cheque/edit/{id}")
+     * @Rest\Post("/cheque/edit/{id}")
      * @return Cheque
      */
     public function postChequeEditAction(Request $request,$id){
@@ -120,7 +120,7 @@ class ChequeController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Delete("/api/cheque/delete/{id}")
+     * @Rest\Delete("/cheque/delete/{id}")
      * @return JsonResponse
      */
     public function deleteChequeAction($id){
@@ -149,7 +149,7 @@ class ChequeController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/cheque/dossier/{dossierId}")
+     * @Rest\Get("/cheque/dossier/{dossierId}")
      */
     public function getChequeByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();

@@ -16,7 +16,7 @@ class DossierController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin/dossiers",name="dossier_list")
+     * @Route("/dossiers",name="dossier_list")
      */
     public function index(){
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');

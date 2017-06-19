@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AccidentController extends Controller
 {
     /**
-     * @Route("/admin/accidents",name="accidents_list")
+     * @Route("/accidents",name="accidents_list")
      */
     public function index(){
         $em= $this->getDoctrine()->getManager();

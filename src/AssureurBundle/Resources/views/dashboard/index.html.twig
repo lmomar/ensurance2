@@ -4,15 +4,15 @@
         <div class="content">
             <div class="btn-controls">
                 <div class="btn-box-row row-fluid">
-                    <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
+                    <a href="{{ path('accidents_list') }}" class="btn-box big span4"><i class="fa fa-car"></i><b>{{ accidentsCount }}</b>
                         <p class="text-muted">
-                            Growth</p>
-                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                            Total des accidents</p>
+                    </a><a href="{{ path('users_list') }}" class="btn-box big span4"><i class="icon-user"></i><b>{{ usersCount }}</b>
                         <p class="text-muted">
-                            New Users</p>
-                    </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
+                            Total des utilisateurs</p>
+                    </a><a href="{{ path('dossier_list') }}" class="btn-box big span4"><i class="icon-bullhorn"></i><b>{{ dossiersCount }}</b>
                         <p class="text-muted">
-                            Profit</p>
+                            Total des dossiers</p>
                     </a>
                 </div>
                 <!--/#btn-controls-->

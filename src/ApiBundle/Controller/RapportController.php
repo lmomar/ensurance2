@@ -26,7 +26,7 @@ class RapportController extends Controller{
      *  output="AssureurBundle\Entity\Rapport"
      * )
     * @Rest\View
-    * @Rest\Post("/api/rapport/add")
+    * @Rest\Post("/rapport/add")
      * @return Rapport
     */
     public function postRapportAction(Request $request)
@@ -70,7 +70,7 @@ class RapportController extends Controller{
      * )
      * @param $id
      * @Rest\View
-     * @Rest\Get("/api/rapport/{id}")
+     * @Rest\Get("/rapport/{id}")
      * @return Rapport
      */
     public function getRapportAction(Request $request,$id){

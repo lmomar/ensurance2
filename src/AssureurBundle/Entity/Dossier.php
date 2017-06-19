@@ -48,29 +48,29 @@ class Dossier
     private $statut;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Rapport", mappedBy="dossier")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Rapport", mappedBy="dossier",fetch="EXTRA_LAZY")
      */
     private $rapports;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Devis", mappedBy="dossier")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Devis", mappedBy="dossier",fetch="EXTRA_LAZY")
      */
     private $devis;
 
     /**
-    * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Facture", mappedBy="dossier")
+    * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Facture", mappedBy="dossier",fetch="EXTRA_LAZY")
     */
     private $factures;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Cheque", mappedBy="dossier")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Cheque", mappedBy="dossier",fetch="EXTRA_LAZY")
      */
     private $cheques;
 
 
 
     /**
-     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Accident")
+     * @ORM\OneToOne(targetEntity="AssureurBundle\Entity\Accident",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="accident_id",referencedColumnName="id")
      */
     private $accident;

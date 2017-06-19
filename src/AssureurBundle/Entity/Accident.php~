@@ -114,7 +114,7 @@ class Accident
     private $constats;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule",inversedBy="accidents", fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="AssureurBundle\Entity\Vehicule",inversedBy="accidents", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="accidents_vehicules")
      */
     protected $vehicules;

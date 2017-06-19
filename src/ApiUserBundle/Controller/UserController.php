@@ -38,7 +38,7 @@ class UserController extends Controller {
     /**
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/login")
+     * @Rest\Post("/login")
      */
     public function postLoginAction(Request $request) {
         $user_manager = $this->get('fos_user.user_manager');
@@ -74,7 +74,7 @@ class UserController extends Controller {
      * )
     /**
      * @Rest\View()
-     * @Rest\Post("/api/profile/{id}")
+     * @Rest\Post("/profile/{id}")
      * @param Request $request
      */
     public function updateProfileAction(Request $request) {
@@ -102,7 +102,7 @@ class UserController extends Controller {
 
     /**
      * @Rest\View()
-     * @Rest\Put("/api/change_password/{id}")
+     * @Rest\Put("/change_password/{id}")
      * @param Request $request
      */
     public function updatePasswordAction(Request $request) {        
@@ -133,11 +133,11 @@ class UserController extends Controller {
     /**
     /**
      * @Rest\View()
-     * @Rest\Get("/api/profile/get/{id}",name="getprofileuser")
+     * @Rest\Get("/profile/get/{id}",name="getprofileuser")
      */
     public function getUserAction(Request $request){
         $id = $request->get('id');
-        //return $id;
+
         $user_manager= $this->get('fos_user.user_manager');
         $user = $user_manager->findUserBy(array('id' => $id));
         if(empty($user))

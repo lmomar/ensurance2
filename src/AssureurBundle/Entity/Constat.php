@@ -184,7 +184,7 @@ class Constat
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="constats")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="constats",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;

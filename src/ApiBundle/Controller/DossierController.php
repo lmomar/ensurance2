@@ -29,7 +29,7 @@ class DossierController extends Controller
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/dossier/add")
+     * @Rest\Post("/dossier/add")
      * @return Dossier
      */
     public function postDossierAction(Request $request){
@@ -80,7 +80,7 @@ class DossierController extends Controller
      * @param $id
      * @return null|object|Response
      * @Rest\View
-     * @Rest\Put("/api/dossier/edit/{id}")
+     * @Rest\Put("/dossier/edit/{id}")
      */
     public function putDossierAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
@@ -124,7 +124,7 @@ class DossierController extends Controller
      * @param $id
      * @return null|object|Response
      * @Rest\View()
-     * @Rest\Get("/api/dossier/get/{id}")
+     * @Rest\Get("/dossier/get/{id}")
      */
     public function getDossierAction($id){
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
@@ -152,7 +152,7 @@ class DossierController extends Controller
      * @param $id
      * @return null|object|Response
      * @Rest\View()
-     * @Rest\Get("/api/dossier/accident/{id}")
+     * @Rest\Get("/dossier/accident/{id}")
      */
     public function getDossierByAccidentIdAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
@@ -161,6 +161,30 @@ class DossierController extends Controller
         {
             return new JsonResponse(['message' => 'not found'],404);
         }
+        return $dossier;
+    }
+
+    /**
+     * @ApiDoc(
+     *  section="Dossier",
+     *  description="Get Object By User ID",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="User ID"
+     *      }
+     *  }
+     * )
+     * @param $id
+     * @return null|object|Response
+     * @Rest\View()
+     * @Rest\Get("/dossier/user/{id}")
+     */
+    public function getDossierByUserAction(Request $request , $id){
+        $em = $this->getDoctrine()->getManager()->getRepository('AssureurBundle:Dossier');
+        $dossier = $em->findByUserId($id);
         return $dossier;
     }
 }

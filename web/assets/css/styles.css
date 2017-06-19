@@ -62,3 +62,15 @@ p{
 .footer{
     padding: 14px 0 9px;
 }
+#addUserModal{
+
+}
+#addUserModal .control-label{
+    width:20%;
+}
+#addUserModal .form-horizontal .controls{
+    margin-left: 95px;
+}
+#addUserModal .span5{
+    margin-left:0;
+}

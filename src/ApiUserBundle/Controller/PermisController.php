@@ -20,7 +20,7 @@ class PermisController extends Controller{
      *  output="ApiUserBundle\Entity\Permis"
      * )
      * @Rest\View()
-     * @Rest\Post("/api/permis/add")
+     * @Rest\Post("/permis/add")
      */
     public function postPermisAction(Request $request) {
         $permis = new Permis();
@@ -58,7 +58,7 @@ class PermisController extends Controller{
      *  }
      * )
      * @Rest\View()
-     * @Rest\Get("/api/permis/get/{id}",name="getPermisByUserId")
+     * @Rest\Get("/permis/get/{id}",name="getPermisByUserId")
      */
     public function getPermisAction(Request $request) {
         //return $request->get('id');
@@ -88,7 +88,7 @@ class PermisController extends Controller{
      *  }
      * )
      * @Rest\View()
-     * @Rest\Put("/api/permis/edit/{id}")
+     * @Rest\Put("/permis/edit/{id}")
      */
     public function putPermisAction(Request $request,$id) {
         $em = $this->getDoctrine()->getManager();

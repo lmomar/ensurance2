@@ -7,7 +7,7 @@
                     <i class="icon-reorder shaded"></i>
                 </a>
                 <a class="brand" href="index.html">
-                    Admin
+                    Ensurance Admin
                 </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                     <ul class="nav pull-right">
@@ -23,16 +23,18 @@
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                {% if app.request.hasPreviousSession %}
-                    {% for type, messages in app.session.flashbag.all() %}
-                        {% for message in messages %}
-                            <div class="flash-{{ type }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
+
                 <div class="module module-login span4 offset4">
+                    {% if app.request.hasPreviousSession %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ type }}">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
 
                     {% block fos_user_content %}
                     {% endblock fos_user_content %}
@@ -43,7 +45,7 @@
 
     <div class="footer">
         <div class="container">
-            <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b> All rights reserved.
+            <b class="copyright">&copy; 2017 ensurance.site </b>All rights reserved.
         </div>
     </div>
 

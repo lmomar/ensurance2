@@ -227,4 +227,28 @@ class Permis
     {
         return $this->deleted;
     }
+
+    /**
+     * Set numPermis
+     *
+     * @param string $numPermis
+     *
+     * @return Permis
+     */
+    public function setNumPermis($numPermis)
+    {
+        $this->numPermis = $numPermis;
+
+        return $this;
+    }
+
+    /**
+     * Get numPermis
+     *
+     * @return string
+     */
+    public function getNumPermis()
+    {
+        return $this->numPermis;
+    }
 }

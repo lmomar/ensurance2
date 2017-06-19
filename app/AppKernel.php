@@ -29,7 +29,8 @@ class AppKernel extends Kernel {
             new UserBundle\UserBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new \CoreSphere\ConsoleBundle\CoreSphereConsoleBundle(),
-            new \JMS\SerializerBundle\JMSSerializerBundle()
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \Nelmio\CorsBundle\NelmioCorsBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

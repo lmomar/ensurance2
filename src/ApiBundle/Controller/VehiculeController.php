@@ -27,7 +27,7 @@ class VehiculeController extends Controller {
      *  output="AssureurBundle\Entity\Vehicule"
      * )
      * @Rest\View()
-     * @Rest\Post("/api/vehicule/add")
+     * @Rest\Post("/vehicule/add")
      */
     public function postVehiculeAction(Request $request) {
         $vehicule = new Vehicule();
@@ -65,7 +65,7 @@ class VehiculeController extends Controller {
      *  }
      * )
      * @Rest\View()
-     * @Rest\Put("api/vehicule/edit/{id}")
+     * @Rest\Put("/vehicule/edit/{id}")
      * @param Request $request
      */
     public function putVehiculeAction(Request $request,$id) {
@@ -99,7 +99,7 @@ class VehiculeController extends Controller {
      *  description="Get Vehicule By Id "
      * )
      * @Rest\View()
-     * @Rest\Get("api/vehicule/{id}",name="getVehicule")
+     * @Rest\Get("/vehicule/{id}",name="getVehicule")
      * @param Request $request
      * @param integer $id
      * @return JsonResponse
@@ -119,7 +119,7 @@ class VehiculeController extends Controller {
      *  description="Get Vehicule(s) By UserID"
      * )
      * @Rest\View()
-     * @Rest\Get("api/vehicules/user/{user_id}",name="getVehicules")
+     * @Rest\Get("/vehicules/user/{user_id}",name="getVehicules")
      * @param Request $request
      * @param integer $user_id
      * @return JsonResponse
@@ -136,7 +136,7 @@ class VehiculeController extends Controller {
      *  description="Delete Vehicule"
      * )
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @Rest\Delete("api/vehicule/delete/{id}")
+     * @Rest\Delete("/vehicule/delete/{id}")
      * @param Request $request
      */
     public function removeVehiculeAction(Request $request) {

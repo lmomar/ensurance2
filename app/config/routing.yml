@@ -1,6 +1,7 @@
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /doc/api
+    prefix:   /
+    host:     doc.ensurance.dev
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
@@ -9,16 +10,18 @@ user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
+    host:     admin.ensurance.dev
 
 api:
     resource: "@ApiBundle/Controller/"
     type:     rest
     prefix:   /
-
+    host:     api.ensurance.dev
 assureur:
     resource: "@AssureurBundle/Controller/"
     type:     annotation
     prefix:   /
+    host:     admin.ensurance.dev
 
 consta:
     resource: "@ConstaBundle/Controller/"
@@ -28,9 +31,7 @@ consta:
 api_user:
     resource: "@ApiUserBundle/Controller/"
     type:     rest
-
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    host:     api.ensurance.dev
+    
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

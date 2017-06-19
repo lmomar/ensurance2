@@ -42,7 +42,7 @@ class Cheque
     private $deleted;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier", inversedBy="cheques")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier", inversedBy="cheques",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="dossier_id", referencedColumnName="id")
      */
     private $dossier;

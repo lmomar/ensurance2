@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="ApiUserBundle\Repository\UserRepository")
  */
 class User extends BaseUser {
 
@@ -82,17 +83,17 @@ class User extends BaseUser {
     protected $adresse;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Vehicule", mappedBy="user",fetch="EXTRA_LAZY")
      */
     private $vehicules;
 
     /**
-     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Rapport",mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AssureurBundle\Entity\Rapport",mappedBy="user",fetch="EXTRA_LAZY")
      */
     private $rapports;
 
     /**
-     * @ORM\OneToMany(targetEntity="ApiUserBundle\Entity\Permis",mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ApiUserBundle\Entity\Permis",mappedBy="user", cascade={"persist", "remove"},fetch="EXTRA_LAZY")
      */
     private $permis;
 

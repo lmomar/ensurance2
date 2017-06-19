@@ -41,7 +41,7 @@ class Photo {
     private $created;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="photos")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Accident", inversedBy="photos",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="accident_id", referencedColumnName="id")
      */
     private $accident;
@@ -129,5 +129,29 @@ class Photo {
     public function getAccident()
     {
         return $this->accident;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Photo
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

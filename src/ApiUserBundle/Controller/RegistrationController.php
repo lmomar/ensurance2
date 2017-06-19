@@ -26,13 +26,13 @@ class RegistrationController extends Controller {
     /**
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/adduser")
+     * @Rest\Post("/adduser")
      */
     function postUserAction(Request $request) {
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->submit($request->request->get($form->getName()));
+        $form->submit($request->request->get('user'));
         //$form->handleRequest($request);
        /* if ($form->isValid()) {
             $email = $request->request->get('email');
@@ -50,9 +50,12 @@ class RegistrationController extends Controller {
         } else {
             return $form;
         }*/
+        $email = $request->request->get('user')['email'];
+        if ($userManager->findUserByEmail($email)) {
+            return new JsonResponse(array('email' => 'exist'));
+        }
         if($form->isSubmitted())
         {
-
             $user->setEnabled(1);
             //$user->setRoles(array('ROLE_USER'));
             $user->addRole('ROLE_CLIENT');

@@ -1,6 +1,7 @@
 Vue.filter('moment', function (value) {
     return moment(value).format('DD-MM-YYYY');
 });
+var api_url = "http://api.ensurance.dev/app_dev.php";
 let data = new Vue({
     el: '#app',
     delimiters: ['${', '}'],
@@ -14,7 +15,7 @@ let data = new Vue({
     },
     methods: {
         getUsers(accident){
-            this.$http.get('/app_dev.php/api/accident/' + accident).then((response) => {
+            this.$http.get(api_url + '/accident/' + accident).then((response) => {
                 this.all = response.body;
                 setTimeout(function () {
                     $(document).ready(function () {
@@ -28,7 +29,7 @@ let data = new Vue({
             })
         },
         getUserObjects(user_id){
-            this.$http.get('/app_dev.php/api/profile/get/' + user_id).then((response) => {
+            this.$http.get(api_url + '/profile/get/' + user_id).then((response) => {
                 this.vehicules = response.body.vehicules;
                 this.permis = response.body.permis;
                 this.empty = false;
@@ -37,7 +38,7 @@ let data = new Vue({
             })
         },
         getDossierObjects(dossier_id){
-            this.$http.get('/app_dev.php/api/dossier/get/' + dossier_id).then((response) => {
+            this.$http.get(api_url + '/dossier/get/' + dossier_id).then((response) => {
                 this.all = response.body;
                 console.log(this.all);
             }).catch((error) => {

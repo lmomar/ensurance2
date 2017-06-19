@@ -12,6 +12,7 @@ use AssureurBundle\Form\Type\AccidentType;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
+
 class AccidentController extends Controller{
     /**
      * @ApiDoc(
@@ -22,7 +23,7 @@ class AccidentController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/accident/add")
+     * @Rest\Post("/accident/add")
      * @return Accident
      */
     public function postAccidentAction(Request $request) {
@@ -77,7 +78,7 @@ class AccidentController extends Controller{
      * @param $id
      * @return null|object|\Symfony\Component\Form\FormErrorIterator|JsonResponse
      * @Rest\View
-     * @Rest\Put("/api/accident/edit/{id}")
+     * @Rest\Put("/accident/edit/{id}")
      */
     public function putAccidentAction(Request $request,$id){
 
@@ -118,7 +119,7 @@ class AccidentController extends Controller{
      *  }
      * )
     * @Rest\View
-    * @Rest\Delete("/api/accident/delete/{id}")
+    * @Rest\Delete("/accident/delete/{id}")
     */
 
     public function deleteAccidentAction(Request $request,$id){
@@ -147,7 +148,7 @@ class AccidentController extends Controller{
      *  }
      * )
     * @Rest\View
-    * @Rest\Get("/api/accident/{id}")
+    * @Rest\Get("/accident/{id}")
     */
     public function getAccidentAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
@@ -172,7 +173,7 @@ class AccidentController extends Controller{
      *  }
      * )
     * @Rest\View
-    * @Rest\Get("/api/accident/vehicule/{id}")
+    * @Rest\Get("/accident/vehicule/{id}")
     */
     public function getAccidentByVehiculeIdAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();

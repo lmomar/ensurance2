@@ -23,7 +23,7 @@ class DevisController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/devis/add")
+     * @Rest\Post("/devis/add")
      * @return Accident
      */
     public function postDevisAction(Request $request){
@@ -71,7 +71,7 @@ class DevisController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_ACCEPTED)
-     * @Rest\Post("/api/devis/edit/{id}")
+     * @Rest\Post("/devis/edit/{id}")
      * @return Accident
      */
     public function postDevisEditAction(Request $request,$id){
@@ -121,7 +121,7 @@ class DevisController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Delete("/api/devis/delete/{id}")
+     * @Rest\Delete("/devis/delete/{id}")
      * @return JsonResponse
      */
     public function deleteDevisAction($id){
@@ -150,7 +150,7 @@ class DevisController extends Controller{
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/devis/dossier/{dossierId}")
+     * @Rest\Get("/devis/dossier/{dossierId}")
      */
     public function getDevisByDossierIdAction($dossierId){
         $em = $this->getDoctrine()->getManager();

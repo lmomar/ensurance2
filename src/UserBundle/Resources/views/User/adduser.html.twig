@@ -1,14 +1,16 @@
 {% extends 'FOSUserBundle::layout.html.twig' %}
 
 {% block content %}
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="widget-box">
-                <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                    <h5>Info</h5>
+    <div class="span9">
+        <div class="content">
+
+            <div class="module">
+                <div class="module-head">
+                    <h3>Forms</h3>
                 </div>
-                <div class="widget-content nopadding">
-                    <form class="form-horizontal" action="{{ path('add_user') }}" method="post">
+                <div class="module-body">
+
+                    <form class="form-horizontal row-fluid" action="{{ path('add_user') }}" method="post">
                         <div class="control-group">
                             <label class="control-label">Nom</label>
                             <div class="controls">
@@ -69,6 +71,8 @@
             </div>
 
 
-        </div>
+
+        </div><!--/.content-->
     </div>
+
 {% endblock %}

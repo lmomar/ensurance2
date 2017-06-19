@@ -23,7 +23,7 @@ class ConstatController extends Controller
      *  output="AssureurBundle\Entity\Constat"
      * )
      * @Rest\View
-     * @Rest\Post("api/constat/add")
+     * @Rest\Post("constat/add")
      * @param Request $request
      * @return Constat
      */
@@ -79,7 +79,7 @@ class ConstatController extends Controller
      *     }
      * )
      * @Rest\View()
-     * @Rest\Put("/api/constat/{id}",name="constat_edit")
+     * @Rest\Put("/constat/{id}",name="constat_edit")
      */
     public function putConstatAction(Request $request, $id)
     {
@@ -135,7 +135,7 @@ class ConstatController extends Controller
      *  }
      * )
      * @Rest\View()
-     * @Rest\Delete("/api/constat/delete/{id}",name="constat_delete")
+     * @Rest\Delete("/constat/delete/{id}",name="constat_delete")
      */
     public function deleteConstatAction(Request $request, $id)
     {
@@ -163,7 +163,7 @@ class ConstatController extends Controller
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/constat/get/{id}")
+     * @Rest\Get("/constat/get/{id}")
      * @return ConstatType
      */
     public function getConstatAction(Request $request, $id)
@@ -191,7 +191,7 @@ class ConstatController extends Controller
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/constats/accident/{accidentID}")
+     * @Rest\Get("/constats/accident/{accidentID}")
      * @return Array()
      */
     public function getConstatsByAccidentAction(Request $request, $accidentID)
@@ -220,7 +220,7 @@ class ConstatController extends Controller
      *  }
      * )
      * @Rest\View
-     * @Rest\Get("/api/constat/generate/{accidentID}",name="generate_constat_jpg")
+     * @Rest\Get("/constat/generate/{accidentID}",name="generate_constat_jpg")
      * @param Request $request
      * @param $id
      * @return Constat|null|object|JsonResponse

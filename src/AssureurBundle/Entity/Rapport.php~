@@ -27,13 +27,13 @@ class Rapport
     private $created;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="rapports")
+     * @ORM\ManyToOne(targetEntity="ApiUserBundle\Entity\User",inversedBy="rapports",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier",inversedBy="rapports")
+     * @ORM\ManyToOne(targetEntity="AssureurBundle\Entity\Dossier",inversedBy="rapports",fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="dossier_id",referencedColumnName="id")
      */
     private $dossier;

@@ -24,7 +24,7 @@ class TemoinController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/api/temoin/add")
+     * @Rest\Post("/temoin/add")
      * @return Temoin
      */
     public function postTemoinAction(Request $request){
@@ -61,7 +61,7 @@ class TemoinController extends Controller{
      * )
      * @param Request $request
      * @Rest\View(statusCode=Response::HTTP_ACCEPTED)
-     * @Rest\Put("/api/temoin/edit/{id}")
+     * @Rest\Put("/temoin/edit/{id}")
      * @return Temoin
      */
     public function putTemoinAction(Request $request,$id){
@@ -105,7 +105,7 @@ class TemoinController extends Controller{
      * )
      * @param $id
      * @Rest\View
-     * @Rest\Get("/api/temoin/{id}")
+     * @Rest\Get("/temoin/{id}")
      * @return Temoin
      */
     public function getTemoinByIdAction($id){
@@ -136,7 +136,7 @@ class TemoinController extends Controller{
      * )
      * @param $accident_id
      * @Rest\View
-     * @Rest\Get("/api/temoins/{accident_id}/liste")
+     * @Rest\Get("/temoins/{accident_id}/liste")
      * @return \ArrayObject
      */
     public function getTemoinsByAccidentIdAction($accident_id){
@@ -167,7 +167,7 @@ class TemoinController extends Controller{
      * )
      * @param $id
      * @Rest\View(statusCode=204)
-     * @Rest\Delete("/api/temoin/delete/{id}")
+     * @Rest\Delete("/temoin/delete/{id}")
      * @return null
      */
     public function deleteTemoinAction($id){
