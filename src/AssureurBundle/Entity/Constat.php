@@ -45,7 +45,7 @@ class Constat
     /**
      * @var bool
      *
-     * @ORM\Column(name="signature", type="string")
+     * @ORM\Column(name="signature", type="string",nullable=true)
      */
     private $signature;
 

@@ -7,6 +7,7 @@ imports:
     - { resource: "@AssureurBundle/Resources/config/services.yml" }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@FrontBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -109,9 +110,11 @@ fos_rest:
         view_response_listener: true
     format_listener:
         rules:
-            - { path: '^/', host: 'api.ensurance.dev', priorities: ['json'], fallback_format: 'json', prefer_extension: false }
+            - { path: '^/', host: 'ensurance.dev', priorities: [html,xml], fallback_format: html, prefer_extension: true }
+            - { path: '^/uploads', host: 'ensurance.dev', priorities: [png,jpeg], fallback_format: false, prefer_extension: true }
+            - { path: '^/', host: 'api.ensurance.dev', priorities: [json, xml], fallback_format: json, prefer_extension: false }
             - { path: '^/', host: 'admin.ensurance.dev', priorities: ['xml','html'], fallback_format: ~, prefer_extension: false }
-            - { path: '^/', host: 'doc.ensurance.site', priorities: ['json','html'], fallback_format: 'json', prefer_extension: false }
+            - { path: '^/', host: 'doc.ensurance.dev', priorities: ['json','html'], fallback_format: 'json', prefer_extension: false }
     body_listener:
         enabled: true
     param_fetcher_listener:

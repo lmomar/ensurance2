@@ -1,3 +1,9 @@
+front:
+    resource: "@FrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    host:     ensurance.dev
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /
